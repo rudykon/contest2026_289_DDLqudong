@@ -1,0 +1,26 @@
+[
+  {
+    "before": "tools-menu.png",
+    "after": "font-subset-tools.png",
+    "changed_pixels": 0,
+    "identical": true
+  },
+  {
+    "before": "tools-final-about.png",
+    "after": "font-subset-about.png",
+    "changed_pixels": 0,
+    "identical": true
+  },
+  {
+    "before": "tools-final-stopwatch-zero.png",
+    "after": "font-subset-stopwatch.png",
+    "changed_pixels": 0,
+    "identical": true
+  },
+  {
+    "before": "tools-final-app.png",
+    "after": "font-subset-app.png",
+    "changed_pixels": 0,
+    "identical": true
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "label": "native-tools",
+    "ms": 319,
+    "before": 16,
+    "after": 64
+  },
+  {
+    "label": "native-stopwatch",
+    "ms": 294,
+    "before": 64,
+    "after": 128
+  },
+  {
+    "label": "native-tools-back",
+    "ms": 235,
+    "before": 128,
+    "after": 64
+  },
+  {
+    "label": "native-home",
+    "ms": 228,
+    "before": 64,
+    "after": 16
+  },
+  {
+    "label": "native-settings",
+    "ms": 364,
+    "before": 16,
+    "after": 256
+  },
+  {
+    "label": "native-home",
+    "ms": 242,
+    "before": 256,
+    "after": 16
+  },
+  {
+    "label": "native-tools",
+    "ms": 233,
+    "before": 16,
+    "after": 64
+  },
+  {
+    "label": "native-stopwatch",
+    "ms": 211,
+    "before": 64,
+    "after": 128
+  },
+  {
+    "label": "native-tools-back",
+    "ms": 236,
+    "before": 128,
+    "after": 64
+  },
+  {
+    "label": "native-home",
+    "ms": 242,
+    "before": 64,
+    "after": 16
+  },
+  {
+    "label": "native-settings",
+    "ms": 244,
+    "before": 16,
+    "after": 256
+  },
+  {
+    "label": "native-home",
+    "ms": 241,
+    "before": 256,
+    "after": 16
+  },
+  {
+    "label": "native-tools",
+    "ms": 234,
+    "before": 16,
+    "after": 64
+  },
+  {
+    "label": "native-stopwatch",
+    "ms": 222,
+    "before": 64,
+    "after": 128
+  },
+  {
+    "label": "native-tools-back",
+    "ms": 222,
+    "before": 128,
+    "after": 64
+  },
+  {
+    "label": "native-home",
+    "ms": 241,
+    "before": 64,
+    "after": 16
+  },
+  {
+    "label": "native-settings",
+    "ms": 243,
+    "before": 16,
+    "after": 256
+  },
+  {
+    "label": "native-home",
+    "ms": 241,
+    "before": 256,
+    "after": 16
+  }
+]

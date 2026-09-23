@@ -1,0 +1,353 @@
+{
+  "firmware_sha256": "e552b62f95e26b94012bc104c3cc448f0a2e18c09c6f6da2691a832605f0bbaa",
+  "firmware_bytes": 5864108,
+  "runs": [
+    {
+      "name": "epic-final-native-off",
+      "samples": 18,
+      "gpu": {
+        "enabled": 0,
+        "verified": 1,
+        "fills": 0,
+        "copies": 0,
+        "pixels": 0,
+        "fallbacks": 5569,
+        "fallback_pixels": 5947689,
+        "faults": 0,
+        "max_irq_us": 0
+      }
+    },
+    {
+      "name": "epic-final-native-on",
+      "samples": 18,
+      "gpu": {
+        "enabled": 1,
+        "verified": 1,
+        "fills": 870,
+        "copies": 0,
+        "pixels": 3380856,
+        "fallbacks": 5630,
+        "fallback_pixels": 2701495,
+        "faults": 0,
+        "max_irq_us": 766
+      }
+    },
+    {
+      "name": "epic-final-app-off",
+      "samples": 22,
+      "gpu": {
+        "enabled": 0,
+        "verified": 1,
+        "fills": 0,
+        "copies": 0,
+        "pixels": 0,
+        "fallbacks": 15381,
+        "fallback_pixels": 9843273,
+        "faults": 0,
+        "max_irq_us": 0
+      }
+    },
+    {
+      "name": "epic-final-app-on",
+      "samples": 22,
+      "gpu": {
+        "enabled": 1,
+        "verified": 1,
+        "fills": 1243,
+        "copies": 0,
+        "pixels": 4827660,
+        "fallbacks": 15464,
+        "fallback_pixels": 5054440,
+        "faults": 0,
+        "max_irq_us": 775
+      }
+    },
+    {
+      "name": "epic-final-app-on2",
+      "samples": 22,
+      "gpu": {
+        "enabled": 1,
+        "verified": 1,
+        "fills": 1243,
+        "copies": 0,
+        "pixels": 4827660,
+        "fallbacks": 15299,
+        "fallback_pixels": 4946909,
+        "faults": 0,
+        "max_irq_us": 775
+      }
+    },
+    {
+      "name": "epic-final-app-off2",
+      "samples": 22,
+      "gpu": {
+        "enabled": 0,
+        "verified": 1,
+        "fills": 0,
+        "copies": 0,
+        "pixels": 0,
+        "fallbacks": 15301,
+        "fallback_pixels": 9758383,
+        "faults": 0,
+        "max_irq_us": 0
+      }
+    }
+  ],
+  "comparison": {
+    "native-tools": {
+      "off": {
+        "n": 3,
+        "median_ms": 234,
+        "min_ms": 233,
+        "max_ms": 318
+      },
+      "on": {
+        "n": 3,
+        "median_ms": 202,
+        "min_ms": 202,
+        "max_ms": 301
+      },
+      "reduction_percent": 13.68
+    },
+    "native-stopwatch": {
+      "off": {
+        "n": 3,
+        "median_ms": 210,
+        "min_ms": 210,
+        "max_ms": 281
+      },
+      "on": {
+        "n": 3,
+        "median_ms": 203,
+        "min_ms": 202,
+        "max_ms": 274
+      },
+      "reduction_percent": 3.33
+    },
+    "native-tools-back": {
+      "off": {
+        "n": 3,
+        "median_ms": 220,
+        "min_ms": 219,
+        "max_ms": 221
+      },
+      "on": {
+        "n": 3,
+        "median_ms": 203,
+        "min_ms": 203,
+        "max_ms": 204
+      },
+      "reduction_percent": 7.73
+    },
+    "native-home": {
+      "off": {
+        "n": 6,
+        "median_ms": 226.0,
+        "min_ms": 225,
+        "max_ms": 226
+      },
+      "on": {
+        "n": 6,
+        "median_ms": 208.0,
+        "min_ms": 207,
+        "max_ms": 208
+      },
+      "reduction_percent": 7.96
+    },
+    "native-settings": {
+      "off": {
+        "n": 3,
+        "median_ms": 228,
+        "min_ms": 228,
+        "max_ms": 350
+      },
+      "on": {
+        "n": 3,
+        "median_ms": 210,
+        "min_ms": 210,
+        "max_ms": 347
+      },
+      "reduction_percent": 7.89
+    },
+    "cached-native": {
+      "off": {
+        "n": 12,
+        "median_ms": 226.0,
+        "min_ms": 210,
+        "max_ms": 234
+      },
+      "on": {
+        "n": 12,
+        "median_ms": 205.5,
+        "min_ms": 202,
+        "max_ms": 210
+      },
+      "reduction_percent": 9.07
+    },
+    "launch": {
+      "off": {
+        "n": 2,
+        "median_ms": 5812.5,
+        "min_ms": 5808,
+        "max_ms": 5817
+      },
+      "on": {
+        "n": 2,
+        "median_ms": 5795.5,
+        "min_ms": 5792,
+        "max_ms": 5799
+      },
+      "reduction_percent": 0.29
+    },
+    "idle-next": {
+      "off": {
+        "n": 16,
+        "median_ms": 481.5,
+        "min_ms": 453,
+        "max_ms": 1104
+      },
+      "on": {
+        "n": 16,
+        "median_ms": 456.0,
+        "min_ms": 437,
+        "max_ms": 1083
+      },
+      "reduction_percent": 5.3
+    },
+    "start": {
+      "off": {
+        "n": 2,
+        "median_ms": 783.5,
+        "min_ms": 783,
+        "max_ms": 784
+      },
+      "on": {
+        "n": 2,
+        "median_ms": 784.0,
+        "min_ms": 783,
+        "max_ms": 785
+      },
+      "reduction_percent": -0.06
+    },
+    "training-next": {
+      "off": {
+        "n": 16,
+        "median_ms": 624.5,
+        "min_ms": 497,
+        "max_ms": 1037
+      },
+      "on": {
+        "n": 16,
+        "median_ms": 603.0,
+        "min_ms": 461,
+        "max_ms": 1006
+      },
+      "reduction_percent": 3.44
+    },
+    "home": {
+      "off": {
+        "n": 2,
+        "median_ms": 449.0,
+        "min_ms": 291,
+        "max_ms": 607
+      },
+      "on": {
+        "n": 2,
+        "median_ms": 281.5,
+        "min_ms": 280,
+        "max_ms": 283
+      },
+      "reduction_percent": 37.31
+    },
+    "resume": {
+      "off": {
+        "n": 2,
+        "median_ms": 474.0,
+        "min_ms": 472,
+        "max_ms": 476
+      },
+      "on": {
+        "n": 2,
+        "median_ms": 524.5,
+        "min_ms": 435,
+        "max_ms": 614
+      },
+      "reduction_percent": -10.65
+    },
+    "stop": {
+      "off": {
+        "n": 2,
+        "median_ms": 1014.5,
+        "min_ms": 766,
+        "max_ms": 1263
+      },
+      "on": {
+        "n": 2,
+        "median_ms": 1310.5,
+        "min_ms": 1254,
+        "max_ms": 1367
+      },
+      "reduction_percent": -29.18
+    },
+    "home-idle": {
+      "off": {
+        "n": 2,
+        "median_ms": 260.0,
+        "min_ms": 256,
+        "max_ms": 264
+      },
+      "on": {
+        "n": 2,
+        "median_ms": 244.0,
+        "min_ms": 238,
+        "max_ms": 250
+      },
+      "reduction_percent": 6.15
+    },
+    "cached-idle-next": {
+      "off": {
+        "n": 8,
+        "median_ms": 473.5,
+        "min_ms": 453,
+        "max_ms": 483
+      },
+      "on": {
+        "n": 8,
+        "median_ms": 450.0,
+        "min_ms": 437,
+        "max_ms": 457
+      },
+      "reduction_percent": 4.96
+    }
+  },
+  "primitive_benchmark": [
+    {
+      "pixels": 6240,
+      "ok": 1,
+      "fill_cpu_us": 322,
+      "fill_gpu_us": 434,
+      "copy_cpu_us": 1167,
+      "copy_gpu_us": 978
+    },
+    {
+      "pixels": 39000,
+      "ok": 1,
+      "fill_cpu_us": 6230,
+      "fill_gpu_us": 2219,
+      "copy_cpu_us": 10381,
+      "copy_gpu_us": 5525
+    },
+    {
+      "pixels": 175500,
+      "ok": 1,
+      "fill_cpu_us": 28265,
+      "fill_gpu_us": 9725,
+      "copy_cpu_us": 46819,
+      "copy_gpu_us": 24721
+    }
+  ],
+  "latency_target_met": false,
+  "measurement": "Synthetic LVGL press to changed-page refresh completion; includes nominal 100ms press and scheduling delay; excludes serial queue, physical touch sensor and panel response.",
+  "scope": "Opaque RGB565 fill >=16384 pixels, non-overlapping RAM RGB565 copy >=4096 pixels; 4096-pixel strips. Mask, alpha, text, gradient, transform and XIP sources stay on CPU.",
+  "fault_test": "One completed strip followed by an injected pre-submit error; CPU repairs whole destination. This does not establish recovery from a physically hung DMA bus master."
+}

@@ -28,9 +28,12 @@ function persist(callback) {
       done(false);
       return;
     }
+    const started = Date.now();
+    const value = JSON.stringify(sessions.slice(0, MAX_SESSIONS));
+    const serialized = Date.now();
     storage.set({
       key: STORAGE_KEY,
-      value: JSON.stringify(sessions.slice(0, MAX_SESSIONS)),
+      value,
       success: () => {
         console.log(`VMC_HISTORY_STORAGE_SET count=${sessions.length}`);
         done(true);
@@ -41,6 +44,7 @@ function persist(callback) {
       },
       complete: () => {},
     });
+    console.warn('VMC_STORE stringify_ms=' + (serialized-started) + ' submit_ms=' + (Date.now()-serialized) + ' chars=' + value.length);
   } catch (e) {
     console.log(`session storage unavailable: ${e && e.message ? e.message : e}`);
     done(false);

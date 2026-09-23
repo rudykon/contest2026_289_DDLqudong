@@ -33,13 +33,6 @@ const includePaths = [
   'src',
   'docs',
   'skills',
-  'native',
-  'scripts/emulator_uorb_bridge.py',
-  'scripts/test_six_axis.mjs',
-  'scripts/test_emulator_uorb_bridge.py',
-  'artifacts/six_axis/validation.json',
-  'artifacts/six_axis/source_selector.png',
-  'scripts/verify_six_axis_emulator.js',
   'sign/README.md',
   'scripts/export_codex_contest_log.py',
   'scripts/create_submission_documents.py',
@@ -50,7 +43,7 @@ const includePaths = [
   'scripts/model_migration_inventory.js',
   'scripts/check_submission_ready.js',
   'scripts/prepare_submission_package.js',
-  'dist/com.velamotion.coach.release.1.1.0.rpk',
+  'dist/com.velamotion.coach.release.1.0.0.rpk',
   'artifacts/mock_verification/official_mock_report.json',
   'artifacts/model_migration/model_asset_report.json',
   ...currentDemoArtifacts,
@@ -58,7 +51,6 @@ const includePaths = [
 
 const deny = [
   /(^|\/)logs(\/|$)/,
-  /(^|\/)__pycache__(\/|$)|\.pyc$/,
   /\.jsonl$/,
   /docs\/validation\/ai_log_validation\.txt$/,
   /(^|\/)node_modules(\/|$)/,
@@ -121,7 +113,7 @@ function main() {
   const copied = []
   includePaths.forEach((rel) => copied.push(...copyRecursive(rel)))
 
-  const release = fileInfo('dist/com.velamotion.coach.release.1.1.0.rpk')
+  const release = fileInfo('dist/com.velamotion.coach.release.1.0.0.rpk')
   const video = fileInfo('artifacts/final_demo/auto_carousel/velamotion_core_demo.mp4')
   const screenshotsDir = path.join(root, 'artifacts/final_demo/auto_carousel')
   const screenshots = fs.existsSync(screenshotsDir)

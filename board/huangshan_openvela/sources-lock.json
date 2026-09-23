@@ -1,0 +1,209 @@
+[
+  {
+    "name": "apps_crypto_mbedtls",
+    "path": "apps/crypto/mbedtls/mbedtls",
+    "url": "https://codeload.github.com/open-vela/apps_crypto_mbedtls/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "92d49638cf796a7038d05745a8684c222371afb8ffbbef6d577002b244ed0c97"
+  },
+  {
+    "name": "apps_graphics_lvgl",
+    "path": "apps/graphics/lvgl/lvgl",
+    "url": "https://codeload.github.com/open-vela/apps_graphics_lvgl/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "34ff3cc75a960d8114c16da2b8d14ae2784c1a6980480c722436c09009c7d76e"
+  },
+  {
+    "name": "apps_interpreters_quickjs",
+    "path": "apps/interpreters/quickjs/quickjs",
+    "url": "https://codeload.github.com/open-vela/apps_interpreters_quickjs/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "32f867a0823f6673430a0b895f70142f9e81ba1c5cd08f0b4d8a49cc0b3d4f71"
+  },
+  {
+    "name": "apps_netutils_cjson_cJSON",
+    "path": "apps/netutils/cjson/cJSON",
+    "url": "https://codeload.github.com/open-vela/apps_netutils_cjson_cJSON/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "c42598de4de76f4ae10da32a6407c3aa97a8d98be48bbc267341b9e5600eb867"
+  },
+  {
+    "name": "apps_system_libuv",
+    "path": "apps/system/libuv/libuv",
+    "url": "https://codeload.github.com/open-vela/apps_system_libuv/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "4efcd571e9515163935810c0b524def71be7ad691b3616bfe587feb9a8ec838f"
+  },
+  {
+    "name": "apps_system_zlib",
+    "path": "apps/system/zlib/zlib",
+    "url": "https://codeload.github.com/open-vela/apps_system_zlib/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "d14a3db0e633f0d9254a851bffbf170026207ba6fd4be41a1611b6294bdaa9d3"
+  },
+  {
+    "name": "build",
+    "path": "build",
+    "url": "https://codeload.github.com/open-vela/build/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "02b121d7ca2f3af8668164c54de513da1feabf58b2f8ab9789b42d8aa120c35f"
+  },
+  {
+    "name": "external",
+    "path": "external",
+    "url": "https://codeload.github.com/open-vela/external/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "bb573e7ab18bc5b57f12fabaa745c2b15d141def4c4785af9d1ecab9a83fb94e"
+  },
+  {
+    "name": "external_curl",
+    "path": "external/curl/curl",
+    "url": "https://codeload.github.com/open-vela/external_curl/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "1c9dbb5eed20d326b2c70fc032c68ab6ff1c05d997156a4f4a402f7c2fd2cd72"
+  },
+  {
+    "name": "external_freetype",
+    "path": "external/freetype/freetype",
+    "url": "https://codeload.github.com/open-vela/external_freetype/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "f5d900c9c1d92d7836d4c4f066e9f261fa79297ebf5f673afccba05eca400254"
+  },
+  {
+    "name": "external_freetype_freetype_subprojects_dlg",
+    "path": "external/freetype/freetype/subprojects/dlg",
+    "url": "https://codeload.github.com/open-vela/external_freetype_freetype_subprojects_dlg/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "5dfe0cf4d9536082b82c6f489a32bf4861b74719734c4c3132492564e904d936"
+  },
+  {
+    "name": "external_libpng",
+    "path": "external/libpng/libpng",
+    "url": "https://codeload.github.com/open-vela/external_libpng/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "fe364753a40f12f52284ae7bada5214e080bd5c1382d9bc34e29875c6ba5c9cf"
+  },
+  {
+    "name": "external_protobuf-c",
+    "path": "external/protobuf-c/protobuf-c",
+    "url": "https://codeload.github.com/open-vela/external_protobuf-c/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "b03435324c78dfb01178608e7e02067acdd77eb1c556b5560e532412b5272f66"
+  },
+  {
+    "name": "external_rapidjson",
+    "path": "external/rapidjson/rapidjson",
+    "url": "https://codeload.github.com/open-vela/external_rapidjson/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "20b94a7dae3c6966a3500e37a04ee4d9111d4f4325d0e1c3ad5959c2b19db311"
+  },
+  {
+    "name": "external_unqlite",
+    "path": "external/unqlite/unqlite",
+    "url": "https://codeload.github.com/open-vela/external_unqlite/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "1b94862e502b587221e9c339c03ed484c7ea29554b949b0ccfcfb48efb81f2e9"
+  },
+  {
+    "name": "external_yoga",
+    "path": "external/yoga/yoga",
+    "url": "https://codeload.github.com/open-vela/external_yoga/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "389728a93203e2647fde676d7c41f73b11a48362c5cc1832e36e78853f484365"
+  },
+  {
+    "name": "external_zblue",
+    "path": "external/zblue/zblue",
+    "url": "https://codeload.github.com/open-vela/external_zblue/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "98058adf0d6df076307028afb9d1a0aedd23eee6d5743310c333a4ec9a41de8a"
+  },
+  {
+    "name": "frameworks",
+    "path": "frameworks",
+    "url": "https://codeload.github.com/open-vela/frameworks/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "c04fa12b933f11e7bd307a081b677a11f1d24b6fb6a6ad6951f5bcdc1fa71d23"
+  },
+  {
+    "name": "frameworks_graphics",
+    "path": "frameworks/graphics",
+    "url": "https://codeload.github.com/open-vela/frameworks_graphics/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "7cc76df1af16e6aee0f330761cb08d6ecdfb9ff017bd04e245892c0337c493ee"
+  },
+  {
+    "name": "frameworks_graphics_uikit",
+    "path": "frameworks/graphics/uikit",
+    "url": "https://codeload.github.com/open-vela/frameworks_graphics_uikit/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "f7809e11fbf35db97abd502c0796cc9feadcbde7436034c100ff786ffbfb1d83"
+  },
+  {
+    "name": "frameworks_runtimes",
+    "path": "frameworks/runtimes",
+    "url": "https://codeload.github.com/open-vela/frameworks_runtimes/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "e71e107c4bbabed908605cefedcbde03235970f96c0910ff05865e56f46a5c73"
+  },
+  {
+    "name": "frameworks_runtimes_ash",
+    "path": "frameworks/runtimes/ash",
+    "url": "https://codeload.github.com/open-vela/frameworks_runtimes_ash/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "090065d8820a6e49bbdc2c4f3961c7d26638b46626643dfa3680e9473d8dae4b"
+  },
+  {
+    "name": "frameworks_runtimes_feature",
+    "path": "frameworks/runtimes/feature",
+    "url": "https://codeload.github.com/open-vela/frameworks_runtimes_feature/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "62cb4af2532072d9ebde8ead71d02f07e620cc12b15f8b3a47ec6d26275df407"
+  },
+  {
+    "name": "frameworks_runtimes_quickapp",
+    "path": "frameworks/runtimes/quickapp",
+    "url": "https://codeload.github.com/open-vela/frameworks_runtimes_quickapp/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "12c1cb5473c489adcb57be6fec977193a4d48fba43324b6bf3f83f873d7e3790"
+  },
+  {
+    "name": "frameworks_system",
+    "path": "frameworks/system",
+    "url": "https://codeload.github.com/open-vela/frameworks_system/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "9bbacfda70fcd7012e9c16648711ff29338a6e693fc8ba12c050da00b3c847a6"
+  },
+  {
+    "name": "frameworks_system_utils",
+    "path": "frameworks/system/utils",
+    "url": "https://codeload.github.com/open-vela/frameworks_system_utils/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "0142857f08ed9a148350cd3f2853bd4f04ac8a0ad9b807273c4300bc9a7cd1e2"
+  },
+  {
+    "name": "frameworks_system_utils_uv",
+    "path": "frameworks/system/utils/uv",
+    "url": "https://codeload.github.com/open-vela/frameworks_system_utils_uv/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "1867b6c53c1c3d8d85b273649a711483d8d72b8d258201ad5a4c16bb20820490"
+  },
+  {
+    "name": "nuttx-apps",
+    "path": "apps",
+    "url": "https://codeload.github.com/open-vela/nuttx-apps/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "1add1c3204122f972582586a8737c42f34066791ea4e9d86a258bf214f892627"
+  },
+  {
+    "name": "nuttx_fs_littlefs_littlefs",
+    "path": "nuttx/fs/littlefs/littlefs",
+    "url": "https://codeload.github.com/open-vela/nuttx_fs_littlefs_littlefs/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "fbf22a48d06c8efc3771843553fa70bfcb90b595f7803e8a002be64dea9cdba5"
+  },
+  {
+    "name": "nuttx_libs_libxx_libcxx",
+    "path": "nuttx/libs/libxx/libcxx/libcxx",
+    "url": "https://codeload.github.com/open-vela/nuttx_libs_libxx_libcxx/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "76b01e2ce74f4adb17ef34a3a211e503900a07c3b7903260f538e8dd9f86f3c7"
+  },
+  {
+    "name": "nuttx_libs_libxx_libcxxabi",
+    "path": "nuttx/libs/libxx/libcxxabi/libcxxabi",
+    "url": "https://codeload.github.com/open-vela/nuttx_libs_libxx_libcxxabi/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "d0b8fec75037bc2416955412867d8d050edd0d47ad525318018eae9ca92cbd2c"
+  },
+  {
+    "name": "packages",
+    "path": "packages",
+    "url": "https://codeload.github.com/open-vela/packages/tar.gz/refs/heads/dev-ai-contest-2026",
+    "sha256": "ede232a2fadeb039b706869335d7bd9b4a3ee427d8e6a42e40cf5092f9cdbf47"
+  },
+  {
+    "name": "nuttx",
+    "archive": "nuttx.tar.gz",
+    "sha256": "855bb1feb9b728ca8361eac057f34601abe1b89882a325ca1d4cefef3b4dbe97"
+  },
+  {
+    "name": "vendor_sifli",
+    "archive": "vendor_sifli.zip",
+    "sha256": "debdb85b64ade1a738a19078cb2e52f8ef93b0dc9a135255eec9082f1a907c57"
+  },
+  {
+    "name": "libs_sifli_sf32lb52",
+    "archive": "libs_sifli_sf32lb52.zip",
+    "sha256": "2648c2c9cdd0311be7bc0179d3b98ee12a119ceb389a2f3abcd884b081246a09"
+  }
+]

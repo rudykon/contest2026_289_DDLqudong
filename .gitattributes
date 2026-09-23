@@ -6,3 +6,4 @@
 *.zip binary
 *.jsonl -diff
 quickapp/velamotion_coach/docs/validation/* -whitespace
+board/huangshan_openvela/windows-build.patch -whitespace

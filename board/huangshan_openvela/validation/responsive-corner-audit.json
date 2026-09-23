@@ -1,0 +1,62 @@
+[
+  {
+    "image": "responsive-tools.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "responsive-app.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "responsive-coach.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "responsive-timeline.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "responsive-swipe-back.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "responsive-ready.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  }
+]

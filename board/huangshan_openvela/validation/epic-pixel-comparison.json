@@ -1,0 +1,17 @@
+[
+  {
+    "before": "font-subset-tools.png",
+    "after": "epic-tools.png",
+    "changed_pixels": 0
+  },
+  {
+    "before": "font-subset-app.png",
+    "after": "epic-app.png",
+    "changed_pixels": 0
+  },
+  {
+    "before": "epic-coach.png",
+    "after": "epic-swipe-back.png",
+    "changed_pixels": 0
+  }
+]

@@ -1,0 +1,391 @@
+{
+  "summary": {
+    "launch": {
+      "n": 1,
+      "median_ms": 7871,
+      "min_ms": 7871,
+      "max_ms": 7871
+    },
+    "idle-next": {
+      "n": 8,
+      "median_ms": 721.0,
+      "min_ms": 683,
+      "max_ms": 1806
+    },
+    "start": {
+      "n": 1,
+      "median_ms": 1546,
+      "min_ms": 1546,
+      "max_ms": 1546
+    },
+    "training-next": {
+      "n": 8,
+      "median_ms": 1147.0,
+      "min_ms": 636,
+      "max_ms": 1338
+    },
+    "home": {
+      "n": 1,
+      "median_ms": 641,
+      "min_ms": 641,
+      "max_ms": 641
+    },
+    "resume": {
+      "n": 1,
+      "median_ms": 656,
+      "min_ms": 656,
+      "max_ms": 656
+    },
+    "stop": {
+      "n": 1,
+      "median_ms": 1991,
+      "min_ms": 1991,
+      "max_ms": 1991
+    },
+    "home-idle": {
+      "n": 1,
+      "median_ms": 351,
+      "min_ms": 351,
+      "max_ms": 351
+    },
+    "cached-idle-next": {
+      "n": 4,
+      "median_ms": 713.0,
+      "min_ms": 683,
+      "max_ms": 721
+    }
+  },
+  "traces": [
+    {
+      "frames": [],
+      "sample": {
+        "label": "launch",
+        "ms": 7871,
+        "before": 16,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 1631,
+        "before": 1,
+        "after": 2
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 1082,
+        "before": 2,
+        "after": 4
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 1806,
+        "before": 4,
+        "after": 8
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 704,
+        "before": 8,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 721,
+        "before": 1,
+        "after": 2
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 683,
+        "before": 2,
+        "after": 4
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 721,
+        "before": 4,
+        "after": 8
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "idle-next",
+        "ms": 705,
+        "before": 8,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "start",
+        "ms": 1546,
+        "before": 1,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 1338,
+        "before": 33,
+        "after": 34
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 1218,
+        "before": 34,
+        "after": 36
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 971,
+        "before": 36,
+        "after": 40
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 1121,
+        "before": 40,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 1173,
+        "before": 33,
+        "after": 34
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 1316,
+        "before": 34,
+        "after": 36
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 636,
+        "before": 36,
+        "after": 40
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "training-next",
+        "ms": 1058,
+        "before": 40,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "home",
+        "ms": 641,
+        "before": 33,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "resume",
+        "ms": 656,
+        "before": 16,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "stop",
+        "ms": 1991,
+        "before": 33,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "home-idle",
+        "ms": 351,
+        "before": 1,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    }
+  ],
+  "measurement": "Synthetic LVGL press to changed-page refresh completion; includes nominal 100ms press and its scheduling delay; excludes serial queue, physical sensor sampling and panel response."
+}

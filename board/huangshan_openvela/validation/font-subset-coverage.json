@@ -1,0 +1,41 @@
+{
+  "fonttools": "4.65.0",
+  "common_chinese_count": 3755,
+  "source_codepoints": 518,
+  "source_cjk_count": 408,
+  "rpk_sha256": "5cd17a55d8638676c3447a9f360c240b7babf9e3f168b01a32d969c116fb5c9b",
+  "fonts": [
+    {
+      "name": "MiSans-Regular.ttf",
+      "before_bytes": 2594476,
+      "after_bytes": 1038928,
+      "before_codepoints": 10603,
+      "after_codepoints": 5189,
+      "verified_glyphs": 5189,
+      "weight_class": 400,
+      "common_chinese_preserved": 3755,
+      "source_supported_before": 518,
+      "newly_missing_source_codepoints": [],
+      "already_unsupported_source_codepoints": [],
+      "outline_metrics_hinting_equal": true,
+      "original_sha256": "1de0e469323439969b12bb531a41795ae6f8396687e262ca5329554874a3a2b0",
+      "subset_sha256": "bf213c0c4da2e96db2a3e614a3e33e2a8573bfe40147849ed28a2288902a2685"
+    },
+    {
+      "name": "MiSans-Demibold.ttf",
+      "before_bytes": 2577464,
+      "after_bytes": 1037780,
+      "before_codepoints": 10576,
+      "after_codepoints": 5162,
+      "verified_glyphs": 5162,
+      "weight_class": 600,
+      "common_chinese_preserved": 3755,
+      "source_supported_before": 518,
+      "newly_missing_source_codepoints": [],
+      "already_unsupported_source_codepoints": [],
+      "outline_metrics_hinting_equal": true,
+      "original_sha256": "edf14b2d7e3f7a26cd694486015a2c6d1de4e688ba19f663e88212406a1c3c2c",
+      "subset_sha256": "7926b7cd156952d2a5f82aad66c66c09787b9d2ae06337bbb2d45316fa683082"
+    }
+  ]
+}

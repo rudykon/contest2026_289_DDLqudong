@@ -159,6 +159,14 @@ function finishAccumulator(acc) {
 }
 
 export function computeImuFeatures(samples) {
+  const work = createImuFeatureWork(samples);
+  while (!work.step()) {}
+  return work.result;
+}
+
+// Each sensor-sample slice is bounded. The synchronous and cooperative paths
+// share the exact arithmetic, preserving the classifier's feature values.
+export function createImuFeatureWork(samples) {
   const count = samples ? samples.length : 0;
   const accMag = new Array(count);
   const gyroMag = new Array(count);
@@ -174,7 +182,11 @@ export function computeImuFeatures(samples) {
   const accMagAcc = createAccumulator();
   const gyroMagAcc = createAccumulator();
 
-  for (let i = 0; i < count; i++) {
+  let cursor = 0;
+  const work = { result: null, step() {
+  if (work.result) return true;
+  const end = Math.min(count, cursor + 8);
+  for (let i = cursor; i < end; i++) {
     const sample = samples[i];
     const ax = finiteAxis(sample, 'accX');
     const ay = finiteAxis(sample, 'accY');
@@ -200,6 +212,11 @@ export function computeImuFeatures(samples) {
     pushAccumulator(gyroMagAcc, gMag);
   }
 
+  cursor = end;
+  if (cursor < count) return false;
+  // Let the event loop run between accumulation and final feature reduction.
+  if (!work.accumulated) { work.accumulated = true; return false; }
+
   const ax = finishAccumulator(axAcc);
   const ay = finishAccumulator(ayAcc);
   const az = finishAccumulator(azAcc);
@@ -215,7 +232,7 @@ export function computeImuFeatures(samples) {
   const fastPeriod = periodicity.fast;
   const slowPeriod = periodicity.slow;
 
-  return {
+  work.result = {
     accMean: acc.mean,
     accStd: acc.std,
     accRange: acc.range,
@@ -240,6 +257,9 @@ export function computeImuFeatures(samples) {
     lateralEnergy: (ax.std + ay.std) / Math.max(az.std, 0.05),
     durationSec: count / SAMPLE_RATE_HZ,
   };
+  return true;
+  } };
+  return work;
 }
 export function compactFeatureLog(f) {
   return `accStd=${f.accStd.toFixed(2)}, gyroStd=${f.gyroStd.toFixed(2)}, accRange=${f.accRange.toFixed(2)}, gyroRange=${f.gyroRange.toFixed(2)}`;

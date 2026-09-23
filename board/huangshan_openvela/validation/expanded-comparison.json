@@ -1,0 +1,215 @@
+{
+  "expanded-final-off": {
+    "operations": 22,
+    "latency": {
+      "launch": {
+        "median_ms": 5759,
+        "range_ms": [
+          5759,
+          5759
+        ],
+        "n": 1
+      },
+      "idle-next": {
+        "median_ms": 459.0,
+        "range_ms": [
+          437,
+          1077
+        ],
+        "n": 8
+      },
+      "start": {
+        "median_ms": 771,
+        "range_ms": [
+          771,
+          771
+        ],
+        "n": 1
+      },
+      "training-next": {
+        "median_ms": 615.5,
+        "range_ms": [
+          465,
+          991
+        ],
+        "n": 8
+      },
+      "home": {
+        "median_ms": 436,
+        "range_ms": [
+          436,
+          436
+        ],
+        "n": 1
+      },
+      "resume": {
+        "median_ms": 606,
+        "range_ms": [
+          606,
+          606
+        ],
+        "n": 1
+      },
+      "stop": {
+        "median_ms": 540,
+        "range_ms": [
+          540,
+          540
+        ],
+        "n": 1
+      },
+      "home-idle": {
+        "median_ms": 234,
+        "range_ms": [
+          234,
+          234
+        ],
+        "n": 1
+      },
+      "cached-idle-next": {
+        "median_ms": 454.5,
+        "range_ms": [
+          437,
+          457
+        ],
+        "n": 4
+      }
+    },
+    "stop_stages_ms": {
+      "summary": 5,
+      "charts": 25,
+      "review": 20,
+      "metadata": 4,
+      "view": 15,
+      "save": 50
+    },
+    "persisted_from_stop_entry_ms": 838,
+    "finalized_vm_from_stop_entry_ms": 882,
+    "store": {
+      "stringify_ms": 35,
+      "submit_ms": 10,
+      "chars": 1574
+    },
+    "gpu": {
+      "enabled": 1,
+      "verified": 1,
+      "fills": 1257,
+      "copies": 0,
+      "pixels": 4881084,
+      "fallbacks": 15567,
+      "fallback_pixels": 5085976,
+      "faults": 0,
+      "max_irq_us": 818,
+      "blends": 0,
+      "mask_verified": 1,
+      "mask_enabled": 0
+    }
+  },
+  "expanded-final-on": {
+    "operations": 22,
+    "latency": {
+      "launch": {
+        "median_ms": 5776,
+        "range_ms": [
+          5776,
+          5776
+        ],
+        "n": 1
+      },
+      "idle-next": {
+        "median_ms": 465.5,
+        "range_ms": [
+          438,
+          1079
+        ],
+        "n": 8
+      },
+      "start": {
+        "median_ms": 776,
+        "range_ms": [
+          776,
+          776
+        ],
+        "n": 1
+      },
+      "training-next": {
+        "median_ms": 595.0,
+        "range_ms": [
+          471,
+          839
+        ],
+        "n": 8
+      },
+      "home": {
+        "median_ms": 258,
+        "range_ms": [
+          258,
+          258
+        ],
+        "n": 1
+      },
+      "resume": {
+        "median_ms": 616,
+        "range_ms": [
+          616,
+          616
+        ],
+        "n": 1
+      },
+      "stop": {
+        "median_ms": 547,
+        "range_ms": [
+          547,
+          547
+        ],
+        "n": 1
+      },
+      "home-idle": {
+        "median_ms": 232,
+        "range_ms": [
+          232,
+          232
+        ],
+        "n": 1
+      },
+      "cached-idle-next": {
+        "median_ms": 454.0,
+        "range_ms": [
+          438,
+          466
+        ],
+        "n": 4
+      }
+    },
+    "stop_stages_ms": {
+      "summary": 6,
+      "charts": 26,
+      "review": 20,
+      "metadata": 4,
+      "view": 15,
+      "save": 50
+    },
+    "persisted_from_stop_entry_ms": 857,
+    "finalized_vm_from_stop_entry_ms": 905,
+    "store": {
+      "stringify_ms": 35,
+      "submit_ms": 9,
+      "chars": 1574
+    },
+    "gpu": {
+      "enabled": 1,
+      "verified": 1,
+      "fills": 1257,
+      "copies": 0,
+      "pixels": 5021004,
+      "fallbacks": 15345,
+      "fallback_pixels": 4879613,
+      "faults": 0,
+      "max_irq_us": 2079,
+      "blends": 86,
+      "mask_verified": 1,
+      "mask_enabled": 1
+    }
+  },
+  "measurement": "Same image, base EPIC on, mask off/on. Synthetic press-to-changed-page refresh includes ~100ms press. Save completion is measured separately from stop handler entry and is not photon latency. One run per mode; no statistical significance claim."
+}

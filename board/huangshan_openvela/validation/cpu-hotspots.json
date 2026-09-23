@@ -1,0 +1,134 @@
+[
+  {
+    "label": "launch",
+    "ms": 8897,
+    "before": 16,
+    "after": 1
+  },
+  {
+    "label": "idle-next",
+    "ms": 1777,
+    "before": 1,
+    "after": 2
+  },
+  {
+    "label": "idle-next",
+    "ms": 1170,
+    "before": 2,
+    "after": 4
+  },
+  {
+    "label": "idle-next",
+    "ms": 1965,
+    "before": 4,
+    "after": 8
+  },
+  {
+    "label": "idle-next",
+    "ms": 742,
+    "before": 8,
+    "after": 1
+  },
+  {
+    "label": "idle-next",
+    "ms": 751,
+    "before": 1,
+    "after": 2
+  },
+  {
+    "label": "idle-next",
+    "ms": 726,
+    "before": 2,
+    "after": 4
+  },
+  {
+    "label": "idle-next",
+    "ms": 763,
+    "before": 4,
+    "after": 8
+  },
+  {
+    "label": "idle-next",
+    "ms": 743,
+    "before": 8,
+    "after": 1
+  },
+  {
+    "label": "start",
+    "ms": 1662,
+    "before": 1,
+    "after": 33
+  },
+  {
+    "label": "training-next",
+    "ms": 1805,
+    "before": 33,
+    "after": 34
+  },
+  {
+    "label": "training-next",
+    "ms": 1315,
+    "before": 34,
+    "after": 36
+  },
+  {
+    "label": "training-next",
+    "ms": 928,
+    "before": 36,
+    "after": 40
+  },
+  {
+    "label": "training-next",
+    "ms": 1278,
+    "before": 40,
+    "after": 33
+  },
+  {
+    "label": "training-next",
+    "ms": 1333,
+    "before": 33,
+    "after": 34
+  },
+  {
+    "label": "training-next",
+    "ms": 1067,
+    "before": 34,
+    "after": 36
+  },
+  {
+    "label": "training-next",
+    "ms": 934,
+    "before": 36,
+    "after": 40
+  },
+  {
+    "label": "training-next",
+    "ms": 1005,
+    "before": 40,
+    "after": 33
+  },
+  {
+    "label": "home",
+    "ms": 1474,
+    "before": 33,
+    "after": 16
+  },
+  {
+    "label": "resume",
+    "ms": 628,
+    "before": 16,
+    "after": 33
+  },
+  {
+    "label": "stop",
+    "ms": 1890,
+    "before": 33,
+    "after": 1
+  },
+  {
+    "label": "home-idle",
+    "ms": 339,
+    "before": 1,
+    "after": 16
+  }
+]

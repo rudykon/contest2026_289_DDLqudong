@@ -1,0 +1,216 @@
+200239b4 <test_xip_mode(unsigned int, bool, unsigned int)>:
+200239b4:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+200239b8:	4b91      	ldr	r3, [pc, #580]	@ (20023c00 <test_xip_mode(unsigned int, bool, unsigned int)+0x24c>)
+200239ba:	4604      	mov	r4, r0
+200239bc:	4608      	mov	r0, r1
+200239be:	68d9      	ldr	r1, [r3, #12]
+200239c0:	f5ad 4d88 	sub.w	sp, sp, #17408	@ 0x4400
+200239c4:	2a00      	cmp	r2, #0
+200239c6:	bf08      	it	eq
+200239c8:	460a      	moveq	r2, r1
+200239ca:	b089      	sub	sp, #36	@ 0x24
+200239cc:	9103      	str	r1, [sp, #12]
+200239ce:	9207      	str	r2, [sp, #28]
+200239d0:	6c1e      	ldr	r6, [r3, #64]	@ 0x40
+200239d2:	6c9d      	ldr	r5, [r3, #72]	@ 0x48
+200239d4:	f3ef 8b10 	mrs	fp, PRIMASK
+200239d8:	b672      	cpsid	i
+200239da:	2800      	cmp	r0, #0
+200239dc:	f000 809f 	beq.w	20023b1e <test_xip_mode(unsigned int, bool, unsigned int)+0x16a>
+200239e0:	2100      	movs	r1, #0
+200239e2:	f8df e22c 	ldr.w	lr, [pc, #556]	@ 20023c10 <test_xip_mode(unsigned int, bool, unsigned int)+0x25c>
+200239e6:	f10d 0c20 	add.w	ip, sp, #32
+200239ea:	460b      	mov	r3, r1
+200239ec:	2208      	movs	r2, #8
+200239ee:	f013 0701 	ands.w	r7, r3, #1
+200239f2:	bf18      	it	ne
+200239f4:	4677      	movne	r7, lr
+200239f6:	3a01      	subs	r2, #1
+200239f8:	ea87 0353 	eor.w	r3, r7, r3, lsr #1
+200239fc:	d1f7      	bne.n	200239ee <test_xip_mode(unsigned int, bool, unsigned int)+0x3a>
+200239fe:	3101      	adds	r1, #1
+20023a00:	f5b1 7f80 	cmp.w	r1, #256	@ 0x100
+20023a04:	f84c 3b04 	str.w	r3, [ip], #4
+20023a08:	d1ef      	bne.n	200239ea <test_xip_mode(unsigned int, bool, unsigned int)+0x36>
+20023a0a:	2c02      	cmp	r4, #2
+20023a0c:	bf0c      	ite	eq
+20023a0e:	213b      	moveq	r1, #59	@ 0x3b
+20023a10:	210b      	movne	r1, #11
+20023a12:	f026 03ff 	bic.w	r3, r6, #255	@ 0xff
+20023a16:	430b      	orrs	r3, r1
+20023a18:	9305      	str	r3, [sp, #20]
+20023a1a:	f425 13e0 	bic.w	r3, r5, #1835008	@ 0x1c0000
+20023a1e:	ea43 4384 	orr.w	r3, r3, r4, lsl #18
+20023a22:	f8df c1dc 	ldr.w	ip, [pc, #476]	@ 20023c00 <test_xip_mode(unsigned int, bool, unsigned int)+0x24c>
+20023a26:	9306      	str	r3, [sp, #24]
+20023a28:	9202      	str	r2, [sp, #8]
+20023a2a:	2100      	movs	r1, #0
+20023a2c:	f04f 5790 	mov.w	r7, #301989888	@ 0x12000000
+20023a30:	f50d 6e84 	add.w	lr, sp, #1056	@ 0x420
+20023a34:	463b      	mov	r3, r7
+20023a36:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
+20023a3a:	f507 3280 	add.w	r2, r7, #65536	@ 0x10000
+20023a3e:	9204      	str	r2, [sp, #16]
+20023a40:	f04f 22e0 	mov.w	r2, #3758153728	@ 0xe000e000
+20023a44:	f8c2 3f5c 	str.w	r3, [r2, #3932]	@ 0xf5c
+20023a48:	f3bf 8f4f 	dsb	sy
+20023a4c:	f103 0220 	add.w	r2, r3, #32
+20023a50:	9201      	str	r2, [sp, #4]
+20023a52:	f04f 0804 	mov.w	r8, #4
+20023a56:	f8d3 9000 	ldr.w	r9, [r3]
+20023a5a:	ea84 0a09 	eor.w	sl, r4, r9
+20023a5e:	fa5f fa8a 	uxtb.w	sl, sl
+20023a62:	aa08      	add	r2, sp, #32
+20023a64:	f852 a02a 	ldr.w	sl, [r2, sl, lsl #2]
+20023a68:	f1b8 0801 	subs.w	r8, r8, #1
+20023a6c:	ea8a 2414 	eor.w	r4, sl, r4, lsr #8
+20023a70:	ea4f 2919 	mov.w	r9, r9, lsr #8
+20023a74:	d1f1      	bne.n	20023a5a <test_xip_mode(unsigned int, bool, unsigned int)+0xa6>
+20023a76:	9a01      	ldr	r2, [sp, #4]
+20023a78:	3304      	adds	r3, #4
+20023a7a:	4293      	cmp	r3, r2
+20023a7c:	d1e9      	bne.n	20023a52 <test_xip_mode(unsigned int, bool, unsigned int)+0x9e>
+20023a7e:	9a04      	ldr	r2, [sp, #16]
+20023a80:	429a      	cmp	r2, r3
+20023a82:	d1dd      	bne.n	20023a40 <test_xip_mode(unsigned int, bool, unsigned int)+0x8c>
+20023a84:	9b02      	ldr	r3, [sp, #8]
+20023a86:	b9eb      	cbnz	r3, 20023ac4 <test_xip_mode(unsigned int, bool, unsigned int)+0x110>
+20023a88:	f84e 4021 	str.w	r4, [lr, r1, lsl #2]
+20023a8c:	3101      	adds	r1, #1
+20023a8e:	f5b1 7f80 	cmp.w	r1, #256	@ 0x100
+20023a92:	d115      	bne.n	20023ac0 <test_xip_mode(unsigned int, bool, unsigned int)+0x10c>
+20023a94:	9b02      	ldr	r3, [sp, #8]
+20023a96:	bb2b      	cbnz	r3, 20023ae4 <test_xip_mode(unsigned int, bool, unsigned int)+0x130>
+20023a98:	f3bf 8f4f 	dsb	sy
+20023a9c:	f3bf 8f6f 	isb	sy
+20023aa0:	9b05      	ldr	r3, [sp, #20]
+20023aa2:	f8cc 3040 	str.w	r3, [ip, #64]	@ 0x40
+20023aa6:	9b06      	ldr	r3, [sp, #24]
+20023aa8:	f8cc 3048 	str.w	r3, [ip, #72]	@ 0x48
+20023aac:	9b07      	ldr	r3, [sp, #28]
+20023aae:	f8cc 300c 	str.w	r3, [ip, #12]
+20023ab2:	f3bf 8f4f 	dsb	sy
+20023ab6:	f3bf 8f6f 	isb	sy
+20023aba:	2301      	movs	r3, #1
+20023abc:	9302      	str	r3, [sp, #8]
+20023abe:	e7b4      	b.n	20023a2a <test_xip_mode(unsigned int, bool, unsigned int)+0x76>
+20023ac0:	9f04      	ldr	r7, [sp, #16]
+20023ac2:	e7b7      	b.n	20023a34 <test_xip_mode(unsigned int, bool, unsigned int)+0x80>
+20023ac4:	f85e 3021 	ldr.w	r3, [lr, r1, lsl #2]
+20023ac8:	42a3      	cmp	r3, r4
+20023aca:	d0df      	beq.n	20023a8c <test_xip_mode(unsigned int, bool, unsigned int)+0xd8>
+20023acc:	b908      	cbnz	r0, 20023ad2 <test_xip_mode(unsigned int, bool, unsigned int)+0x11e>
+20023ace:	2000      	movs	r0, #0
+20023ad0:	e7dc      	b.n	20023a8c <test_xip_mode(unsigned int, bool, unsigned int)+0xd8>
+20023ad2:	4b4c      	ldr	r3, [pc, #304]	@ (20023c04 <test_xip_mode(unsigned int, bool, unsigned int)+0x250>)
+20023ad4:	4a4c      	ldr	r2, [pc, #304]	@ (20023c08 <test_xip_mode(unsigned int, bool, unsigned int)+0x254>)
+20023ad6:	601f      	str	r7, [r3, #0]
+20023ad8:	f85e 3021 	ldr.w	r3, [lr, r1, lsl #2]
+20023adc:	6013      	str	r3, [r2, #0]
+20023ade:	4b4b      	ldr	r3, [pc, #300]	@ (20023c0c <test_xip_mode(unsigned int, bool, unsigned int)+0x258>)
+20023ae0:	601c      	str	r4, [r3, #0]
+20023ae2:	e7f4      	b.n	20023ace <test_xip_mode(unsigned int, bool, unsigned int)+0x11a>
+20023ae4:	f3bf 8f4f 	dsb	sy
+20023ae8:	b920      	cbnz	r0, 20023af4 <test_xip_mode(unsigned int, bool, unsigned int)+0x140>
+20023aea:	4b45      	ldr	r3, [pc, #276]	@ (20023c00 <test_xip_mode(unsigned int, bool, unsigned int)+0x24c>)
+20023aec:	641e      	str	r6, [r3, #64]	@ 0x40
+20023aee:	649d      	str	r5, [r3, #72]	@ 0x48
+20023af0:	9a03      	ldr	r2, [sp, #12]
+20023af2:	60da      	str	r2, [r3, #12]
+20023af4:	f04f 5390 	mov.w	r3, #301989888	@ 0x12000000
+20023af8:	f04f 22e0 	mov.w	r2, #3758153728	@ 0xe000e000
+20023afc:	f8c2 3f5c 	str.w	r3, [r2, #3932]	@ 0xf5c
+20023b00:	3320      	adds	r3, #32
+20023b02:	f1b3 5f98 	cmp.w	r3, #318767104	@ 0x13000000
+20023b06:	d1f9      	bne.n	20023afc <test_xip_mode(unsigned int, bool, unsigned int)+0x148>
+20023b08:	f3bf 8f4f 	dsb	sy
+20023b0c:	f3bf 8f6f 	isb	sy
+20023b10:	f38b 8810 	msr	PRIMASK, fp
+20023b14:	f50d 4d88 	add.w	sp, sp, #17408	@ 0x4400
+20023b18:	b009      	add	sp, #36	@ 0x24
+20023b1a:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+20023b1e:	f04f 27e0 	mov.w	r7, #3758153728	@ 0xe000e000
+20023b22:	f50d 6284 	add.w	r2, sp, #1056	@ 0x420
+20023b26:	0303      	lsls	r3, r0, #12
+20023b28:	0841      	lsrs	r1, r0, #1
+20023b2a:	f403 5380 	and.w	r3, r3, #4096	@ 0x1000
+20023b2e:	eb03 4301 	add.w	r3, r3, r1, lsl #16
+20023b32:	f103 5390 	add.w	r3, r3, #301989888	@ 0x12000000
+20023b36:	f8c7 3f5c 	str.w	r3, [r7, #3932]	@ 0xf5c
+20023b3a:	f3bf 8f4f 	dsb	sy
+20023b3e:	00c1      	lsls	r1, r0, #3
+20023b40:	f103 0c20 	add.w	ip, r3, #32
+20023b44:	f853 eb04 	ldr.w	lr, [r3], #4
+20023b48:	459c      	cmp	ip, r3
+20023b4a:	f842 e021 	str.w	lr, [r2, r1, lsl #2]
+20023b4e:	f101 0101 	add.w	r1, r1, #1
+20023b52:	d1f7      	bne.n	20023b44 <test_xip_mode(unsigned int, bool, unsigned int)+0x190>
+20023b54:	3001      	adds	r0, #1
+20023b56:	f5b0 7f00 	cmp.w	r0, #512	@ 0x200
+20023b5a:	d1e4      	bne.n	20023b26 <test_xip_mode(unsigned int, bool, unsigned int)+0x172>
+20023b5c:	f3bf 8f4f 	dsb	sy
+20023b60:	f3bf 8f6f 	isb	sy
+20023b64:	2c03      	cmp	r4, #3
+20023b66:	f026 03ff 	bic.w	r3, r6, #255	@ 0xff
+20023b6a:	d046      	beq.n	20023bfa <test_xip_mode(unsigned int, bool, unsigned int)+0x246>
+20023b6c:	2c02      	cmp	r4, #2
+20023b6e:	bf14      	ite	ne
+20023b70:	210b      	movne	r1, #11
+20023b72:	213b      	moveq	r1, #59	@ 0x3b
+20023b74:	430b      	orrs	r3, r1
+20023b76:	4922      	ldr	r1, [pc, #136]	@ (20023c00 <test_xip_mode(unsigned int, bool, unsigned int)+0x24c>)
+20023b78:	640b      	str	r3, [r1, #64]	@ 0x40
+20023b7a:	f425 13e0 	bic.w	r3, r5, #1835008	@ 0x1c0000
+20023b7e:	ea43 4384 	orr.w	r3, r3, r4, lsl #18
+20023b82:	648b      	str	r3, [r1, #72]	@ 0x48
+20023b84:	f3bf 8f4f 	dsb	sy
+20023b88:	f3bf 8f6f 	isb	sy
+20023b8c:	2100      	movs	r1, #0
+20023b8e:	2001      	movs	r0, #1
+20023b90:	f04f 27e0 	mov.w	r7, #3758153728	@ 0xe000e000
+20023b94:	030b      	lsls	r3, r1, #12
+20023b96:	084c      	lsrs	r4, r1, #1
+20023b98:	f403 5380 	and.w	r3, r3, #4096	@ 0x1000
+20023b9c:	eb03 4304 	add.w	r3, r3, r4, lsl #16
+20023ba0:	f103 5390 	add.w	r3, r3, #301989888	@ 0x12000000
+20023ba4:	f8c7 3f5c 	str.w	r3, [r7, #3932]	@ 0xf5c
+20023ba8:	f3bf 8f4f 	dsb	sy
+20023bac:	00cc      	lsls	r4, r1, #3
+20023bae:	f103 0c20 	add.w	ip, r3, #32
+20023bb2:	f853 8b04 	ldr.w	r8, [r3], #4
+20023bb6:	f852 e024 	ldr.w	lr, [r2, r4, lsl #2]
+20023bba:	3401      	adds	r4, #1
+20023bbc:	45f0      	cmp	r8, lr
+20023bbe:	bf18      	it	ne
+20023bc0:	2000      	movne	r0, #0
+20023bc2:	459c      	cmp	ip, r3
+20023bc4:	d1f5      	bne.n	20023bb2 <test_xip_mode(unsigned int, bool, unsigned int)+0x1fe>
+20023bc6:	3101      	adds	r1, #1
+20023bc8:	f5b1 7f00 	cmp.w	r1, #512	@ 0x200
+20023bcc:	d1e2      	bne.n	20023b94 <test_xip_mode(unsigned int, bool, unsigned int)+0x1e0>
+20023bce:	b910      	cbnz	r0, 20023bd6 <test_xip_mode(unsigned int, bool, unsigned int)+0x222>
+20023bd0:	4b0b      	ldr	r3, [pc, #44]	@ (20023c00 <test_xip_mode(unsigned int, bool, unsigned int)+0x24c>)
+20023bd2:	641e      	str	r6, [r3, #64]	@ 0x40
+20023bd4:	649d      	str	r5, [r3, #72]	@ 0x48
+20023bd6:	2200      	movs	r2, #0
+20023bd8:	f04f 24e0 	mov.w	r4, #3758153728	@ 0xe000e000
+20023bdc:	0853      	lsrs	r3, r2, #1
+20023bde:	0311      	lsls	r1, r2, #12
+20023be0:	041b      	lsls	r3, r3, #16
+20023be2:	f103 5390 	add.w	r3, r3, #301989888	@ 0x12000000
+20023be6:	f401 5180 	and.w	r1, r1, #4096	@ 0x1000
+20023bea:	3201      	adds	r2, #1
+20023bec:	440b      	add	r3, r1
+20023bee:	f5b2 7f00 	cmp.w	r2, #512	@ 0x200
+20023bf2:	f8c4 3f5c 	str.w	r3, [r4, #3932]	@ 0xf5c
+20023bf6:	d1f1      	bne.n	20023bdc <test_xip_mode(unsigned int, bool, unsigned int)+0x228>
+20023bf8:	e786      	b.n	20023b08 <test_xip_mode(unsigned int, bool, unsigned int)+0x154>
+20023bfa:	216b      	movs	r1, #107	@ 0x6b
+20023bfc:	e7ba      	b.n	20023b74 <test_xip_mode(unsigned int, bool, unsigned int)+0x1c0>
+20023bfe:	bf00      	nop
+20023c00:	50042000 	.word	0x50042000
+20023c04:	20033e00 	.word	0x20033e00
+20023c08:	20033dfc 	.word	0x20033dfc
+20023c0c:	20033df8 	.word	0x20033df8
+20023c10:	edb88320 	.word	0xedb88320
+20023c14:	00000000 	.word	0x00000000

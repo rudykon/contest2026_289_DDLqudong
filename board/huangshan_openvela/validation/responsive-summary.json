@@ -1,0 +1,58 @@
+{
+  "responsive-final": {
+    "launch": {
+      "n": 1,
+      "median_ms": 5625,
+      "min_ms": 5625,
+      "max_ms": 5625
+    },
+    "idle-next": {
+      "n": 8,
+      "median_ms": 482.5,
+      "min_ms": 467,
+      "max_ms": 1132
+    },
+    "start": {
+      "n": 1,
+      "median_ms": 778,
+      "min_ms": 778,
+      "max_ms": 778
+    },
+    "training-next": {
+      "n": 8,
+      "median_ms": 748.0,
+      "min_ms": 479,
+      "max_ms": 1068
+    },
+    "home": {
+      "n": 1,
+      "median_ms": 466,
+      "min_ms": 466,
+      "max_ms": 466
+    },
+    "resume": {
+      "n": 1,
+      "median_ms": 480,
+      "min_ms": 480,
+      "max_ms": 480
+    },
+    "stop": {
+      "n": 1,
+      "median_ms": 1402,
+      "min_ms": 1402,
+      "max_ms": 1402
+    },
+    "home-idle": {
+      "n": 1,
+      "median_ms": 258,
+      "min_ms": 258,
+      "max_ms": 258
+    },
+    "cached-idle-next": {
+      "n": 4,
+      "median_ms": 479.5,
+      "min_ms": 467,
+      "max_ms": 483
+    }
+  }
+}

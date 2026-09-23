@@ -1,0 +1,17 @@
+[
+  {
+    "before": "font-subset-tools.png",
+    "after": "responsive-tools.png",
+    "changed_pixels": 0
+  },
+  {
+    "before": "font-subset-app.png",
+    "after": "responsive-app.png",
+    "changed_pixels": 0
+  },
+  {
+    "before": "responsive-coach.png",
+    "after": "responsive-swipe-back.png",
+    "changed_pixels": 0
+  }
+]

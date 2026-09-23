@@ -1,0 +1,389 @@
+{
+  "elf": "/opt/openvela/build/nuttx-cpu-profile.elf",
+  "batches": [
+    {
+      "samples": 587,
+      "top_pc": [
+        {
+          "function": "nxsched_switch",
+          "samples": 47,
+          "percent": 8.0
+        },
+        {
+          "function": "lv_draw_sw_blend_color_to_rgb565",
+          "samples": 29,
+          "percent": 4.9
+        },
+        {
+          "function": "JS_CallInternal",
+          "samples": 27,
+          "percent": 4.6
+        },
+        {
+          "function": "mm_malloc",
+          "samples": 18,
+          "percent": 3.1
+        },
+        {
+          "function": "mm_forcefree",
+          "samples": 17,
+          "percent": 2.9
+        },
+        {
+          "function": "JS_GetPropertyInternal",
+          "samples": 13,
+          "percent": 2.2
+        },
+        {
+          "function": "__divdf3",
+          "samples": 13,
+          "percent": 2.2
+        },
+        {
+          "function": "mm_realloc",
+          "samples": 9,
+          "percent": 1.5
+        },
+        {
+          "function": "get_prop_core",
+          "samples": 9,
+          "percent": 1.5
+        },
+        {
+          "function": "YGNodelayoutImpl(YGNode*, float, float, YGDirection, YGMeasureMode, YGMeasureMode, float, float, bool, YGConfig*, facebook::yoga::LayoutData&, void*, unsigned long, unsigned long, facebook::yoga::LayoutPassReason)",
+          "samples": 8,
+          "percent": 1.4
+        },
+        {
+          "function": "get_selector_style_prop",
+          "samples": 6,
+          "percent": 1.0
+        },
+        {
+          "function": "lv_font_get_glyph_width",
+          "samples": 6,
+          "percent": 1.0
+        },
+        {
+          "function": "YGDoubleEqual(double, double)",
+          "samples": 6,
+          "percent": 1.0
+        },
+        {
+          "function": "event_send_core",
+          "samples": 6,
+          "percent": 1.0
+        },
+        {
+          "function": "memcpy",
+          "samples": 6,
+          "percent": 1.0
+        },
+        {
+          "function": "mm_free",
+          "samples": 5,
+          "percent": 0.9
+        },
+        {
+          "function": "lv_spangroup_event",
+          "samples": 5,
+          "percent": 0.9
+        },
+        {
+          "function": "nxsem_clockwait_slow",
+          "samples": 5,
+          "percent": 0.9
+        },
+        {
+          "function": "lv_obj_event",
+          "samples": 4,
+          "percent": 0.7
+        },
+        {
+          "function": "vsprintf_internal.constprop.0",
+          "samples": 4,
+          "percent": 0.7
+        },
+        {
+          "function": "free_delaylist.isra.0",
+          "samples": 4,
+          "percent": 0.7
+        },
+        {
+          "function": "YGRoundValueToPixelGrid",
+          "samples": 4,
+          "percent": 0.7
+        },
+        {
+          "function": "ferry::CreateJSEventObj(JSContext*, ferry::Widget*, ferry::_tagANY const*)",
+          "samples": 4,
+          "percent": 0.7
+        },
+        {
+          "function": "JS_FreeValue",
+          "samples": 3,
+          "percent": 0.5
+        },
+        {
+          "function": "JS_DefineProperty",
+          "samples": 3,
+          "percent": 0.5
+        }
+      ],
+      "top_lr": [
+        [
+          "nxsem_wait_slow",
+          51
+        ],
+        [
+          "JS_CallInternal",
+          32
+        ],
+        [
+          "mm_malloc",
+          27
+        ],
+        [
+          "mm_forcefree",
+          17
+        ],
+        [
+          "YGRoundValueToPixelGrid",
+          16
+        ],
+        [
+          "YGNodelayoutImpl(YGNode*, float, float, YGDirection, YGMeasureMode, YGMeasureMode, float, float, bool, YGConfig*, facebook::yoga::LayoutData&, void*, unsigned long, unsigned long, facebook::yoga::LayoutPassReason)",
+          10
+        ],
+        [
+          "mm_realloc",
+          9
+        ],
+        [
+          "event_send_core",
+          8
+        ],
+        [
+          "js_def_malloc",
+          7
+        ],
+        [
+          "lv_draw_sw_blend_color_to_rgb565",
+          7
+        ],
+        [
+          "lv_cache_release",
+          7
+        ],
+        [
+          "JS_ArraySpeciesCreate",
+          6
+        ],
+        [
+          "lv_obj_event",
+          5
+        ],
+        [
+          "JS_DefinePropertyValue",
+          5
+        ],
+        [
+          "lv_obj_refresh_style",
+          5
+        ]
+      ]
+    },
+    {
+      "samples": 987,
+      "top_pc": [
+        {
+          "function": "JS_CallInternal",
+          "samples": 142,
+          "percent": 14.4
+        },
+        {
+          "function": "mm_malloc",
+          "samples": 57,
+          "percent": 5.8
+        },
+        {
+          "function": "JS_GetPropertyInternal",
+          "samples": 33,
+          "percent": 3.3
+        },
+        {
+          "function": "mm_forcefree",
+          "samples": 32,
+          "percent": 3.2
+        },
+        {
+          "function": "lv_draw_sw_blend_color_to_rgb565",
+          "samples": 31,
+          "percent": 3.1
+        },
+        {
+          "function": "__divdf3",
+          "samples": 23,
+          "percent": 2.3
+        },
+        {
+          "function": "js_call_c_function",
+          "samples": 22,
+          "percent": 2.2
+        },
+        {
+          "function": "__aeabi_dadd",
+          "samples": 21,
+          "percent": 2.1
+        },
+        {
+          "function": "mm_realloc",
+          "samples": 13,
+          "percent": 1.3
+        },
+        {
+          "function": "nxsched_switch",
+          "samples": 12,
+          "percent": 1.2
+        },
+        {
+          "function": "mm_free",
+          "samples": 9,
+          "percent": 0.9
+        },
+        {
+          "function": "JS_DefineProperty",
+          "samples": 9,
+          "percent": 0.9
+        },
+        {
+          "function": "mm_heapmember",
+          "samples": 8,
+          "percent": 0.8
+        },
+        {
+          "function": "memcpy",
+          "samples": 8,
+          "percent": 0.8
+        },
+        {
+          "function": "sched_idletask",
+          "samples": 8,
+          "percent": 0.8
+        },
+        {
+          "function": "__nedf2",
+          "samples": 8,
+          "percent": 0.8
+        },
+        {
+          "function": "add_property",
+          "samples": 8,
+          "percent": 0.8
+        },
+        {
+          "function": "JS_GetOwnPropertyNamesInternal",
+          "samples": 8,
+          "percent": 0.8
+        },
+        {
+          "function": "get_prop_core",
+          "samples": 7,
+          "percent": 0.7
+        },
+        {
+          "function": "JS_CreateProperty",
+          "samples": 7,
+          "percent": 0.7
+        },
+        {
+          "function": "YGNodelayoutImpl(YGNode*, float, float, YGDirection, YGMeasureMode, YGMeasureMode, float, float, bool, YGConfig*, facebook::yoga::LayoutData&, void*, unsigned long, unsigned long, facebook::yoga::LayoutPassReason)",
+          "samples": 7,
+          "percent": 0.7
+        },
+        {
+          "function": "YGRoundValueToPixelGrid",
+          "samples": 7,
+          "percent": 0.7
+        },
+        {
+          "function": "__muldf3",
+          "samples": 6,
+          "percent": 0.6
+        },
+        {
+          "function": "JS_DefinePropertyValue",
+          "samples": 6,
+          "percent": 0.6
+        },
+        {
+          "function": "JS_SetPropertyInternal",
+          "samples": 6,
+          "percent": 0.6
+        }
+      ],
+      "top_lr": [
+        [
+          "JS_CallInternal",
+          192
+        ],
+        [
+          "mm_malloc",
+          76
+        ],
+        [
+          "mm_forcefree",
+          31
+        ],
+        [
+          "YGRoundValueToPixelGrid",
+          23
+        ],
+        [
+          "mm_realloc",
+          21
+        ],
+        [
+          "JS_DefinePropertyValue",
+          20
+        ],
+        [
+          "lv_draw_sw_blend_color_to_rgb565",
+          16
+        ],
+        [
+          "nxsem_wait_slow",
+          14
+        ],
+        [
+          "__aeabi_cdcmple",
+          14
+        ],
+        [
+          "js_def_malloc",
+          10
+        ],
+        [
+          "js_call_c_function",
+          10
+        ],
+        [
+          "JS_GetOwnPropertyNamesInternal",
+          10
+        ],
+        [
+          "YGNodelayoutImpl(YGNode*, float, float, YGDirection, YGMeasureMode, YGMeasureMode, float, float, bool, YGConfig*, facebook::yoga::LayoutData&, void*, unsigned long, unsigned long, facebook::yoga::LayoutPassReason)",
+          9
+        ],
+        [
+          "JS_GetGlobalVar",
+          9
+        ],
+        [
+          "JS_ToFloat64Free",
+          8
+        ]
+      ]
+    }
+  ]
+}

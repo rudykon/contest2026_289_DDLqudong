@@ -1,6 +1,6 @@
 <template>
-  <div class="swiper">
-    <div class="screen home-screen" if="{{ pageState.showHome }}">
+  <div class="swiper" ontouchstart="beginTouchGesture" ontouchmove="moveTouchGesture" ontouchend="finishTouchGesture">
+    <div class="screen home-screen" show="{{ pageState.showHome }}">
       <div class="demo-page-mark" style="background-color: {{ pageState.accentColor }};"></div>
       <div class="demo-run-mark" style="background-color: {{ live.runMarkerColor }};"></div>
       <div class="goal-stars" style="transform: scale({{ goalStarsScale }});">
@@ -11,19 +11,11 @@
       </div>
       <div class="app-head">
         <div class="title-block">
-          <text class="app-title">小芽</text>
+          <text class="app-title">小芽 · {{ dataSourceText }}</text>
         </div>
-        <text class="mode-pill">{{ dataSourceText }}</text>
       </div>
 
       <div class="state-card">
-        <div class="process-strip hero-process-strip">
-          <div class="process-pulse" style="background-color: {{ processingStateColor }}; opacity: {{ motionPulseOpacity }}; transform: scaleX({{ motionPulseScale }});"></div>
-          <div class="process-copy">
-            <text class="process-title">{{ processingStateText }}</text>
-          </div>
-        </div>
-
         <div class="activity-row hero-activity-row">
           <div class="buddy-zone">
             <div class="activity-buddy-pop" style="opacity: {{ activityOpacity }}; transform: scale({{ activityScale }});">
@@ -42,14 +34,9 @@
             </div>
           </div>
           <div class="activity-copy">
-            <div class="state-top hero-state-top">
-              <text class="state-dot">●</text>
-              <text class="state-copy">{{ live.runStatusText }}</text>
-            </div>
             <text class="activity-name" style="color: {{ live.activityColor }}; opacity: {{ activityOpacity }}; transform: scale({{ activityScale }});">{{ live.activityName }}</text>
             <div class="activity-chip-row">
               <text class="activity-chip">{{ live.elapsedText }}</text>
-              <text class="activity-chip">{{ live.confidenceText }}</text>
             </div>
           </div>
         </div>
@@ -57,34 +44,32 @@
         <div class="coach-box" style="background-color: {{ live.riskBgColor }}; transform: translateX({{ riskTranslateX }}px);">
           <div class="coach-head">
             <text class="coach-label" style="color: {{ live.riskColor }};">{{ live.riskTitle }}</text>
-            <text class="coach-zone" style="color: {{ live.zoneColor }};">{{ live.zoneText }}</text>
           </div>
-          <div class="intensity-track"><div class="intensity-fill" style="width: {{ live.zoneWidth }}px; background-color: {{ live.zoneColor }};"></div></div>
         </div>
       </div>
 
       <div class="metric-strip">
         <div class="metric-card metric-heart">
-          <text class="metric-icon">♥</text>
+          <text class="metric-icon">心率</text>
           <text class="metric-value heart-value" style="transform: scale({{ heartScale }});">{{ live.hrText }}</text>
         </div>
         <div class="metric-card metric-steps">
-          <text class="metric-icon">步</text>
+          <text class="metric-icon">步数</text>
           <text class="metric-value">{{ live.stepText }}</text>
         </div>
         <div class="metric-card metric-zone">
-          <text class="metric-icon">强</text>
-          <text class="metric-value" style="color: {{ live.zoneColor }};">{{ live.zoneText }}</text>
+          <text class="metric-icon">强度</text>
+          <text class="metric-value" style="color: {{ live.zoneInk }};">{{ live.zoneText }}</text>
         </div>
       </div>
 
       <div class="start-action">
-        <div class="start-ring" style="opacity: {{ startRingOpacity }}; transform: scale({{ startRingScale }});" onclick="toggleRunning"><div class="start-ring-core"></div></div>
-        <input class="primary-btn start-primary-btn" style="opacity: {{ startButtonOpacity }}; transform: scale({{ startButtonScale }});" type="button" value="{{ live.startButtonText }}" onclick="toggleRunning" />
+        <div class="start-ring" style="opacity: {{ startRingOpacity }}; transform: scale({{ startRingScale }});" ontouchstart="queueTouchAction('toggleRunning')" ontouchend="finishTouchGesture" if="{{ startRingOpacity > 0 }}"><div class="start-ring-core"></div></div>
+        <input class="primary-btn start-primary-btn" style="opacity: {{ startButtonOpacity }}; transform: scale({{ startButtonScale }});" type="button" value="{{ live.startButtonText }}" ontouchstart="queueTouchAction('toggleRunning')" ontouchend="finishTouchGesture" />
       </div>
     </div>
 
-    <div class="screen ai-screen" if="{{ pageState.showCoach }}">
+    <div class="screen ai-screen" show="{{ pageState.showCoach }}" if="{{ coachLoaded }}">
       <div class="demo-page-mark" style="background-color: {{ pageState.accentColor }};"></div>
       <div class="page-head compact-head">
         <text class="page-title">初筛</text>
@@ -110,10 +95,9 @@
           </div>
           <div class="prob-row coach-prob-row" for="{{ live.coachClassRows }}">
             <text class="prob-name">{{ $item.name }}</text>
-            <div class="bar-bg"><div class="bar-fill" style="width: {{ $item.width }}px; background-color: {{ $item.color }};"></div></div>
             <text class="prob-pct">{{ $item.percent }}%</text>
           </div>
-          <div class="coach-advice-box"><text class="coach-advice-label">芽</text><text class="coach-advice">{{ live.coachTip }}</text></div>
+          <div class="coach-advice-box"><text class="coach-advice" for="{{ live.coachTipLines }}">{{ $item }}</text></div>
         </div>
 
         <div class="coach-view" if="{{ coachToolsOpen }}">
@@ -121,84 +105,71 @@
             <text class="coach-selected-name">{{ currentSceneName }}</text>
           </div>
           <div class="coach-scene-grid">
-            <input class="coach-scene-btn coach-scene-main" style="background-color: {{ sceneMixedBg }}; color: {{ sceneMixedColor }};" type="button" value="混合" onclick="useMixed" />
-            <input class="coach-scene-btn" style="background-color: {{ sceneRunningBg }}; color: {{ sceneRunningColor }};" type="button" value="跑步" onclick="useRunning" />
-            <input class="coach-scene-btn" style="background-color: {{ sceneFatigueBg }}; color: {{ sceneFatigueColor }};" type="button" value="疲劳跑" onclick="useFatigue" />
-            <input class="coach-scene-btn" style="background-color: {{ sceneJumpBg }}; color: {{ sceneJumpColor }};" type="button" value="跳绳" onclick="useJump" />
-            <input class="coach-scene-btn" style="background-color: {{ sceneStaticBg }}; color: {{ sceneStaticColor }};" type="button" value="静坐" onclick="useStatic" />
-            <input class="coach-scene-btn" style="background-color: {{ sceneRealBg }}; color: {{ sceneRealColor }};" type="button" value="真机" onclick="useRealDevice" />
-            <input class="coach-scene-btn" style="background-color: {{ sceneEmulatorBg }}; color: {{ sceneEmulatorColor }};" type="button" value="模拟器六轴" onclick="useEmulatorSensors" />
+            <input class="coach-scene-btn coach-scene-main" style="background-color: {{ sceneMixedBg }}; color: {{ sceneMixedColor }};" type="button" value="混合" ontouchstart="queueTouchAction('useMixed')" ontouchend="finishTouchGesture" />
+            <input class="coach-scene-btn" style="background-color: {{ sceneRunningBg }}; color: {{ sceneRunningColor }};" type="button" value="跑步" ontouchstart="queueTouchAction('useRunning')" ontouchend="finishTouchGesture" />
+            <input class="coach-scene-btn" style="background-color: {{ sceneFatigueBg }}; color: {{ sceneFatigueColor }};" type="button" value="疲劳跑" ontouchstart="queueTouchAction('useFatigue')" ontouchend="finishTouchGesture" />
+            <input class="coach-scene-btn" style="background-color: {{ sceneJumpBg }}; color: {{ sceneJumpColor }};" type="button" value="跳绳" ontouchstart="queueTouchAction('useJump')" ontouchend="finishTouchGesture" />
+            <input class="coach-scene-btn" style="background-color: {{ sceneStaticBg }}; color: {{ sceneStaticColor }};" type="button" value="静坐" ontouchstart="queueTouchAction('useStatic')" ontouchend="finishTouchGesture" />
+            <input class="coach-scene-btn" style="background-color: {{ sceneRealBg }}; color: {{ sceneRealColor }};" type="button" value="真机" ontouchstart="queueTouchAction('useRealDevice')" ontouchend="finishTouchGesture" />
           </div>
-          <div class="coach-ai-box">
-            <text class="coach-ai-label">复盘</text>
-            <text class="coach-ai-text">{{ live.aiSummaryText }}</text>
-          </div>
-          <input class="coach-ai-btn" type="button" value="{{ live.aiSummaryButtonText }}" onclick="refreshAiSummary" />
         </div>
       </div>
-      <input class="secondary-btn core-toggle-btn" if="{{ !isRunning }}" type="button" value="{{ coachToolsButtonText }}" onclick="toggleCoachTools" />
+      <input class="secondary-btn core-toggle-btn" show="{{ !isRunning }}" type="button" value="{{ coachToolsButtonText }}" ontouchstart="queueTouchAction('toggleCoachTools')" ontouchend="finishTouchGesture" />
     </div>
 
-    <div class="screen timeline-screen" if="{{ pageState.showTimeline }}">
+    <div class="screen timeline-screen" show="{{ pageState.showTimeline }}" if="{{ timelineLoaded }}">
       <div class="demo-page-mark" style="background-color: {{ pageState.accentColor }};"></div>
       <div class="page-head compact-head">
         <text class="page-title">时间线</text>
       </div>
 
       <div class="timeline-card core-timeline-card">
-        <div class="timeline-summary">
+        <div class="timeline-summary" if="{{ !timelineReviewOpen }}">
           <div class="timeline-summary-orb"><text class="timeline-summary-value">{{ live.summarySegments }}</text><text class="timeline-summary-label">段</text></div>
           <text class="timeline-summary-active">{{ live.summaryActive }}</text>
         </div>
 
-        <div if="{{ !timelineReviewOpen }}">
+        <div class="timeline-list" if="{{ !timelineReviewOpen }}">
           <text class="empty timeline-empty" if="{{ live.timelineEmpty }}">运动后自动生成</text>
-          <div class="seg-row" for="{{ live.timelineRows }}">
+          <list class="segment-scroll" ontouchstart="beginTouchGesture" ontouchmove="moveTouchGesture" ontouchend="finishTouchGesture">
+          <list-item type="segment" class="seg-row" for="{{ live.timelineRows }}">
             <div class="seg-dot" style="background-color: {{ $item.color }};"></div>
             <div class="seg-main">
               <div class="seg-title-row">
-                <text class="seg-name">{{ $item.label }}</text>
+                <text class="seg-name">{{ $item.label }}</text><text class="seg-duration">{{ $item.duration }}</text>
               </div>
               <div class="seg-bar-row">
                 <div class="seg-track"><div class="seg-fill" style="width: {{ $item.width }}px; background-color: {{ $item.color }};"></div></div>
-                <text class="seg-duration">{{ $item.duration }}</text>
               </div>
             </div>
-          </div>
+          </list-item>
+          </list>
         </div>
 
         <div class="core-review" if="{{ timelineReviewOpen }}">
           <div class="summary-stat-row core-summary-stat-row">
-            <div class="summary-stat"><text class="stat-value">{{ live.summaryTotal }}</text><text class="stat-label">总</text></div>
-            <div class="summary-stat"><text class="stat-value">{{ live.summaryActive }}</text><text class="stat-label">动</text></div>
-            <div class="summary-stat"><text class="stat-value">{{ live.summaryRisk }}</text><text class="stat-label">醒</text></div>
+            <div class="summary-stat"><text class="stat-value">{{ live.summaryTotal }}</text><text class="stat-label">总时长</text></div>
+            <div class="summary-stat"><text class="stat-value">{{ live.summaryActive }}</text><text class="stat-label">活动</text></div>
+            <div class="summary-stat"><text class="stat-value">{{ live.summaryRisk }}</text><text class="stat-label">提醒</text></div>
           </div>
           <div class="review-title-row"><text class="review-note">{{ live.summaryActiveShare }}</text></div>
-          <div class="share-row core-share-row" for="{{ live.activityShareRows }}">
-            <text class="share-name">{{ $item.name }}</text>
-            <div class="share-track"><div class="share-fill" style="width: {{ $item.width }}px; background-color: {{ $item.color }};"></div></div>
-            <text class="share-pct">{{ $item.percent }}</text>
-          </div>
-          <div class="core-ai-review">
-            <text class="core-ai-review-label">复盘</text>
-            <text class="core-ai-review-text">{{ live.aiSummaryText }}</text>
-          </div>
-          <input class="core-ai-review-btn" type="button" value="{{ live.aiSummaryButtonText }}" onclick="refreshAiSummary" />
+          <list class="core-ai-review" ontouchstart="beginTouchGesture" ontouchmove="moveTouchGesture" ontouchend="finishTouchGesture"><list-item class="review-copy-item" type="review-copy" for="{{ live.aiSummaryLines }}"><text class="core-ai-review-text">{{ $item }}</text></list-item></list>
+          <input class="core-ai-review-btn" type="button" value="{{ live.aiSummaryButtonText }}" ontouchstart="queueTouchAction('refreshAiSummary')" ontouchend="finishTouchGesture" />
         </div>
       </div>
-      <input class="secondary-btn core-toggle-btn" if="{{ !live.timelineEmpty }}" type="button" value="{{ timelineViewButtonText }}" onclick="toggleTimelineReview" />
+      <input class="secondary-btn core-toggle-btn" show="{{ !live.timelineEmpty && !isRunning }}" type="button" value="{{ timelineViewButtonText }}" ontouchstart="queueTouchAction('toggleTimelineReview')" ontouchend="finishTouchGesture" />
     </div>
 
-    <div class="screen sync-screen" if="{{ pageState.showSyncReview }}">
+    <div class="screen sync-screen" show="{{ pageState.showSyncReview }}" if="{{ syncLoaded }}">
       <div class="demo-page-mark" style="background-color: {{ pageState.accentColor }};"></div>
       <div class="page-head compact-head">
         <text class="page-title">协同</text>
       </div>
 
       <div class="review-tabs">
-        <input class="review-tab review-tab-wide" style="background-color: {{ reviewSyncTabBg }}; color: {{ reviewSyncTabColor }};" type="button" value="同步" onclick="showSyncPanel" />
-        <input class="review-tab review-tab-wide" style="background-color: {{ reviewHistoryTabBg }}; color: {{ reviewHistoryTabColor }};" type="button" value="历史" onclick="showHistoryPanel" />
-        <input class="review-tab review-tab-wide" style="background-color: {{ reviewMoreTabBg }}; color: {{ reviewMoreTabColor }};" type="button" value="更多" onclick="showDiagnosticPanel" />
+        <input class="review-tab review-tab-wide" style="background-color: {{ reviewSyncTabBg }}; color: {{ reviewSyncTabColor }};" type="button" value="同步" ontouchstart="queueTouchAction('showSyncPanel')" ontouchend="finishTouchGesture" />
+        <input class="review-tab review-tab-wide" style="background-color: {{ reviewHistoryTabBg }}; color: {{ reviewHistoryTabColor }};" type="button" value="历史" ontouchstart="queueTouchAction('showHistoryPanel')" ontouchend="finishTouchGesture" />
+        <input class="review-tab review-tab-wide" style="background-color: {{ reviewMoreTabBg }}; color: {{ reviewMoreTabColor }};" type="button" value="更多" ontouchstart="queueTouchAction('showDiagnosticPanel')" ontouchend="finishTouchGesture" />
       </div>
 
       <div class="sync-card core-sync-card" if="{{ showReviewPanelSync }}">
@@ -208,76 +179,64 @@
             <text class="process-title">{{ processingStateText }}</text>
           </div>
         </div>
-        <div class="sync-visual core-sync-visual">
-          <div class="sync-device sync-watch"><div class="watch-strap watch-strap-top"></div><div class="watch-screen"><text class="watch-screen-face">芽</text></div><div class="watch-strap watch-strap-bottom"></div></div>
-          <div class="sync-link">
-            <div class="sync-link-dot" style="opacity: {{ syncDot1Opacity }};"></div>
-            <div class="sync-link-dot" style="opacity: {{ syncDot2Opacity }};"></div>
-            <div class="sync-link-dot" style="opacity: {{ syncDot3Opacity }};"></div>
-          </div>
-          <div class="sync-device sync-phone"><div class="phone-screen"><text class="phone-screen-face">精</text></div></div>
-        </div>
         <text class="precise-stamp" if="{{ preciseReviewReady }}" style="opacity: {{ preciseStampOpacity }}; transform: scale({{ preciseStampScale }});">已回填</text>
         <text class="precise-wait" if="{{ !preciseReviewReady }}">{{ syncFeedbackText }}</text>
         <div class="export-metrics core-export-metrics">
-          <div class="export-metric"><text class="export-value">{{ exportTotalText }}</text><text class="export-label">时</text></div>
-          <div class="export-metric"><text class="export-value">{{ exportSegmentText }}</text><text class="export-label">片</text></div>
-          <div class="export-metric"><text class="export-value">{{ exportRiskText }}</text><text class="export-label">醒</text></div>
+          <div class="export-metric"><text class="export-value">{{ exportTotalText }}</text><text class="export-label">时长</text></div>
+          <div class="export-metric"><text class="export-value">{{ exportSegmentText }}</text><text class="export-label">片段</text></div>
+          <div class="export-metric"><text class="export-value">{{ exportRiskText }}</text><text class="export-label">提醒</text></div>
         </div>
-        <div class="sync-buttons core-sync-buttons">
-          <input class="mini-btn" style="opacity: {{ syncDiagnoseOpacity }};" type="button" value="{{ syncDiagnoseButtonText }}" onclick="diagnoseSync" />
-          <input class="mini-btn primary-mini" style="opacity: {{ syncSendOpacity }};" type="button" value="{{ syncSendButtonText }}" onclick="sendLatestToPhone" />
+        <div class="sync-buttons core-sync-buttons" show="{{ !isRunning }}">
+          <input class="mini-btn" style="opacity: {{ syncDiagnoseOpacity }};" type="button" value="{{ syncDiagnoseButtonText }}" ontouchstart="queueTouchAction('diagnoseSync')" ontouchend="finishTouchGesture" />
+          <input class="mini-btn primary-mini" style="opacity: {{ syncSendOpacity }};" type="button" value="{{ syncSendButtonText }}" ontouchstart="queueTouchAction('sendLatestToPhone')" ontouchend="finishTouchGesture" />
         </div>
       </div>
 
       <div class="history-card core-fold-card" if="{{ showReviewPanelHistory }}">
         <text class="empty history-empty" if="{{ historyEmpty }}">暂无记录</text>
-        <div class="history-row" for="{{ historyRows }}">
+        <list class="history-scroll" if="{{ !historyEmpty }}" ontouchstart="beginTouchGesture" ontouchmove="moveTouchGesture" ontouchend="finishTouchGesture">
+        <list-item type="history" class="history-row" for="{{ historyRows }}">
           <div class="history-main">
             <div class="history-title-row"><text class="history-title">{{ $item.title }}</text><text class="history-time">{{ $item.time }}</text></div>
-            <div class="history-bar-row">
-              <div class="history-track"><div class="history-fill" style="width: {{ $item.activeWidth }}px;"></div></div>
-            </div>
           </div>
           <div class="history-side"><text class="history-score">{{ $item.score }}</text></div>
-        </div>
-        <input class="fold-action-btn history-clear-btn" if="{{ !historyEmpty }}" style="background-color: {{ historyClearButtonBg }}; color: {{ historyClearButtonColor }};" type="button" value="{{ historyClearButtonText }}" onclick="clearHistory" />
+        </list-item>
+        </list>
+        <input class="fold-action-btn history-clear-btn" show="{{ !historyEmpty && !isRunning }}" style="background-color: {{ historyClearButtonBg }}; color: {{ historyClearButtonColor }};" type="button" value="{{ historyClearButtonText }}" ontouchstart="queueTouchAction('clearHistory')" ontouchend="finishTouchGesture" />
       </div>
 
       <div class="diagnostic-card core-fold-card" if="{{ showReviewPanelDiagnostic }}">
-        <div class="more-tabs"><input class="more-tab" style="background-color: {{ moreDeviceTabBg }}; color: {{ moreDeviceTabColor }};" type="button" value="设备" onclick="showDiagnosticPanel" /><input class="more-tab" style="background-color: {{ morePrivacyTabBg }}; color: {{ morePrivacyTabColor }};" type="button" value="隐私" onclick="showPrivacyPanel" /></div>
-        <div class="diag-summary">
-          <text class="diag-summary-text">{{ diagnosticSummaryText }}</text>
-          <div class="diag-summary-track"><div class="diag-summary-fill" style="width: {{ diagnosticPassWidth }}px;"></div></div>
-        </div>
-        <div class="diag-row" for="{{ diagnosticRows }}">
+        <div class="more-tabs"><input class="more-tab" style="background-color: {{ moreDeviceTabBg }}; color: {{ moreDeviceTabColor }};" type="button" value="设备" ontouchstart="queueTouchAction('showDiagnosticPanel')" ontouchend="finishTouchGesture" /><input class="more-tab" style="background-color: {{ morePrivacyTabBg }}; color: {{ morePrivacyTabColor }};" type="button" value="隐私" ontouchstart="queueTouchAction('showPrivacyPanel')" ontouchend="finishTouchGesture" /></div>
+        <list class="diagnostic-scroll" ontouchstart="beginTouchGesture" ontouchmove="moveTouchGesture" ontouchend="finishTouchGesture">
+        <list-item type="diagnostic" class="diag-row" for="{{ diagnosticRows }}">
           <div class="diag-dot" style="background-color: {{ $item.color }};"></div>
           <text class="diag-name">{{ $item.name }}</text>
           <text class="diag-status">{{ $item.status }}</text>
-        </div>
-        <input class="fold-action-btn" type="button" value="{{ diagnosticButtonText }}" onclick="runDiagnostics" />
+        </list-item>
+        </list>
+        <input class="fold-action-btn" show="{{ !isRunning }}" type="button" value="{{ diagnosticButtonText }}" ontouchstart="queueTouchAction('runDiagnostics')" ontouchend="finishTouchGesture" />
       </div>
 
       <div class="privacy-card core-fold-card" if="{{ showReviewPanelPrivacy }}">
-        <div class="more-tabs"><input class="more-tab" style="background-color: {{ moreDeviceTabBg }}; color: {{ moreDeviceTabColor }};" type="button" value="设备" onclick="showDiagnosticPanel" /><input class="more-tab" style="background-color: {{ morePrivacyTabBg }}; color: {{ morePrivacyTabColor }};" type="button" value="隐私" onclick="showPrivacyPanel" /></div>
+        <div class="more-tabs"><input class="more-tab" style="background-color: {{ moreDeviceTabBg }}; color: {{ moreDeviceTabColor }};" type="button" value="设备" ontouchstart="queueTouchAction('showDiagnosticPanel')" ontouchend="finishTouchGesture" /><input class="more-tab" style="background-color: {{ morePrivacyTabBg }}; color: {{ morePrivacyTabColor }};" type="button" value="隐私" ontouchstart="queueTouchAction('showPrivacyPanel')" ontouchend="finishTouchGesture" /></div>
         <div class="privacy-grid core-privacy-grid">
           <div class="privacy-item core-privacy-item"><text class="privacy-icon">端</text><text class="privacy-title">腕上</text></div>
           <div class="privacy-item core-privacy-item"><text class="privacy-icon">存</text><text class="privacy-title">本地</text></div>
           <div class="privacy-item core-privacy-item"><text class="privacy-icon">回</text><text class="privacy-title">回填</text></div>
         </div>
-        <input class="fold-action-btn" type="button" value="{{ motionEffectButtonText }}" onclick="toggleMotionEffects" />
+        <input class="fold-action-btn" show="{{ !isRunning }}" type="button" value="{{ motionEffectButtonText }}" ontouchstart="queueTouchAction('toggleMotionEffects')" ontouchend="finishTouchGesture" />
       </div>
     </div>
 
-    <input class="global-stop" if="{{ isRunning }}" type="button" value="停止训练" onclick="stopSession" ontouchstart="stopSession" />
-    <input class="nav-prev" type="button" value="‹" onclick="previousDemoPage" />
-    <div class="page-dots" if="{{ !isRunning }}">
+    <input class="global-stop" show="{{ isRunning && !pageState.showHome }}" type="button" value="停止训练" ontouchstart="queueTouchAction('stopSession')" ontouchend="finishTouchGesture" />
+    <input class="nav-prev" type="button" value="桌面" ontouchstart="queueTouchAction('returnToDesktop')" ontouchend="finishTouchGesture" />
+    <div class="page-dots" show="{{ !isRunning }}">
       <div class="page-dot" style="background-color: {{ pageState.dot0Color }}; transform: scale({{ pageState.dot0Scale }});"></div>
       <div class="page-dot" style="background-color: {{ pageState.dot1Color }}; transform: scale({{ pageState.dot1Scale }});"></div>
       <div class="page-dot" style="background-color: {{ pageState.dot2Color }}; transform: scale({{ pageState.dot2Scale }});"></div>
       <div class="page-dot" style="background-color: {{ pageState.dot3Color }}; transform: scale({{ pageState.dot3Scale }});"></div>
     </div>
-    <input class="nav-next" type="button" value="›" onclick="nextDemoPage" />
+    <input class="nav-next" type="button" value="下一页" ontouchstart="queueTouchAction('nextDemoPage')" ontouchend="finishTouchGesture" />
   </div>
 </template>
 
@@ -285,12 +244,15 @@
 import { MotionEngine, probabilityRows, formatSec, segmentRows } from '../../common/algorithm/motion_engine.js';
 import { CooperativeMotionRunner } from '../../common/algorithm/cooperative_motion_runner.js';
 import { MotionFxController, motionNeutralFrame } from '../../common/ui/motion_fx_controller.js';
+import { TouchGesture } from '../../common/ui/touch_gesture.js';
+import { LivePatchBuffer, PAGE_LIVE_KEYS } from '../../common/ui/live_patch.js';
+import { InteractionScheduler } from '../../common/ui/interaction_scheduler.js';
+import { CooperativeSteps } from '../../common/ui/cooperative_steps.js';
 import { HISTORY_CLEAR_ACTIONS, historyClearAction, syncActionPermission, wrappedPageIndex } from '../../common/ui/interaction_state.js';
 import { classEmoji, classColor, CLASS_NAMES, CLASS_BG, SAMPLE_PERIOD_MS } from '../../common/algorithm/config.js';
 import { classifyHrZone, buildCoachTip, buildSummary, analyzeWorkoutRisk } from '../../common/algorithm/intensity_rules.js';
 import { MockSensorProvider } from '../../common/sensor/mock_sensor_provider.js';
-import { SixAxisSensorProvider as RealSensorProvider } from '../../common/sensor/six_axis_provider.js';
-import { EmulatorUorbTransport } from '../../common/sensor/emulator_uorb_transport.js';
+import { RealSensorProvider } from '../../common/sensor/real_sensor_provider.js';
 import { getScenario } from '../../common/sensor/mock_scenarios.js';
 import { HealthProvider, DATA_TYPES } from '../../common/sensor/health_provider.js';
 import { saveSession, loadSessions, listSessions, clearSessions } from '../../common/storage/session_store.js';
@@ -299,13 +261,22 @@ import { PROCESSING_STATES, processingStateView, inspectPreciseResult, preciseRe
 import { runDeviceDiagnostics } from '../../common/device/device_diagnostics.js';
 import { getSessionStartPermission, getDiagnosticStartPermission, getRealTrainingPermission } from '../../common/device/operation_guard.js';
 import { pulseWorkoutAlert, shouldShakeRiskCard } from '../../common/device/vibration_provider.js';
-import brightness from '@system.brightness';
-import battery from '@system.battery';
+import { loadOptionalFeature } from '../../common/device/optional_features.js';
+const brightness = loadOptionalFeature('brightness');
+const battery = loadOptionalFeature('battery');
 import { requestAiSummary, buildLocalAiSummary } from '../../common/ai/summary_provider.js';
 
+const touchGesture = new TouchGesture();
+const liveUpdates = new LivePatchBuffer(
+  (vm) => PAGE_LIVE_KEYS[vm.pageState.index] || [],
+  () => !touchGesture.state || Date.now() - touchGesture.state.time > 5000,
+);
+const interactionScheduler = new InteractionScheduler();
+const inferenceSchedule = { schedule: (callback) => interactionScheduler.schedule(callback) };
 let engine = null;
 let inferenceRunner = null;
-let lastSixAxisLogMs = 0;
+const stopWork = new CooperativeSteps();
+let stopGeneration = 0;
 let motionFx = null;
 let unsubscribePhoneMessages = null;
 let mockProvider = null;
@@ -400,7 +371,7 @@ function topCoachRows(rows) {
   return (rows || [])
     .slice()
     .sort((left, right) => Number(right.percent || 0) - Number(left.percent || 0))
-    .slice(0, 3);
+    .slice(0, 2);
 }
 
 function twoDigit(n) {
@@ -597,7 +568,7 @@ function createInitialLiveState() {
     runStatusText: "待开始",
     runMarkerColor: "#94A3B8",
     alertStatusText: "提醒开启",
-    startButtonText: "▶",
+    startButtonText: "开始",
     activityEmoji: "动",
     activityName: "待机",
     activityColor: "#111111",
@@ -608,8 +579,10 @@ function createInitialLiveState() {
     accText: "等待动作数据",
     zoneText: "--",
     zoneColor: "#111111",
+    zoneInk: "#111111",
     zoneWidth: 18,
-    coachTip: "小芽会陪你识别动作，强度变化时及时提醒。",
+    coachTip: "识别动作，提醒运动强度",
+    coachTipLines: ["识别动作", "提醒运动强度"],
     riskTitle: "状态正常",
     riskMessage: "未发现疲劳或异常强度。",
     riskColor: "#16A34A",
@@ -626,6 +599,7 @@ function createInitialLiveState() {
     summaryRisk: "无风险",
     aiSummaryTitle: "等待训练",
     aiSummaryText: "训练后生成一句建议。",
+    aiSummaryLines: ["训练后生成一句建议。"],
     aiSummarySource: "本地总结",
     aiSummaryButtonText: "生成建议",
     activityShareRows: activityShareRowsFromSummary({}),
@@ -636,21 +610,35 @@ function createInitialLiveState() {
 }
 
 function patchLive(vm, patch) {
-  const current = vm && vm.live ? vm.live : createInitialLiveState();
+  const current = liveUpdates.current(vm) || createInitialLiveState();
   const next = Object.assign({}, current, patch || {});
-  vm.live = next;
-  return next;
+  // Bright activity colors remain on bars; use darker ink for small-screen text.
+  const zoneInk = { '#38BDF8': '#176289', '#22C55E': '#16755A', '#F97316': '#A34310', '#EF4444': '#B3261E' };
+  next.zoneInk = zoneInk[String(next.zoneColor).toUpperCase()] || next.zoneColor;
+  // A single actionable clause stays readable without squeezing the watch font.
+  if (!current.coachTipLines || (patch && patch.coachTip !== undefined && patch.coachTip !== current.coachTip)) {
+    const coachClauses = String(next.coachTip || '').split(/[，。！？]/).filter(Boolean);
+    next.coachTip = coachClauses.length ? coachClauses[coachClauses.length - 1] : '';
+    next.coachTipLines = [next.coachTip.slice(0, 10), next.coachTip.slice(10)].filter(Boolean);
+  }
+  if (!current.aiSummaryLines || next.aiSummaryText !== current.aiSummaryText)
+    next.aiSummaryLines = String(next.aiSummaryText || '').match(/.{1,11}/g) || [];
+  return liveUpdates.commit(vm, next);
 }
 
 export default {
   private: {
     pageState: pageStateFor(0),
+    coachLoaded: false,
+    timelineLoaded: false,
+    syncLoaded: false,
     currentSceneName: "混合训练",
     sceneDesc: sceneHint("mixed_workout"),
     scenePreviewRows: scenePreviewRows("mixed_workout"),
-    dataSourceText: "演",
+    dataSourceText: "演示",
     storageStatusText: "读取中",
     isRunning: false,
+    isFinalizing: false,
     live: createInitialLiveState(),
     serviceHealthText: "Mock 兜底",
     historyRows: [],
@@ -707,7 +695,7 @@ export default {
     preciseReviewReady: false,
     preciseReviewText: "尚未收到手机精确结果",
     pageVisible: false,
-    motionEffectsEnabled: true,
+    motionEffectsEnabled: false,
     motionEffectsPaused: true,
     animationPowerSave: false,
     baselineActive: false,
@@ -746,7 +734,7 @@ export default {
     syncDot3Opacity: 0.34,
     motionPolicyText: "动效待机",
     motionPolicyDetail: "页面显示时启用轻量动效；低电量且未充电时自动暂停。",
-    motionEffectButtonText: "暂停动效",
+    motionEffectButtonText: "恢复动效",
     batteryLevelText: "电量未知",
     goalActiveText: "本次活跃目标 30 秒",
     sceneMixedBg: "#DFF6EE",
@@ -759,8 +747,6 @@ export default {
     sceneJumpColor: "#42514B",
     sceneStaticBg: "#F0F5F2",
     sceneStaticColor: "#42514B",
-    sceneEmulatorBg: "#F0F5F2",
-    sceneEmulatorColor: "#42514B",
     sceneRealBg: "#F0F5F2",
     sceneRealColor: "#42514B",
   },
@@ -770,7 +756,7 @@ export default {
     batteryPolicyGeneration += 1;
     setTrainingScreenOn(false);
     engine = new MotionEngine();
-    inferenceRunner = new CooperativeMotionRunner(engine);
+    inferenceRunner = new CooperativeMotionRunner(engine, inferenceSchedule);
     motionFx = new MotionFxController();
     mockProvider = new MockSensorProvider();
     realProvider = new RealSensorProvider();
@@ -793,12 +779,15 @@ export default {
 
   onShow() {
     this.pageVisible = true;
+    patchLive(this, this.inferenceViewPatch());
+    liveUpdates.flush(this);
     setTrainingScreenOn(this.isRunning);
     this.refreshBatteryPolicy();
     this.refreshMotionEffects();
   },
 
   onHide() {
+    touchGesture.cancel();
     this.pageVisible = false;
     this.resetHistoryClear();
     batteryPolicyGeneration += 1;
@@ -810,9 +799,12 @@ export default {
   },
 
   onDestroy() {
+    touchGesture.cancel();
     this.pageVisible = false;
     this.motionEffectsPaused = true;
     pageDisposing = true;
+    stopGeneration += 1;
+    stopWork.drain();
     batteryPolicyGeneration += 1;
     setTrainingScreenOn(false);
     if (motionFx) motionFx.pause();
@@ -841,9 +833,59 @@ export default {
     clearDemoSessionTimers();
   },
 
+  beginTouchGesture(event) {
+    interactionScheduler.touch();
+    touchGesture.begin(event, '', Date.now());
+  },
+
+  returnToDesktop() {
+    touchGesture.cancel();
+    this.$app.exit();
+  },
+
+  onBackPress() {
+    this.returnToDesktop();
+    return true;
+  },
+
+  queueTouchAction(action, event) {
+    interactionScheduler.touch();
+    touchGesture.begin(event, action, Date.now());
+  },
+
+  moveTouchGesture(event) {
+    interactionScheduler.touch();
+    this.applyTouchResult(touchGesture.move(event));
+  },
+
+  finishTouchGesture(event) {
+    interactionScheduler.touch();
+    this.applyTouchResult(touchGesture.end(event, Date.now()));
+    liveUpdates.flush(this);
+  },
+
+  applyTouchResult(result) {
+    if (!result || !this.pageVisible) return;
+    if (result.pageDelta) {
+      this.setDemoPage(wrappedPageIndex(this.pageState.index, result.pageDelta, PAGE_NAMES.length));
+      console.log(`VMC_GESTURE_PAGE index=${this.pageState.index}`);
+    } else if (result.action && typeof this[result.action] === 'function') {
+      this[result.action]();
+    }
+  },
+
   setDemoPage(index) {
+    touchGesture.cancel();
     if (this.pageState && this.pageState.index === 3 && Number(index) !== 3) this.resetHistoryClear();
-    this.pageState = pageStateFor(index);
+    if (Number(index) === 1) this.coachLoaded = true;
+    if (Number(index) === 2) this.timelineLoaded = true;
+    if (Number(index) === 3) this.syncLoaded = true;
+    const nextPage = pageStateFor(index);
+    Object.keys(nextPage).forEach((key) => {
+      if (this.pageState[key] !== nextPage[key]) this.pageState[key] = nextPage[key];
+    });
+    patchLive(this, this.inferenceViewPatch());
+    liveUpdates.flush(this);
     this.updateMotionChannels();
   },
 
@@ -944,7 +986,6 @@ export default {
       ['Jump', 'jump_rope'],
       ['Static', 'static'],
       ['Real', 'real_device'],
-      ['Emulator', 'official_six_axis'],
     ];
     pairs.forEach((pair) => {
       this[`scene${pair[0]}Bg`] = pair[1] === sceneId ? selectedBg : idleBg;
@@ -966,7 +1007,8 @@ export default {
     const assignNumber = (sourceKey, targetKey, fallback) => {
       if (!Object.prototype.hasOwnProperty.call(safe, sourceKey)) return;
       const value = Number(safe[sourceKey]);
-      this[targetKey] = Number.isFinite(value) ? value : fallback;
+      const next = Number.isFinite(value) ? value : fallback;
+      if (this[targetKey] !== next) this[targetKey] = next;
     };
     assignNumber('pulseScale', 'motionPulseScale', 1);
     assignNumber('pulseOpacity', 'motionPulseOpacity', 0.56);
@@ -1004,7 +1046,7 @@ export default {
   },
 
   updateMotionChannels() {
-    if (!motionFx) return;
+    if (!motionFx || !this.pageVisible || !this.motionEffectsEnabled) return;
     const pageIndex = this.pageState ? this.pageState.index : -1;
     const onHome = pageIndex === 0;
     const onSync = pageIndex === 3 && this.showReviewPanelSync;
@@ -1179,7 +1221,7 @@ export default {
       healthProvider.start();
       this.serviceHealthText = '订阅中';
     } catch (e) {
-      this.serviceHealthText = dataProviderMode === 'real' ? '无健康数据' : '演示健康数据';
+      this.serviceHealthText = 'Mock 兜底';
       console.log(`service.health unavailable: ${e.message}`);
     }
   },
@@ -1196,8 +1238,8 @@ export default {
     }
   },
 
-  applyHealthError() {
-    this.serviceHealthText = dataProviderMode === 'real' ? '无健康数据' : '演示健康数据';
+  applyHealthError(err) {
+    this.serviceHealthText = err && err.unsupported ? 'Mock 兜底' : 'Mock 兜底';
   },
 
   applyScene(sceneId, force) {
@@ -1205,10 +1247,9 @@ export default {
       this.sceneDesc = '请先停止训练';
       return;
     }
-    if (realProvider) realProvider.stop();
     dataProviderMode = 'mock';
     selectedSceneId = sceneId;
-    this.dataSourceText = '演';
+    this.dataSourceText = '演示';
     const scene = getScenario(sceneId);
     this.currentSceneName = scene.name;
     this.sceneDesc = sceneHint(sceneId);
@@ -1227,52 +1268,14 @@ export default {
       this.sceneDesc = '请先停止训练';
       return;
     }
-    if (realProvider) realProvider.stop();
-    realProvider = new RealSensorProvider();
     dataProviderMode = 'real';
     selectedSceneId = 'real_device';
     this.currentSceneName = '真机采集';
     this.sceneDesc = sceneHint('real_device');
     this.scenePreviewRows = scenePreviewRows('real_device');
     this.setSceneSelection('real_device');
-    this.dataSourceText = '真';
+    this.dataSourceText = '真机';
     if (mockProvider) mockProvider.stop();
-  },
-
-  useEmulatorSensors() {
-    if (this.isRunning) { this.sceneDesc = '请先停止训练'; return; }
-    if (mockProvider) mockProvider.stop();
-    if (realProvider) realProvider.stop();
-    realProvider = new RealSensorProvider({ transport: new EmulatorUorbTransport() });
-    dataProviderMode = 'real';
-    selectedSceneId = 'official_six_axis';
-    this.currentSceneName = '模拟器六轴';
-    this.sceneDesc = '读取模拟器系统传感器·需启动本机验证桥';
-    this.scenePreviewRows = scenePreviewRows('real_device');
-    this.setSceneSelection('official_six_axis');
-    this.dataSourceText = '仿真';
-  },
-
-  handleRealSensorStatus(status) {
-    if (pageDisposing || dataProviderMode !== 'real' || !this.isRunning) return;
-    if (status.error) {
-      const error = status.error;
-      console.error('VMC_SIX_AXIS_ABORT reason=' + error);
-      this.resetSession();
-      this.storageStatusText = '未保存';
-      patchLive(this, { runStatusText: '六轴采集中断', startButtonText: '重试',
-        alertStatusText: '不会保存', summaryTip: '传感器数据不完整，请检查连接后重试。',
-        riskTitle: '采集已停止', riskMessage: '本次训练未保存', runMarkerColor: '#F97316' });
-      return;
-    }
-    if (status.ready) {
-      this.startHealthProvider();
-      this.dataSourceText = status.source === 'emulator_uorb' ? '仿真' : '真';
-      patchLive(this, { runStatusText: '六轴识别中', summaryTip: '加速度与陀螺仪已连接，正在建立动作基线。' });
-      console.log('VMC_SIX_AXIS_READY source=' + status.source);
-    } else {
-      patchLive(this, { runStatusText: '连接六轴传感器', summaryTip: '等待加速度与陀螺仪数据。' });
-    }
   },
 
   toggleRunning() {
@@ -1282,6 +1285,10 @@ export default {
   },
 
   startSession(startOffsetSec) {
+    if (this.isFinalizing) {
+      console.log('VMC_SESSION_START_BLOCKED reason=finalizing');
+      return false;
+    }
     const startPermission = getSessionStartPermission(this.isDiagnosing);
     if (!startPermission.allowed) {
       patchLive(this, {
@@ -1314,7 +1321,7 @@ export default {
             status: capabilities && capabilities.accelerometer ? '通过' : '失败',
             detail: capabilities && capabilities.accelerometer ? 'ACC 可用' : 'ACC 不可用',
           },
-          { name: '真实 GYRO', status: '失败', detail: '需安装原生六轴扩展固件' },
+          { name: '真实 GYRO', status: '失败', detail: '公开 JS API 未提供 GYRO' },
         ]);
         this.diagnosticSummaryText = realPermission.message;
         this.diagnosticPassWidth = capabilities && capabilities.accelerometer ? 124 : 18;
@@ -1347,7 +1354,7 @@ export default {
     this.cancelAiSummary();
     if (!engine) engine = new MotionEngine();
     if (!inferenceRunner || inferenceRunner.engine !== engine) {
-      inferenceRunner = new CooperativeMotionRunner(engine);
+      inferenceRunner = new CooperativeMotionRunner(engine, inferenceSchedule);
     } else {
       inferenceRunner.cancel();
     }
@@ -1374,13 +1381,13 @@ export default {
     if (motionFx) motionFx.clearTransientEffects(false);
     this.applyMotionFrame(motionNeutralFrame(false));
     this.setProcessingState(PROCESSING_STATES.WATCH_SCREENING);
-    if (dataProviderMode !== 'real') this.startHealthProvider();
+    this.startHealthProvider();
     this.isRunning = true;
     this.updateMotionChannels();
     this.triggerMotionEffect('start');
     this.diagnosticButtonText = "训练中不可检测";
     patchLive(this, Object.assign(createInitialLiveState(), {
-      startButtonText: "■",
+      startButtonText: "停止",
       runStatusText: "识别中",
       runMarkerColor: "#22C55E",
       activityName: "准备中",
@@ -1393,13 +1400,13 @@ export default {
     if (dataProviderMode === 'real') {
       if (!realProvider) realProvider = new RealSensorProvider();
       if (mockProvider) mockProvider.stop();
-      this.dataSourceText = selectedSceneId === 'official_six_axis' ? '仿真' : '真';
-      realProvider.start((batch) => this.handleBatch(batch), { onStatus: (status) => this.handleRealSensorStatus(status) });
+      this.dataSourceText = '真机';
+      realProvider.start((batch) => this.handleBatch(batch), { interval: 'game' });
       console.log('VMC_REAL_SENSOR_START');
     } else {
       if (!mockProvider) mockProvider = new MockSensorProvider();
       if (realProvider) realProvider.stop();
-      this.dataSourceText = '演';
+      this.dataSourceText = '演示';
       mockProvider.start(selectedSceneId, (batch) => this.handleBatch(batch), { startOffsetSec: startOffsetSec || 0 });
     }
     return true;
@@ -1410,6 +1417,7 @@ export default {
       console.log('VMC_SESSION_STOP_IGNORED reason=not_running');
       return false;
     }
+    const stopStarted = Date.now();
     this.isRunning = false;
     this.baselineActive = false;
     if (motionFx) motionFx.clearTransientEffects(false);
@@ -1429,7 +1437,7 @@ export default {
     if (!lastSample || !lastResult || lastResult.warmupFraction < 1 || elapsed < 3) {
       this.storageStatusText = "未保存";
       patchLive(this, {
-        startButtonText: "▶",
+        startButtonText: "开始",
         runStatusText: "训练时间过短",
         runMarkerColor: "#94A3B8",
         summaryTip: "至少训练 3 秒后再停止，才会生成有效记录。",
@@ -1440,47 +1448,76 @@ export default {
       return true;
     }
 
-    this.storageStatusText = "写入中";
-    const summary = buildSummary(lastResult, elapsed, lastSample);
-    summary.riskCount = riskEvents.length;
-    summary.riskLabel = riskEvents.length ? riskEvents[riskEvents.length - 1].title : "无风险";
-    summary.activityShares = activityShareRowsFromSummary(summary);
-    summary.intensityTrend = intensityTrendRowsFromSamples(trendSamples);
-    const review = this.reviewPatch(summary, true);
-    this.preciseReviewReady = false;
-    this.preciseReviewText = "尚未收到手机精确结果";
-    this.syncFeedbackText = '待回填';
-    this.cancelAiSummary();
-    this.setProcessingState(PROCESSING_STATES.PENDING_SYNC);
-    patchLive(this, Object.assign({
-      startButtonText: "▶",
-      runStatusText: "训练已保存",
-      runMarkerColor: "#94A3B8",
-      summaryTotal: formatSec(summary.totalSec),
-      summaryActive: formatSec(summary.activeSec),
-      summarySegments: String(summary.segmentCount),
-      intensityTrendRows: summary.intensityTrend,
-      summaryTip: "已保存：活跃 " + formatSec(summary.activeSec) + "，自动识别 " + summary.segmentCount + " 个片段。",
-    }, review));
-    saveSession({
-      sceneId: selectedSceneId,
-      sceneName: this.currentSceneName,
-      sensorSource: lastSample && lastSample.source ? lastSample.source : 'internal_mock',
-      stepAvailable: Boolean(lastSample && lastSample.stepAvailable !== false),
-      summary,
-      segments: lastResult ? lastResult.segments : [],
-      risks: riskEvents.slice(-8),
-    }, (persisted) => {
-      if (pageDisposing) return;
-      this.storageStatusText = persisted ? listSessions().length + " 次记录" : "仅内存保存";
+    this.isFinalizing = true;
+    this.storageStatusText = '整理中';
+    patchLive(this, {startButtonText:'保存中', runStatusText:'训练已停止', runMarkerColor:'#94A3B8'});
+    const token = ++stopGeneration;
+    const started = stopStarted;
+    const result = lastResult, sample = lastSample, risks = riskEvents, trends = trendSamples;
+    const record = {sceneId:selectedSceneId, sceneName:this.currentSceneName, segments:result.segments, risks:risks.slice(-8)};
+    const active = () => !pageDisposing && token === stopGeneration;
+    let summary, review, settled = false;
+    const stage = (name, fn) => () => {
+      const at = Date.now(); fn();
+      console.warn('VMC_STOP_STAGE name=' + name + ' ms=' + (Date.now()-at));
+    };
+    stopWork.run([
+      stage('summary', () => {
+        summary = buildSummary(result, elapsed, sample);
+        summary.riskCount = risks.length;
+        summary.riskLabel = risks.length ? risks[risks.length-1].title : '无风险';
+        record.summary = summary;
+      }),
+      stage('charts', () => {
+        summary.activityShares = activityShareRowsFromSummary(summary);
+        summary.intensityTrend = intensityTrendRowsFromSamples(trends);
+      }),
+      stage('review', () => { if (active()) review = this.reviewPatch(summary, true); }),
+      stage('metadata', () => {
+        if (!active()) return;
+        this.preciseReviewReady = false;
+        this.preciseReviewText = '尚未收到手机精确结果';
+        this.syncFeedbackText = '待回填';
+        this.cancelAiSummary();
+        this.setProcessingState(PROCESSING_STATES.PENDING_SYNC);
+      }),
+      stage('view', () => {
+        if (!active()) return;
+        patchLive(this, Object.assign({
+          summaryTotal:formatSec(summary.totalSec), summaryActive:formatSec(summary.activeSec),
+          summarySegments:String(summary.segmentCount), intensityTrendRows:summary.intensityTrend,
+          summaryTip:'正在保存：活跃 ' + formatSec(summary.activeSec) + '，' + summary.segmentCount + ' 个片段。',
+        }, review));
+      }),
+      stage('save', () => {
+        saveSession(record, (persisted) => {
+          if (settled) return;
+          settled = true;
+          console.warn('VMC_SESSION_PERSISTED elapsed_ms=' + (Date.now()-started) + ' persisted=' + persisted);
+          if (!active()) return;
+          this.isFinalizing = false;
+          this.applyHistory(listSessions());
+          this.storageStatusText = persisted ? listSessions().length + ' 次记录' : '仅内存保存';
+          patchLive(this, {startButtonText:'开始', runStatusText:persisted ? '训练已保存' : '仅内存保存',
+            summaryTip:(persisted ? '已保存：活跃 ' : '仅内存：活跃 ') + formatSec(summary.activeSec) + '，自动识别 ' + summary.segmentCount + ' 个片段。'});
+          console.log('VMC_SESSION_STOP total=' + summary.totalSec + ' active=' + summary.activeSec + ' segments=' + summary.segmentCount);
+          console.warn('VMC_SESSION_FINALIZED elapsed_ms=' + (Date.now()-started) + ' persisted=' + persisted);
+        });
+      }),
+    ], (error) => {
+      console.warn('VMC_SESSION_FINALIZE_ERROR ' + error);
+      if (active()) {
+        this.isFinalizing = false;
+        this.storageStatusText = '整理失败';
+        patchLive(this, {startButtonText:'开始', runStatusText:'未保存'});
+      }
     });
-    console.log("VMC_SESSION_STOP total=" + summary.totalSec + " active=" + summary.activeSec + " segments=" + summary.segmentCount);
-    this.applyHistory(listSessions());
-    this.applyExportPreview();
+    console.warn('VMC_SESSION_STOP_ACCEPTED');
     return true;
   },
 
   resetSession() {
+    if (this.isFinalizing) return false;
     clearDemoSessionTimers();
     setTrainingScreenOn(false);
     if (inferenceRunner) inferenceRunner.cancel();
@@ -1536,6 +1573,7 @@ export default {
   },
 
   clearHistory() {
+    if (this.isFinalizing) return false;
     const action = historyClearAction({
       hasItems: !this.historyEmpty,
       armed: this.historyClearArmed,
@@ -1612,7 +1650,7 @@ export default {
   beginSyncOperation(action) {
     const permission = syncActionPermission({
       action,
-      busy: this.syncDiagnosing || this.syncSending,
+      busy: this.isFinalizing || this.syncDiagnosing || this.syncSending,
       isRunning: this.isRunning,
       hasRecord: Boolean(this.latestSession()),
     });
@@ -1766,7 +1804,7 @@ export default {
   },
 
   aiSummaryPayload(summary, activityRows) {
-    const live = this.live || createInitialLiveState();
+    const live = liveUpdates.current(this) || createInitialLiveState();
     return {
       summary: summary || lastSummarySnapshot || {},
       activityShareRows: activityRows || live.activityShareRows || [],
@@ -1833,7 +1871,8 @@ export default {
       });
       if (trendSamples.length > 120) trendSamples.shift();
     }
-    return intensityTrendRowsFromSamples(trendSamples);
+    // Keep raw samples for risk analysis and the saved summary. The watch
+    // does not display this chart during training, so do not rebuild it here.
   },
 
   riskPatch(risk, elapsed) {
@@ -1857,28 +1896,25 @@ export default {
       if (riskEvents.length > 8) riskEvents.shift();
       console.log("VMC_RISK_EVENT key=" + risk.key + " title=" + risk.title + " elapsed=" + formatSec(elapsed));
     }
-    const rows = riskRowsFromEvents(riskEvents);
     return {
       riskTitle: risk.title,
       riskMessage: risk.message,
       riskColor: risk.color,
       riskBgColor: risk.bgColor,
       alertStatusText,
-      riskRows: rows,
-      riskEmpty: rows.length === 0,
       summaryRisk: riskEvents.length > 0 ? riskEvents.length + " 条提醒" : "无风险",
     };
   },
 
   reviewPatch(summary, includeAi) {
     lastSummarySnapshot = summary;
-    const activityRows = activityShareRowsFromSummary(summary);
+    const activityRows = includeAi ? (summary.activityShares || activityShareRowsFromSummary(summary)) : null;
     const patch = {
       summaryActiveShare: activeShareText(summary),
-      activityShareRows: activityRows,
       summaryRisk: riskEvents.length > 0 ? riskEvents.length + " 条提醒" : "无风险",
     };
-    const live = this.live || createInitialLiveState();
+    if (activityRows) patch.activityShareRows = activityRows;
+    const live = liveUpdates.current(this) || createInitialLiveState();
     if (includeAi && live.aiSummarySource !== "velaclaw") {
       patch.aiSummaryTitle = "本地建议";
       patch.aiSummarySource = "本地总结";
@@ -1902,18 +1938,6 @@ export default {
 
   handleBatch(batch) {
     if (!this.isRunning || !batch || batch.length === 0 || !engine) return;
-    if (dataProviderMode === 'real' && batch.some((sample) => !sample || !sample.gyroAvailable ||
-      !sample.fullActivityRecognition || !['accX', 'accY', 'accZ', 'gyroX', 'gyroY', 'gyroZ', 'timeStamp'].every((key) => Number.isFinite(sample[key])))) {
-      realProvider.fail('invalid_six_axis_batch');
-      return;
-    }
-    if (dataProviderMode === 'real' && (!lastSixAxisLogMs || Date.now() - lastSixAxisLogMs >= 1000)) {
-      lastSixAxisLogMs = Date.now();
-      const sample = batch[batch.length - 1];
-      console.log('VMC_SIX_AXIS_BATCH source=' + sample.source + ' count=' + batch.length +
-        ' t=' + sample.sensorTimestampMs + ' acc=' + [sample.accX,sample.accY,sample.accZ].join(',') +
-        ' gyro=' + [sample.gyroX,sample.gyroY,sample.gyroZ].join(','));
-    }
     const receivedAtMs = Date.now();
     const fallbackStart = receivedAtMs - Math.max(0, batch.length - 1) * SAMPLE_PERIOD_MS;
     const safeBatch = batch.map((sample, idx) => Object.assign({}, sample || {}, {
@@ -1930,12 +1954,26 @@ export default {
       timeStamp: finiteNumber(sample && sample.timeStamp, fallbackStart + idx * SAMPLE_PERIOD_MS),
     }));
     if (!inferenceRunner || inferenceRunner.engine !== engine) {
-      inferenceRunner = new CooperativeMotionRunner(engine);
+      inferenceRunner = new CooperativeMotionRunner(engine, inferenceSchedule);
     }
     inferenceRunner.submit(safeBatch, { receivedAtMs }, (result, processedBatch, meta) => {
       if (!this.isRunning) return;
       this.applyInferenceResult(processedBatch, result, meta && meta.startedAtMs);
     });
+  },
+
+  inferenceViewPatch() {
+    if (!lastResult || !this.pageVisible) return {};
+    // Build only the visible page's rows, including immediately on navigation.
+    // Hidden pages retain widgets but need no sorting, formatting or diffing.
+    if (this.pageState.index === 1) {
+      const rows = probabilityRows(lastResult.smoothedProbs || lastResult.probs);
+      return { coachClassRows: topCoachRows(rows) };
+    } else if (this.pageState.index === 2) {
+      const rows = segmentRows(lastResult.segments);
+      return { timelineRows: rows, timelineEmpty: rows.length === 0 };
+    }
+    return {};
   },
 
   applyInferenceResult(safeBatch, result, startedAtMs) {
@@ -1946,7 +1984,7 @@ export default {
     lastResult = result;
     const elapsed = secFromNow(lastSample);
     const zone = classifyHrZone(lastSample.heartRate);
-    const trendRows = this.recordTrend(result, lastSample, elapsed, zone);
+    this.recordTrend(result, lastSample, elapsed, zone);
     const risk = analyzeWorkoutRisk(result, lastSample, zone, trendSamples);
     const riskUi = this.riskPatch(risk, elapsed);
     let activityUi;
@@ -1985,8 +2023,6 @@ export default {
     this.updateMotionChannels();
 
     const alertUi = this.alertPatch(result, lastSample, zone, risk);
-    const classRows = probabilityRows(result.smoothedProbs || result.probs);
-    const timelineRows = segmentRows(result.segments);
     const summary = buildSummary(result, elapsed, lastSample);
     if (!goalActiveReached && summary.activeSec >= GOAL_ACTIVE_SEC) {
       goalActiveReached = true;
@@ -1998,20 +2034,15 @@ export default {
     const live = patchLive(this, Object.assign({
       elapsedText: formatSec(elapsed),
       hrText: lastSample.heartRate > 0 ? String(Math.round(lastSample.heartRate)) : "--",
-      stepText: lastSample.stepAvailable === false ? '--' : String(Math.round(lastSample.stepCount || 0)),
+      stepText: String(Math.round(lastSample.stepCount || 0)),
       accText: lastSample.accX.toFixed(1) + " / " + lastSample.accY.toFixed(1) + " / " + lastSample.accZ.toFixed(1),
       zoneText: zone.label,
       zoneColor: zone.color,
       zoneWidth: zoneBarWidth(zone.level),
-      intensityTrendRows: trendRows,
-      classRows,
-      coachClassRows: topCoachRows(classRows),
-      timelineRows,
-      timelineEmpty: timelineRows.length === 0,
       summaryTotal: formatSec(summary.totalSec),
       summaryActive: formatSec(summary.activeSec),
       summarySegments: String(summary.segmentCount),
-    }, riskUi, activityUi, reviewUi, alertUi));
+    }, riskUi, activityUi, reviewUi, alertUi, this.inferenceViewPatch()));
 
     const now = Date.now();
     if (now - lastProbeLogMs > 1000) {
@@ -2024,8 +2055,8 @@ export default {
 
 <style>
 .swiper {
-  width: 480px;
-  height: 480px;
+  width: 100%;
+  height: 100%;
   background-color: #f5f5f5;
   indicator-color: #d8d8d8;
   indicator-selected-color: #ff6900;
@@ -2077,8 +2108,8 @@ export default {
   z-index: 11;
 }
 .screen {
-  width: 480px;
-  height: 480px;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   background-color: #f5f5f5;
@@ -3816,7 +3847,7 @@ export default {
   justify-content: center;
 }
 .coach-scene-btn {
-  width: 82px;
+  width: 112px;
   height: 34px;
   margin: 3px;
   border-radius: 17px;
@@ -5359,4 +5390,248 @@ export default {
 .review-note {
   color: #3E9E82;
 }
+/* Large-type watch layout. 480 design pixels map to 390 panel pixels.
+ * Keep controls >=60 design pixels (49 panel pixels) and primary body text >=24.
+ * Navigation uses the previously empty bottom area, clear of page content. */
+.app-head, .page-head, .compact-head {
+  width: 440px; height: 46px; margin-top: 12px;
+}
+.title-block { width: 280px; height: 46px; }
+.app-title, .page-title { height: 46px; font-size: 36px; }
+.mode-pill { width: 88px; height: 38px; font-size: 24px; border-radius: 19px; }
+.demo-page-mark, .demo-run-mark { width: 0; height: 0; }
+.state-card { width: 440px; height: 244px; margin-top: 8px; padding: 12px; }
+.hero-process-strip, .coach-process-strip, .sync-process-strip {
+  width: 224px; height: 36px; margin-top: 0; padding-left: 10px; padding-right: 10px;
+}
+.process-copy { width: 184px; height: 34px; }
+.process-title { width: 184px; height: 32px; font-size: 24px; color: #22312D; }
+.hero-activity-row { width: 416px; height: 116px; margin-top: 4px; }
+.activity-copy { width: 304px; height: 116px; margin-left: 12px; }
+.hero-state-top { height: 28px; }
+.state-copy { width: 272px; height: 28px; font-size: 22px; color: #42514B; }
+.state-dot { height: 28px; font-size: 16px; }
+.activity-name { width: 304px; height: 52px; font-size: 42px; }
+.activity-chip-row { width: 264px; height: 32px; margin-top: 0; }
+.activity-chip { width: 126px; height: 32px; font-size: 24px; color: #42514B; }
+.coach-box { width: 416px; height: 56px; margin-top: 4px; padding: 8px; }
+.coach-head { width: 400px; height: 30px; }
+.coach-label { width: 270px; height: 30px; font-size: 24px; }
+.coach-zone { width: 110px; height: 30px; font-size: 24px; }
+.intensity-track { width: 400px; margin-top: 4px; }
+.metric-strip { width: 440px; height: 84px; margin-top: 8px; }
+.metric-card { width: 140px; height: 84px; padding: 4px; }
+.metric-icon { height: 30px; font-size: 24px; color: #42514B; }
+.metric-value { height: 42px; font-size: 34px; }
+.start-action { width: 440px; height: 64px; margin-top: 8px; }
+.primary-btn, .start-primary-btn {
+  width: 440px; height: 64px; margin-top: 0; font-size: 32px; border-radius: 24px;
+  transform-origin: 220px 32px;
+}
+.start-ring { left: 201px; top: 13px; }
+.nav-prev, .nav-next {
+  top: 486px; width: 132px; height: 60px; border-radius: 22px; font-size: 26px;
+  background-color: #DFF6EE; color: #174F40;
+}
+.nav-prev { left: 20px; }
+.nav-next { left: 328px; }
+.global-stop {
+  left: 166px; top: 486px; width: 148px; height: 60px; font-size: 26px;
+  border-radius: 22px; background-color: #FCE5E5; color: #922C2C;
+}
+.page-dots { left: 196px; top: 510px; width: 88px; height: 14px; }
+.page-dot { width: 12px; height: 12px; border-radius: 6px; }
+.coach-core-card, .core-timeline-card {
+  width: 440px; height: 338px; margin-top: 8px; padding: 12px;
+}
+.core-toggle-btn { width: 440px; height: 64px; margin-top: 8px; font-size: 28px; border-radius: 24px; }
+.coach-view { width: 416px; height: 278px; }
+.coach-live-row { width: 416px; height: 66px; margin-top: 4px; }
+.coach-live-copy { width: 326px; height: 44px; }
+.coach-live-title { width: 326px; height: 42px; font-size: 30px; }
+.coach-prob-row { width: 416px; height: 40px; margin-top: 2px; }
+.prob-name { width: 154px; height: 34px; font-size: 24px; color: #22312D; }
+.bar-bg { width: 168px; height: 10px; }
+.prob-pct { width: 76px; height: 34px; margin-left: 8px; font-size: 24px; color: #42514B; }
+.coach-advice-box { width: 416px; height: 78px; margin-top: 4px; padding: 8px; }
+.coach-advice-label { width: 38px; height: 38px; font-size: 26px; }
+.coach-advice { width: 346px; height: 64px; margin-left: 8px; font-size: 24px; color: #22312D; }
+.coach-selected-row { width: 416px; height: 38px; margin-top: 2px; }
+.coach-selected-name { width: 400px; height: 34px; font-size: 26px; text-align: center; }
+.coach-scene-grid { width: 416px; height: 132px; margin-top: 2px; }
+.coach-scene-btn { width: 130px; height: 60px; margin: 3px; font-size: 26px; border-radius: 20px; }
+.coach-ai-box { width: 416px; height: 36px; margin-top: 2px; padding: 0; }
+.coach-ai-label { width: 0; height: 0; }
+.coach-ai-text { width: 416px; height: 34px; margin-top: 0; font-size: 24px; }
+.coach-ai-btn { width: 416px; height: 60px; margin-top: 4px; margin-left: 0; font-size: 26px; border-radius: 20px; }
+.timeline-summary { width: 416px; height: 60px; padding: 4px; }
+.timeline-summary-orb { width: 100px; height: 52px; }
+.timeline-summary-value { height: 42px; font-size: 34px; }
+.timeline-summary-label { height: 32px; font-size: 24px; }
+.timeline-summary-active { width: 300px; height: 44px; font-size: 34px; color: #16755A; }
+.timeline-empty { width: 416px; height: 228px; padding-top: 80px; font-size: 28px; }
+.seg-row { width: 416px; height: 48px; margin-top: 2px; margin-bottom: 0; padding: 3px; }
+.timeline-list { width: 416px; height: 254px; flex-direction: column; }
+.seg-dot { width: 8px; height: 38px; margin-left: 4px; margin-right: 4px; }
+.seg-main { width: 386px; height: 42px; margin-left: 4px; }
+.seg-title-row { width: 386px; height: 32px; }
+.seg-name { width: 242px; height: 32px; font-size: 26px; }
+.seg-duration { width: 136px; height: 32px; font-size: 24px; margin-left: 0; color: #42514B; }
+.seg-bar-row { width: 386px; height: 8px; }
+.core-review { width: 416px; height: 310px; }
+.core-summary-stat-row { width: 416px; height: 78px; margin-top: 0; }
+.summary-stat { width: 134px; height: 76px; }
+.stat-value { height: 40px; font-size: 30px; }
+.stat-label { height: 32px; font-size: 24px; color: #42514B; }
+.review-title-row { width: 416px; height: 34px; margin-top: 4px; }
+.review-note { width: 416px; height: 32px; font-size: 24px; color: #16755A; }
+.core-ai-review { width: 416px; height: 118px; margin-top: 4px; padding: 8px; }
+.core-ai-review-label { height: 30px; font-size: 24px; }
+.core-ai-review-text { width: 400px; height: 74px; margin-top: 0; font-size: 24px; }
+.core-ai-review-btn { width: 416px; height: 60px; margin-top: 8px; margin-left: 0; font-size: 26px; border-radius: 20px; }
+.review-tabs { width: 440px; height: 60px; margin-top: 8px; }
+.review-tab-wide { width: 140px; height: 60px; font-size: 28px; border-radius: 22px; }
+.core-sync-card, .core-fold-card { width: 440px; height: 342px; margin-top: 8px; padding: 12px; }
+.core-sync-visual { width: 416px; height: 76px; margin-top: 0; }
+.watch-screen-face, .phone-screen-face { height: 34px; font-size: 26px; }
+.precise-stamp, .precise-wait { width: 416px; height: 36px; font-size: 26px; margin-top: 2px; }
+.core-export-metrics { width: 416px; height: 84px; margin-top: 4px; }
+.export-metric { width: 134px; height: 84px; }
+.export-value { width: 132px; height: 42px; font-size: 32px; }
+.export-label { height: 32px; font-size: 24px; color: #42514B; }
+.core-sync-buttons { width: 416px; height: 60px; margin-top: 8px; }
+.mini-btn { width: 202px; height: 60px; font-size: 28px; border-radius: 20px; }
+.empty { width: 416px; height: 74px; font-size: 28px; color: #42514B; }
+.history-row { width: 416px; height: 62px; margin-bottom: 0; }
+.history-main { width: 308px; height: 60px; margin-left: 4px; }
+.history-title-row { width: 308px; height: 60px; flex-direction: column; }
+.history-title { width: 308px; height: 32px; font-size: 26px; }
+.history-time { width: 308px; height: 28px; font-size: 22px; text-align: left; color: #42514B; }
+.history-side { width: 92px; height: 60px; margin-right: 4px; justify-content: center; }
+.history-score { width: 92px; height: 34px; font-size: 26px; }
+.fold-action-btn { width: 416px; height: 60px; margin-top: 8px; margin-left: 0; font-size: 26px; border-radius: 20px; }
+.more-tabs { width: 416px; height: 60px; margin-bottom: 4px; }
+.more-tab { width: 202px; height: 60px; font-size: 26px; border-radius: 20px; }
+.diag-summary { width: 416px; height: 44px; margin-bottom: 2px; padding-left: 8px; }
+.diag-summary-text { width: 400px; height: 30px; font-size: 22px; color: #22312D; }
+.diag-summary-track { height: 4px; margin-top: 0; }
+.diag-row { width: 416px; height: 22px; margin-top: 0; margin-bottom: 0; }
+.diag-name { width: 254px; height: 22px; font-size: 20px; }
+.diag-status { width: 128px; height: 22px; font-size: 20px; color: #42514B; }
+.core-privacy-grid { width: 416px; height: 174px; }
+.core-privacy-item { width: 134px; height: 170px; }
+.privacy-icon { width: 66px; height: 66px; font-size: 34px; }
+.privacy-title { width: 130px; height: 36px; font-size: 28px; }
+.scene-help { width: 416px; height: 76px; margin-top: 14px; font-size: 26px; color: #42514B; text-align: center; }
+.core-ai-review-label { width: 0; height: 0; }
+.core-ai-review-text { height: 102px; }
+.diag-summary { height: 32px; }
+.diag-summary-track { height: 0; }
+.export-metric { flex-direction: column; }
+/* Extra-large type with corner-safe text bounds for the 390x450 panel.
+ * Keep title centered and both bottom captions inside x=80..310 panel px. */
+.app-head, .page-head, .compact-head {
+  width: 384px; height: 54px; margin-top: 24px; align-items: center; justify-content: center;
+}
+.title-block { width: 384px; height: 54px; align-items: center; }
+.app-title, .page-title { width: 384px; height: 52px; font-size: 40px; text-align: center; }
+.page-dots { left: 196px; top: 82px; width: 88px; height: 8px; }
+.page-dot { width: 7px; height: 7px; border-radius: 4px; }
+.state-card { width: 384px; height: 180px; margin-top: 10px; padding: 12px; }
+.hero-activity-row { width: 360px; height: 112px; margin-top: 0; }
+.activity-copy { width: 260px; height: 112px; margin-left: 8px; }
+.activity-name { width: 260px; height: 64px; font-size: 50px; }
+.activity-chip-row { width: 260px; height: 46px; margin-top: 0; }
+.activity-chip { width: 246px; height: 46px; font-size: 38px; text-align: left; background-color: transparent; }
+.coach-box { width: 360px; height: 40px; margin-top: 2px; padding: 2px; }
+.coach-head { width: 356px; height: 36px; }
+.coach-label { width: 356px; height: 36px; font-size: 30px; text-align: center; }
+.metric-strip { width: 384px; height: 88px; margin-top: 8px; }
+.metric-card { width: 124px; height: 88px; padding: 2px; }
+.metric-icon { height: 36px; font-size: 30px; }
+.metric-value { height: 48px; font-size: 38px; }
+.start-action { width: 384px; height: 76px; margin-top: 8px; }
+.primary-btn, .start-primary-btn {
+  width: 384px; height: 76px; font-size: 40px; border-radius: 26px; transform-origin: 192px 38px;
+}
+.start-ring { left: 173px; top: 19px; }
+.nav-prev, .nav-next { top: 464px; width: 144px; height: 72px; font-size: 32px; border-radius: 24px; }
+.nav-prev { left: 84px; }
+.nav-next { left: 252px; }
+.global-stop { left: 48px; top: 376px; width: 384px; height: 76px; font-size: 36px; border-radius: 26px; }
+.coach-core-card, .core-timeline-card { width: 384px; height: 280px; margin-top: 10px; padding: 12px; }
+.core-toggle-btn { width: 384px; height: 76px; margin-top: 8px; font-size: 36px; border-radius: 26px; }
+.coach-process-strip, .sync-process-strip { width: 260px; height: 40px; }
+.process-copy { width: 224px; height: 40px; }
+.process-title { width: 224px; height: 38px; font-size: 30px; }
+.coach-view { width: 360px; height: 216px; }
+.coach-live-row { width: 360px; height: 60px; margin-top: 0; padding: 4px; }
+.coach-live-copy { width: 278px; height: 48px; margin-left: 6px; }
+.coach-live-title { width: 278px; height: 44px; font-size: 32px; }
+.coach-prob-row { width: 360px; height: 44px; margin-top: 0; }
+.prob-name { width: 270px; height: 42px; font-size: 32px; }
+.prob-pct { width: 82px; height: 42px; font-size: 30px; margin-left: 0; }
+.coach-advice-box { width: 360px; height: 64px; margin-top: 4px; padding: 0; flex-direction: column; }
+.coach-advice { width: 344px; height: 32px; margin-left: 0; margin-top: 0; font-size: 30px; }
+.coach-selected-row { width: 360px; height: 40px; margin-top: 0; }
+.coach-selected-name { width: 360px; height: 38px; font-size: 30px; }
+.coach-scene-grid { width: 360px; height: 164px; margin-top: 4px; }
+.coach-scene-btn { width: 114px; height: 76px; margin: 3px; font-size: 32px; }
+.timeline-summary { width: 360px; height: 60px; padding: 0; }
+.timeline-summary-orb { width: 138px; height: 56px; }
+.timeline-summary-value { width: 98px; height: 48px; margin-left: 0; font-size: 40px; }
+.timeline-summary-label { width: 36px; height: 38px; font-size: 30px; }
+.timeline-summary-active { width: 218px; height: 48px; font-size: 40px; }
+.timeline-list { width: 360px; height: 194px; }
+.segment-scroll { width: 360px; height: 194px; flex-direction: column; }
+.timeline-empty { width: 360px; height: 180px; padding-top: 64px; font-size: 32px; }
+.seg-row { width: 360px; height: 76px; margin: 0; padding: 3px; }
+.seg-dot { width: 8px; height: 56px; margin-left: 0; margin-right: 4px; }
+.seg-main { width: 338px; height: 64px; margin-left: 4px; }
+.seg-title-row { width: 338px; height: 46px; }
+.seg-name { width: 202px; height: 44px; font-size: 32px; }
+.seg-duration { width: 132px; height: 44px; font-size: 30px; }
+.seg-bar-row { width: 338px; height: 10px; }
+.core-review { width: 360px; height: 256px; }
+.core-summary-stat-row { width: 360px; height: 72px; }
+.summary-stat { width: 116px; height: 72px; }
+.stat-value { height: 42px; font-size: 34px; }
+.stat-label { height: 32px; font-size: 26px; }
+.review-title-row { width: 360px; height: 34px; margin-top: 0; }
+.review-note { width: 360px; height: 34px; font-size: 28px; }
+.core-ai-review { width: 360px; height: 70px; margin-top: 2px; padding: 0; flex-direction: column; }
+.review-copy-item { width: 360px; height: 38px; }
+.core-ai-review-text { width: 356px; height: 38px; margin-top: 0; font-size: 30px; }
+.core-ai-review-btn { width: 360px; height: 72px; margin-top: 4px; font-size: 32px; }
+.review-tabs { width: 384px; height: 72px; margin-top: 8px; }
+.review-tab-wide { width: 124px; height: 72px; font-size: 34px; }
+.core-sync-card, .core-fold-card { width: 384px; height: 280px; margin-top: 8px; padding: 12px; }
+.precise-stamp, .precise-wait { width: 360px; height: 40px; margin-top: 0; font-size: 32px; }
+.core-export-metrics { width: 360px; height: 88px; margin-top: 2px; }
+.export-metric { width: 116px; height: 88px; }
+.export-value { width: 116px; height: 48px; font-size: 38px; }
+.export-label { height: 36px; font-size: 30px; }
+.core-sync-buttons { width: 360px; height: 76px; margin-top: 8px; }
+.mini-btn { width: 174px; height: 76px; font-size: 34px; }
+.empty { width: 360px; height: 76px; font-size: 34px; }
+.history-empty { margin-top: 72px; }
+.history-scroll { width: 360px; height: 172px; flex-direction: column; }
+.history-row { width: 360px; height: 84px; }
+.history-main { width: 260px; height: 80px; margin-left: 0; }
+.history-title-row { width: 260px; height: 80px; }
+.history-title { width: 260px; height: 42px; font-size: 32px; }
+.history-time { width: 260px; height: 36px; font-size: 28px; }
+.history-side { width: 94px; height: 80px; margin-right: 0; }
+.history-score { width: 94px; height: 40px; font-size: 30px; }
+.fold-action-btn { width: 360px; height: 76px; margin-top: 8px; font-size: 32px; }
+.more-tabs { width: 360px; height: 72px; margin-bottom: 4px; }
+.more-tab { width: 174px; height: 72px; font-size: 32px; }
+.diagnostic-scroll { width: 360px; height: 96px; flex-direction: column; }
+.diag-row { width: 360px; height: 44px; }
+.diag-name { width: 232px; height: 40px; font-size: 30px; }
+.diag-status { width: 100px; height: 40px; font-size: 28px; margin-right: 0; }
+.core-privacy-grid { width: 360px; height: 96px; }
+.core-privacy-item { width: 116px; height: 96px; }
+.privacy-icon { width: 50px; height: 46px; font-size: 32px; }
+.privacy-title { width: 114px; height: 38px; margin-top: 2px; font-size: 30px; }
 </style>

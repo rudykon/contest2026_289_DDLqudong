@@ -1,0 +1,26 @@
+[
+  {
+    "before": "font-subset-tools.png",
+    "after": "expanded-tools.png",
+    "changed_pixels": 490,
+    "max_rgb565_channel_delta": 1
+  },
+  {
+    "before": "font-subset-app.png",
+    "after": "expanded-app.png",
+    "changed_pixels": 356,
+    "max_rgb565_channel_delta": 1
+  },
+  {
+    "before": "expanded-coach.png",
+    "after": "expanded-swipe-back.png",
+    "changed_pixels": 0,
+    "max_rgb565_channel_delta": 0
+  },
+  {
+    "before": "expanded-tools-mask-off.png",
+    "after": "expanded-tools.png",
+    "changed_pixels": 490,
+    "max_rgb565_channel_delta": 1
+  }
+]

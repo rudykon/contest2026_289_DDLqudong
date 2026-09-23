@@ -1,0 +1,17 @@
+[
+  {
+    "before": "font-subset-tools.png",
+    "after": "latency-tools.png",
+    "changed_pixels": 0
+  },
+  {
+    "before": "font-subset-app.png",
+    "after": "latency-app.png",
+    "changed_pixels": 0
+  },
+  {
+    "before": "latency-coach.png",
+    "after": "latency-swipe-back.png",
+    "changed_pixels": 0
+  }
+]

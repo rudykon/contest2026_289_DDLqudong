@@ -398,9 +398,11 @@ test('cooperative inference yields between classifier and TRL without changing t
   assert.equal(scheduled.length, 1, 'classification must start in a later event-loop task');
   assert.equal(actual, null);
   scheduled.shift()();
-  assert.equal(scheduled.length, 1, 'TRL must run in a separate event-loop task');
+  assert.equal(scheduled.length, 1, 'feature extraction must yield to input between slices');
   assert.equal(engine.trl.probs.length, 0, 'classification alone must not commit temporal state');
-  scheduled.shift()();
+  let taskCount = 1;
+  while (scheduled.length) { scheduled.shift()(); taskCount += 1; }
+  assert.ok(taskCount >= Math.ceil(WINDOW_SIZE / 8) + 2, 'feature slices and TRL must remain independently cancellable');
 
   assert.ok(actual);
   assert.equal(work.pending, false);
@@ -679,7 +681,7 @@ test('ordinary activity never shakes the risk card and risk feedback is always s
   };
   const vibration = await importTransformed(
     'src/common/device/vibration_provider.js',
-    [["import vibrator from '@system.vibrator';", 'const vibrator = globalThis.__vmcVibratorMock;']],
+    [["import { loadOptionalFeature } from './optional_features.js';", 'const loadOptionalFeature = () => globalThis.__vmcVibratorMock;']],
     'vibration-policy',
   );
   try {
@@ -1203,7 +1205,7 @@ test('service.health wrapper normalizes callback/Promise and unsubscribes active
 
   const healthModule = await importTransformed(
     'src/common/sensor/health_provider.js',
-    [['import health from \'@service.health\';', 'const health = globalThis.__vmcHealthMock;']],
+    [["import { loadOptionalFeature } from '../device/optional_features.js';", 'const loadOptionalFeature = () => globalThis.__vmcHealthMock;']],
     'health',
   );
   const recent = await healthModule.getRecentHealth([healthModule.DATA_TYPES.HEART_RATE], 100);
@@ -1880,12 +1882,12 @@ test('real training never starts or saves when six-axis capability is incomplete
   assert.equal(events.length, eventCountBeforeStop + 1, 'blocked session stop should only log and return');
 });
 
-test('active training exposes an immediate global stop action on every page', async () => {
+test('active training exposes a global stop action on every page', async () => {
   const page = await fs.readFile(path.join(projectRoot, 'src/pages/index/index.ux'), 'utf8');
-  assert.ok(page.includes('class="global-stop" if="{{ isRunning }}"'));
-  assert.ok(page.includes('value="停止训练" onclick="stopSession"'));
-  assert.ok(page.includes('ontouchstart="stopSession"'));
-  assert.ok(page.includes('new CooperativeMotionRunner(engine)'));
+  assert.ok(page.includes('class="global-stop" show="{{ isRunning && !pageState.showHome }}"'));
+  assert.ok(page.includes('value="停止训练" ontouchstart="queueTouchAction(\'stopSession\')"'));
+  assert.ok(page.includes('ontouchstart="queueTouchAction(\'stopSession\')"'));
+  assert.ok(page.includes('new CooperativeMotionRunner(engine, inferenceSchedule)'));
   assert.ok(page.includes('if (inferenceRunner) inferenceRunner.cancel();'));
   assert.ok(page.includes("VMC_SESSION_STOP_IGNORED reason=not_running"));
   const stopStyle = page.match(/\.global-stop\s*\{([\s\S]*?)\}/);
@@ -1897,10 +1899,10 @@ test('active training exposes an immediate global stop action on every page', as
 
 test('watch template ships exactly four core pages and folds secondary tools into them', async () => {
   const page = await fs.readFile(path.join(projectRoot, 'src/pages/index/index.ux'), 'utf8');
-  const screenBlocks = page.match(/class="screen\s+[^\"]+"\s+if="\{\{\s*pageState\./g) || [];
+  const screenBlocks = page.match(/class="screen\s+[^\"]+"\s+show="\{\{\s*pageState\./g) || [];
   assert.equal(screenBlocks.length, 4, 'the watch package must contain exactly four pageState screens');
   assert.deepEqual(
-    [...page.matchAll(/class="screen\s+([^\s\"]+)[^\"]*"\s+if="\{\{\s*pageState\.(show\w+)/g)]
+    [...page.matchAll(/class="screen\s+([^\s\"]+)[^\"]*"\s+show="\{\{\s*pageState\.(show\w+)/g)]
       .map((match) => [match[1], match[2]]),
     [
       ['home-screen', 'showHome'],
@@ -1942,7 +1944,7 @@ test('home ships a code-native buddy and only celebrates the real 30 second goal
 
 test('watch UI ships the mint-soda companion hierarchy without unsupported descendant selectors', async () => {
   const page = await fs.readFile(path.join(projectRoot, 'src/pages/index/index.ux'), 'utf8');
-  assert.ok(page.includes('<text class="app-title">小芽</text>'));
+  assert.ok(page.includes('<text class="app-title">小芽 · {{ dataSourceText }}</text>'));
   assert.ok(page.includes('class="buddy-sprout"'));
   assert.ok(page.includes('class="buddy-leaf buddy-leaf-left"'));
   assert.ok(page.includes('class="buddy-leaf buddy-leaf-right"'));
@@ -1953,13 +1955,13 @@ test('watch UI ships the mint-soda companion hierarchy without unsupported desce
   ['#F4FAF7', '#DFF6EE', '#EAF5FF', '#F1F4FF', '#22312D', '#239B78', '#5364CC']
     .forEach((color) => assert.ok(page.includes(color), 'missing UI palette token ' + color));
   assert.ok(page.includes('.activity-buddy-pop,\n.heart-buddy-pulse,\n.motion-buddy {\n  width: 78px;'));
-  assert.ok(/class="start-ring"[^>]*onclick="toggleRunning"/.test(page),
-    'the transparent start-ring layer must forward center taps');
+  assert.ok(/class="start-ring"[^>]*ontouchstart="queueTouchAction\('toggleRunning'\)"/.test(page),
+    'the start-ring layer must queue a confirmed tap');
   assert.equal(/^\.[^{,\n]+\s+\./m.test(page), false,
     'Vela CSS does not support descendant selectors');
 });
 
-test('watch pages keep glanceable text density and use symbols for the primary action', async () => {
+test('watch pages keep glanceable density and readable board action labels', async () => {
   const page = await fs.readFile(path.join(projectRoot, 'src/pages/index/index.ux'), 'utf8');
   assert.equal(page.includes('<text class="app-subtitle">'), false);
   assert.equal(page.includes('<text class="process-detail">'), false);
@@ -1969,13 +1971,15 @@ test('watch pages keep glanceable text density and use symbols for the primary a
   assert.equal(page.includes('<div class="prob-heading">'), false);
   assert.equal(page.includes('<div class="sync-state core-sync-state">'), false);
   assert.equal((page.match(/class="page-title"/g) || []).length, 3);
-  assert.ok(page.includes('startButtonText: "▶"'));
-  assert.ok(page.includes('startButtonText: "■"'));
-  assert.ok(page.includes('value="设备" onclick="showDiagnosticPanel"'));
-  assert.ok(page.includes('value="隐私" onclick="showPrivacyPanel"'));
+  assert.ok(page.includes('startButtonText: "开始"'));
+  assert.ok(page.includes('startButtonText: "停止"'));
+  assert.ok(page.includes('<text class="metric-icon">心率</text>'));
+  assert.equal(page.includes('▶') || page.includes('♥'), false, 'board fonts lack these glyphs');
+  assert.ok(page.includes('value="设备" ontouchstart="queueTouchAction(\'showDiagnosticPanel\')"'));
+  assert.ok(page.includes('value="隐私" ontouchstart="queueTouchAction(\'showPrivacyPanel\')"'));
   assert.ok(page.includes('/* Watch-density refinement: one glance, one result, one action. */'));
-  assert.ok(page.includes('class="page-dots" if="{{ !isRunning }}"'));
-  assert.ok(page.includes('value="‹" onclick="previousDemoPage"'));
+  assert.ok(page.includes('class="page-dots" show="{{ !isRunning }}"'));
+  assert.ok(page.includes('value="桌面" ontouchstart="queueTouchAction(\'returnToDesktop\')"'));
   assert.ok(page.includes('left: 340px;'));
   assert.ok(page.includes('width: 56px;'));
 });
@@ -1991,8 +1995,8 @@ test('watch secondary actions expose selection, confirmation, and recoverable bu
   assert.ok(page.includes('}, 5200);'));
   assert.ok(page.includes('}, 7000);'));
   assert.ok(page.includes('style="background-color: {{ sceneRunningBg }}; color: {{ sceneRunningColor }};"'));
-  assert.ok(page.includes('if="{{ !isRunning }}" type="button" value="{{ coachToolsButtonText }}"'));
-  assert.ok(page.includes('if="{{ !live.timelineEmpty }}" type="button" value="{{ timelineViewButtonText }}"'));
+  assert.ok(page.includes('show="{{ !isRunning }}" type="button" value="{{ coachToolsButtonText }}"'));
+  assert.ok(page.includes('show="{{ !live.timelineEmpty && !isRunning }}" type="button" value="{{ timelineViewButtonText }}"'));
 });
 
 test('default visual hierarchy reserves orange for intensity and risk states', async () => {
@@ -2010,12 +2014,12 @@ test('default visual hierarchy reserves orange for intensity and risk states', a
 test('coach and sync pages progressively disclose dense secondary information', async () => {
   const page = await fs.readFile(path.join(projectRoot, 'src/pages/index/index.ux'), 'utf8');
   assert.ok(page.includes('function topCoachRows(rows)'));
-  assert.ok(page.includes('.slice(0, 3);'));
+  assert.ok(page.includes('.slice(0, 2);'));
   assert.ok(page.includes('for="{{ live.coachClassRows }}"'));
   assert.equal((page.match(/class="review-tab review-tab-wide"/g) || []).length, 3);
-  assert.ok(page.includes('value="同步" onclick="showSyncPanel"'));
-  assert.ok(page.includes('value="历史" onclick="showHistoryPanel"'));
-  assert.ok(page.includes('value="更多" onclick="showDiagnosticPanel"'));
+  assert.ok(page.includes('value="同步" ontouchstart="queueTouchAction(\'showSyncPanel\')"'));
+  assert.ok(page.includes('value="历史" ontouchstart="queueTouchAction(\'showHistoryPanel\')"'));
+  assert.ok(page.includes('value="更多" ontouchstart="queueTouchAction(\'showDiagnosticPanel\')"'));
   assert.equal((page.match(/class="more-tabs"/g) || []).length, 2);
   assert.ok(page.includes("const moreActive = name === 'diagnostic' || name === 'privacy';"));
   assert.ok(page.includes("this.reviewMoreTabBg = moreActive ? '#22312D' : '#FFFFFF';"));
@@ -2088,6 +2092,33 @@ test('watch UI avoids unsupported color emoji glyphs', async () => {
   ['💤', '🏸', '🪢', '🦅', '🏃', '🏓', '⌚'].forEach((glyph) => {
     assert.equal(config.includes(glyph) || page.includes(glyph), false, 'unsupported glyph remains: ' + glyph);
   });
+});
+
+test('missing board services do not prevent startup or fabricate health samples', async () => {
+  const oldRequire = globalThis.require;
+  globalThis.require = () => { throw new Error('native feature not registered'); };
+  try {
+    const optional = await importTransformed('src/common/device/optional_features.js', [], 'optional');
+    for (const name of ['health', 'vibrator', 'brightness', 'battery']) {
+      assert.equal(optional.loadOptionalFeature(name), null);
+    }
+    const health = await importTransformed('src/common/sensor/health_provider.js', [
+      ["import { loadOptionalFeature } from '../device/optional_features.js';", 'const loadOptionalFeature = () => null;'],
+    ], 'missing-health');
+    const samples = [];
+    const errors = [];
+    const provider = new health.HealthProvider((sample) => samples.push(sample), (error) => errors.push(error));
+    provider.start();
+    assert.deepEqual(await health.getRecentHealth([0], 100), []);
+    provider.stop();
+    assert.deepEqual(samples, []);
+    assert.equal(errors.length, 3);
+    assert.ok(errors.every((error) => error.unsupported && error.code === 203));
+    assert.deepEqual(provider.activeTypes, []);
+  } finally {
+    if (oldRequire === undefined) delete globalThis.require;
+    else globalThis.require = oldRequire;
+  }
 });
 
 let failures = 0;

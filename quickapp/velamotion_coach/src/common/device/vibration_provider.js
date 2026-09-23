@@ -1,4 +1,5 @@
-import vibrator from '@system.vibrator';
+import { loadOptionalFeature } from './optional_features.js';
+const vibrator = loadOptionalFeature('vibrator');
 
 export function vibrate(mode) {
   try {

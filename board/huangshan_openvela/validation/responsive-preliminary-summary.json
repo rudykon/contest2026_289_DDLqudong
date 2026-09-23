@@ -1,0 +1,114 @@
+{
+  "xip-dual": {
+    "launch": {
+      "n": 1,
+      "median_ms": 6567,
+      "min_ms": 6567,
+      "max_ms": 6567
+    },
+    "idle-next": {
+      "n": 8,
+      "median_ms": 503.5,
+      "min_ms": 483,
+      "max_ms": 1178
+    },
+    "start": {
+      "n": 1,
+      "median_ms": 862,
+      "min_ms": 862,
+      "max_ms": 862
+    },
+    "training-next": {
+      "n": 8,
+      "median_ms": 691.0,
+      "min_ms": 465,
+      "max_ms": 1044
+    },
+    "home": {
+      "n": 1,
+      "median_ms": 291,
+      "min_ms": 291,
+      "max_ms": 291
+    },
+    "resume": {
+      "n": 1,
+      "median_ms": 487,
+      "min_ms": 487,
+      "max_ms": 487
+    },
+    "stop": {
+      "n": 1,
+      "median_ms": 1313,
+      "min_ms": 1313,
+      "max_ms": 1313
+    },
+    "home-idle": {
+      "n": 1,
+      "median_ms": 270,
+      "min_ms": 270,
+      "max_ms": 270
+    },
+    "cached-idle-next": {
+      "n": 4,
+      "median_ms": 499.0,
+      "min_ms": 483,
+      "max_ms": 506
+    }
+  },
+  "responsive-dual": {
+    "launch": {
+      "n": 1,
+      "median_ms": 5602,
+      "min_ms": 5602,
+      "max_ms": 5602
+    },
+    "idle-next": {
+      "n": 8,
+      "median_ms": 486.5,
+      "min_ms": 468,
+      "max_ms": 1141
+    },
+    "start": {
+      "n": 1,
+      "median_ms": 824,
+      "min_ms": 824,
+      "max_ms": 824
+    },
+    "training-next": {
+      "n": 8,
+      "median_ms": 724.5,
+      "min_ms": 450,
+      "max_ms": 1037
+    },
+    "home": {
+      "n": 1,
+      "median_ms": 458,
+      "min_ms": 458,
+      "max_ms": 458
+    },
+    "resume": {
+      "n": 1,
+      "median_ms": 462,
+      "min_ms": 462,
+      "max_ms": 462
+    },
+    "stop": {
+      "n": 1,
+      "median_ms": 1612,
+      "min_ms": 1612,
+      "max_ms": 1612
+    },
+    "home-idle": {
+      "n": 1,
+      "median_ms": 259,
+      "min_ms": 259,
+      "max_ms": 259
+    },
+    "cached-idle-next": {
+      "n": 4,
+      "median_ms": 478.0,
+      "min_ms": 468,
+      "max_ms": 488
+    }
+  }
+}

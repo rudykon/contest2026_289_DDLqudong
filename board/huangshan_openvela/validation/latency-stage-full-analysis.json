@@ -1,0 +1,1057 @@
+{
+  "summary": {
+    "launch": {
+      "n": 1,
+      "median_ms": 7494,
+      "min_ms": 7494,
+      "max_ms": 7494
+    },
+    "idle-next": {
+      "n": 8,
+      "median_ms": 956.0,
+      "min_ms": 883,
+      "max_ms": 1951
+    },
+    "start": {
+      "n": 1,
+      "median_ms": 1723,
+      "min_ms": 1723,
+      "max_ms": 1723
+    },
+    "training-next": {
+      "n": 8,
+      "median_ms": 1263.5,
+      "min_ms": 1117,
+      "max_ms": 1757
+    },
+    "home": {
+      "n": 1,
+      "median_ms": 591,
+      "min_ms": 591,
+      "max_ms": 591
+    },
+    "resume": {
+      "n": 1,
+      "median_ms": 631,
+      "min_ms": 631,
+      "max_ms": 631
+    },
+    "stop": {
+      "n": 1,
+      "median_ms": 2141,
+      "min_ms": 2141,
+      "max_ms": 2141
+    },
+    "home-idle": {
+      "n": 1,
+      "median_ms": 387,
+      "min_ms": 387,
+      "max_ms": 387
+    },
+    "cached-idle-next": {
+      "n": 4,
+      "median_ms": 922.0,
+      "min_ms": 883,
+      "max_ms": 958
+    }
+  },
+  "traces": [
+    {
+      "frames": [
+        {
+          "refresh": 101,
+          "layout": 0,
+          "draw": 74,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 110
+        },
+        {
+          "refresh": 595,
+          "layout": 234,
+          "draw": 334,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 7489
+        }
+      ],
+      "release_at": 114,
+      "handler_ms": 4,
+      "sample": {
+        "label": "launch",
+        "ms": 7494,
+        "before": 272,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 696,
+        "layout": 234,
+        "draw": 408,
+        "flush": 54
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 159,
+          "layout": 1,
+          "draw": 130,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 211
+        },
+        {
+          "refresh": 164,
+          "layout": 4,
+          "draw": 134,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 425
+        },
+        {
+          "refresh": 617,
+          "layout": 278,
+          "draw": 312,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1855
+        }
+      ],
+      "release_at": 217,
+      "handler_ms": 37,
+      "sample": {
+        "label": "idle-next",
+        "ms": 1859,
+        "before": 1,
+        "after": 2
+      },
+      "phase_totals_ms": {
+        "refresh": 940,
+        "layout": 283,
+        "draw": 576,
+        "flush": 81
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 160,
+          "layout": 5,
+          "draw": 128,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 205
+        },
+        {
+          "refresh": 157,
+          "layout": 5,
+          "draw": 127,
+          "flush": 25,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 412
+        },
+        {
+          "refresh": 446,
+          "layout": 242,
+          "draw": 177,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1292
+        }
+      ],
+      "release_at": 211,
+      "handler_ms": 36,
+      "sample": {
+        "label": "idle-next",
+        "ms": 1296,
+        "before": 2,
+        "after": 4
+      },
+      "phase_totals_ms": {
+        "refresh": 763,
+        "layout": 252,
+        "draw": 432,
+        "flush": 79
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 130,
+          "layout": 4,
+          "draw": 99,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 176
+        },
+        {
+          "refresh": 131,
+          "layout": 5,
+          "draw": 99,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 355
+        },
+        {
+          "refresh": 608,
+          "layout": 306,
+          "draw": 274,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1946
+        }
+      ],
+      "release_at": 182,
+      "handler_ms": 35,
+      "sample": {
+        "label": "idle-next",
+        "ms": 1951,
+        "before": 4,
+        "after": 8
+      },
+      "phase_totals_ms": {
+        "refresh": 869,
+        "layout": 315,
+        "draw": 472,
+        "flush": 82
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 172,
+          "layout": 4,
+          "draw": 141,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 218
+        },
+        {
+          "refresh": 173,
+          "layout": 4,
+          "draw": 141,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 440
+        },
+        {
+          "refresh": 303,
+          "layout": 145,
+          "draw": 130,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 949
+        }
+      ],
+      "release_at": 224,
+      "handler_ms": 35,
+      "sample": {
+        "label": "idle-next",
+        "ms": 954,
+        "before": 8,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 648,
+        "layout": 153,
+        "draw": 412,
+        "flush": 83
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 165,
+          "layout": 5,
+          "draw": 134,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 211
+        },
+        {
+          "refresh": 163,
+          "layout": 5,
+          "draw": 131,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 423
+        },
+        {
+          "refresh": 307,
+          "layout": 153,
+          "draw": 127,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 937
+        }
+      ],
+      "release_at": 217,
+      "handler_ms": 35,
+      "sample": {
+        "label": "idle-next",
+        "ms": 941,
+        "before": 1,
+        "after": 2
+      },
+      "phase_totals_ms": {
+        "refresh": 635,
+        "layout": 163,
+        "draw": 392,
+        "flush": 80
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 157,
+          "layout": 5,
+          "draw": 126,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 203
+        },
+        {
+          "refresh": 159,
+          "layout": 5,
+          "draw": 127,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 411
+        },
+        {
+          "refresh": 280,
+          "layout": 154,
+          "draw": 98,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 899
+        }
+      ],
+      "release_at": 209,
+      "handler_ms": 36,
+      "sample": {
+        "label": "idle-next",
+        "ms": 903,
+        "before": 2,
+        "after": 4
+      },
+      "phase_totals_ms": {
+        "refresh": 596,
+        "layout": 164,
+        "draw": 351,
+        "flush": 81
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 130,
+          "layout": 4,
+          "draw": 100,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 177
+        },
+        {
+          "refresh": 130,
+          "layout": 5,
+          "draw": 99,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 355
+        },
+        {
+          "refresh": 318,
+          "layout": 151,
+          "draw": 141,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 879
+        }
+      ],
+      "release_at": 182,
+      "handler_ms": 36,
+      "sample": {
+        "label": "idle-next",
+        "ms": 883,
+        "before": 4,
+        "after": 8
+      },
+      "phase_totals_ms": {
+        "refresh": 578,
+        "layout": 160,
+        "draw": 340,
+        "flush": 78
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 174,
+          "layout": 4,
+          "draw": 143,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 220
+        },
+        {
+          "refresh": 173,
+          "layout": 4,
+          "draw": 142,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 442
+        },
+        {
+          "refresh": 304,
+          "layout": 145,
+          "draw": 133,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 953
+        }
+      ],
+      "release_at": 226,
+      "handler_ms": 35,
+      "sample": {
+        "label": "idle-next",
+        "ms": 958,
+        "before": 8,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 651,
+        "layout": 153,
+        "draw": 418,
+        "flush": 80
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 161,
+          "layout": 0,
+          "draw": 135,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 212
+        },
+        {
+          "refresh": 165,
+          "layout": 5,
+          "draw": 133,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 802
+        },
+        {
+          "refresh": 492,
+          "layout": 222,
+          "draw": 244,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1718
+        }
+      ],
+      "release_at": 218,
+      "handler_ms": 411,
+      "sample": {
+        "label": "start",
+        "ms": 1723,
+        "before": 1,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 818,
+        "layout": 227,
+        "draw": 512,
+        "flush": 79
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 291,
+          "layout": 131,
+          "draw": 133,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 343
+        },
+        {
+          "refresh": 164,
+          "layout": 4,
+          "draw": 133,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 673
+        },
+        {
+          "refresh": 500,
+          "layout": 210,
+          "draw": 264,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1741
+        }
+      ],
+      "release_at": 371,
+      "handler_ms": 130,
+      "sample": {
+        "label": "training-next",
+        "ms": 1746,
+        "before": 33,
+        "after": 34
+      },
+      "phase_totals_ms": {
+        "refresh": 955,
+        "layout": 345,
+        "draw": 530,
+        "flush": 80
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 156,
+          "layout": 4,
+          "draw": 125,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 481
+        },
+        {
+          "refresh": 156,
+          "layout": 5,
+          "draw": 124,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 772
+        },
+        {
+          "refresh": 378,
+          "layout": 205,
+          "draw": 145,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1753
+        }
+      ],
+      "release_at": 505,
+      "handler_ms": 103,
+      "sample": {
+        "label": "training-next",
+        "ms": 1757,
+        "before": 34,
+        "after": 36
+      },
+      "phase_totals_ms": {
+        "refresh": 690,
+        "layout": 214,
+        "draw": 394,
+        "flush": 82
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 143,
+          "layout": 5,
+          "draw": 112,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 189
+        },
+        {
+          "refresh": 142,
+          "layout": 4,
+          "draw": 111,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 388
+        },
+        {
+          "refresh": 348,
+          "layout": 160,
+          "draw": 161,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1167
+        }
+      ],
+      "release_at": 198,
+      "handler_ms": 40,
+      "sample": {
+        "label": "training-next",
+        "ms": 1172,
+        "before": 36,
+        "after": 40
+      },
+      "phase_totals_ms": {
+        "refresh": 633,
+        "layout": 169,
+        "draw": 384,
+        "flush": 80
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 170,
+          "layout": 5,
+          "draw": 138,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 216
+        },
+        {
+          "refresh": 399,
+          "layout": 192,
+          "draw": 179,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1232
+        }
+      ],
+      "release_at": 225,
+      "handler_ms": 78,
+      "sample": {
+        "label": "training-next",
+        "ms": 1237,
+        "before": 40,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 569,
+        "layout": 197,
+        "draw": 317,
+        "flush": 55
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 166,
+          "layout": 4,
+          "draw": 135,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 215
+        },
+        {
+          "refresh": 348,
+          "layout": 184,
+          "draw": 137,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1285
+        }
+      ],
+      "release_at": 355,
+      "handler_ms": 117,
+      "sample": {
+        "label": "training-next",
+        "ms": 1290,
+        "before": 33,
+        "after": 34
+      },
+      "phase_totals_ms": {
+        "refresh": 514,
+        "layout": 188,
+        "draw": 272,
+        "flush": 54
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 430,
+          "layout": 198,
+          "draw": 204,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 511
+        },
+        {
+          "refresh": 156,
+          "layout": 4,
+          "draw": 126,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1122
+        },
+        {
+          "refresh": 303,
+          "layout": 165,
+          "draw": 111,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1576
+        }
+      ],
+      "release_at": 850,
+      "handler_ms": 108,
+      "sample": {
+        "label": "training-next",
+        "ms": 1581,
+        "before": 34,
+        "after": 36
+      },
+      "phase_totals_ms": {
+        "refresh": 889,
+        "layout": 367,
+        "draw": 441,
+        "flush": 81
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 146,
+          "layout": 5,
+          "draw": 114,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 506
+        },
+        {
+          "refresh": 141,
+          "layout": 5,
+          "draw": 110,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 720
+        },
+        {
+          "refresh": 326,
+          "layout": 163,
+          "draw": 136,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1190
+        }
+      ],
+      "release_at": 530,
+      "handler_ms": 41,
+      "sample": {
+        "label": "training-next",
+        "ms": 1195,
+        "before": 36,
+        "after": 40
+      },
+      "phase_totals_ms": {
+        "refresh": 613,
+        "layout": 173,
+        "draw": 360,
+        "flush": 80
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 168,
+          "layout": 4,
+          "draw": 137,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 214
+        },
+        {
+          "refresh": 323,
+          "layout": 159,
+          "draw": 137,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1113
+        }
+      ],
+      "release_at": 223,
+      "handler_ms": 83,
+      "sample": {
+        "label": "training-next",
+        "ms": 1117,
+        "before": 40,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 491,
+        "layout": 163,
+        "draw": 274,
+        "flush": 54
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 303,
+          "layout": 143,
+          "draw": 133,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 314
+        },
+        {
+          "refresh": 132,
+          "layout": 14,
+          "draw": 92,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 587
+        }
+      ],
+      "release_at": 339,
+      "handler_ms": 4,
+      "sample": {
+        "label": "home",
+        "ms": 591,
+        "before": 33,
+        "after": 272
+      },
+      "phase_totals_ms": {
+        "refresh": 435,
+        "layout": 157,
+        "draw": 225,
+        "flush": 53
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 100,
+          "layout": 0,
+          "draw": 73,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 110
+        },
+        {
+          "refresh": 90,
+          "layout": 22,
+          "draw": 40,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 274
+        },
+        {
+          "refresh": 314,
+          "layout": 155,
+          "draw": 131,
+          "flush": 28,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 626
+        }
+      ],
+      "release_at": 115,
+      "handler_ms": 4,
+      "sample": {
+        "label": "resume",
+        "ms": 631,
+        "before": 272,
+        "after": 33
+      },
+      "phase_totals_ms": {
+        "refresh": 504,
+        "layout": 177,
+        "draw": 244,
+        "flush": 83
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 164,
+          "layout": 0,
+          "draw": 137,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 221
+        },
+        {
+          "refresh": 361,
+          "layout": 170,
+          "draw": 165,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 1152
+        },
+        {
+          "refresh": 433,
+          "layout": 273,
+          "draw": 133,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 2136
+        }
+      ],
+      "release_at": 333,
+      "handler_ms": 425,
+      "sample": {
+        "label": "stop",
+        "ms": 2141,
+        "before": 33,
+        "after": 1
+      },
+      "phase_totals_ms": {
+        "refresh": 958,
+        "layout": 443,
+        "draw": 435,
+        "flush": 80
+      }
+    },
+    {
+      "frames": [
+        {
+          "refresh": 162,
+          "layout": 1,
+          "draw": 134,
+          "flush": 27,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 172
+        },
+        {
+          "refresh": 111,
+          "layout": 13,
+          "draw": 72,
+          "flush": 26,
+          "pixels": 175500,
+          "transfers": 1,
+          "pending": 1,
+          "offset": 383
+        }
+      ],
+      "release_at": 178,
+      "handler_ms": 3,
+      "sample": {
+        "label": "home-idle",
+        "ms": 387,
+        "before": 1,
+        "after": 272
+      },
+      "phase_totals_ms": {
+        "refresh": 273,
+        "layout": 14,
+        "draw": 206,
+        "flush": 53
+      }
+    }
+  ],
+  "measurement": "Synthetic LVGL press to changed-page refresh completion; includes nominal 100ms press and its scheduling delay; excludes serial queue, physical sensor sampling and panel response."
+}

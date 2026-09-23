@@ -1,0 +1,307 @@
+{
+  "summary": {
+    "native-tools": {
+      "n": 3,
+      "median_ms": 234,
+      "min_ms": 233,
+      "max_ms": 319
+    },
+    "native-stopwatch": {
+      "n": 3,
+      "median_ms": 222,
+      "min_ms": 211,
+      "max_ms": 294
+    },
+    "native-tools-back": {
+      "n": 3,
+      "median_ms": 235,
+      "min_ms": 222,
+      "max_ms": 236
+    },
+    "native-home": {
+      "n": 6,
+      "median_ms": 241.0,
+      "min_ms": 228,
+      "max_ms": 242
+    },
+    "native-settings": {
+      "n": 3,
+      "median_ms": 244,
+      "min_ms": 243,
+      "max_ms": 364
+    }
+  },
+  "traces": [
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-tools",
+        "ms": 319,
+        "before": 16,
+        "after": 64
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-stopwatch",
+        "ms": 294,
+        "before": 64,
+        "after": 128
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-tools-back",
+        "ms": 235,
+        "before": 128,
+        "after": 64
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-home",
+        "ms": 228,
+        "before": 64,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-settings",
+        "ms": 364,
+        "before": 16,
+        "after": 256
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-home",
+        "ms": 242,
+        "before": 256,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-tools",
+        "ms": 233,
+        "before": 16,
+        "after": 64
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-stopwatch",
+        "ms": 211,
+        "before": 64,
+        "after": 128
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-tools-back",
+        "ms": 236,
+        "before": 128,
+        "after": 64
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-home",
+        "ms": 242,
+        "before": 64,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-settings",
+        "ms": 244,
+        "before": 16,
+        "after": 256
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-home",
+        "ms": 241,
+        "before": 256,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-tools",
+        "ms": 234,
+        "before": 16,
+        "after": 64
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-stopwatch",
+        "ms": 222,
+        "before": 64,
+        "after": 128
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-tools-back",
+        "ms": 222,
+        "before": 128,
+        "after": 64
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-home",
+        "ms": 241,
+        "before": 64,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-settings",
+        "ms": 243,
+        "before": 16,
+        "after": 256
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    },
+    {
+      "frames": [],
+      "sample": {
+        "label": "native-home",
+        "ms": 241,
+        "before": 256,
+        "after": 16
+      },
+      "phase_totals_ms": {
+        "refresh": 0,
+        "layout": 0,
+        "draw": 0,
+        "flush": 0
+      }
+    }
+  ],
+  "measurement": "Synthetic LVGL press to changed-page refresh completion; includes nominal 100ms press and its scheduling delay; excludes serial queue, physical sensor sampling and panel response."
+}

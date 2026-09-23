@@ -4,3 +4,10 @@
 **/sign/release/*.pem
 **/com.velamotion.coach/
 .DS_Store
+**/__pycache__/
+*.pyc
+**/github_token.json
+board/huangshan_openvela/logs/
+board/huangshan_openvela/firmware/*.bin
+!board/huangshan_openvela/firmware/velamotion-openvela.bin
+board/huangshan_openvela/validation/*.rpk

@@ -1,6 +1,7 @@
 import { WINDOW_SIZE, STEP_SIZE, SAMPLE_PERIOD_MS, CLASS_NAMES, CLASS_COLORS, CLASS_EMOJIS } from './config.js';
 import { classifyWindowWithBackend } from './model_backend.js';
 import { TemporalRecordLayer } from './trl_postprocessor.js';
+import { createImuFeatureWork } from './imu_features.js';
 
 export class MotionEngine {
   constructor() {
@@ -53,14 +54,14 @@ export class MotionEngine {
     };
   }
 
-  classifyPreparedWindow(prepared) {
+  classifyPreparedWindow(prepared, features) {
     const classifierStarted = Date.now();
     const prediction = classifyWindowWithBackend(prepared.window, {
       heartRate: prepared.last.heartRate,
       spo2: prepared.last.spo2,
       stress: prepared.last.stress,
       stepCount: prepared.last.stepCount,
-    });
+    }, features);
     return {
       prediction,
       classifierMs: Date.now() - classifierStarted,
@@ -187,9 +188,16 @@ export class MotionEngine {
     // Classification and temporal decoding are the two expensive QuickJS
     // stages. Put them in separate tasks so touch/stop events can run between
     // them, and check cancellation before committing any new TRL state.
-    schedule(() => {
+    const featureWork = createImuFeatureWork(prepared.window);
+    let featureMs = 0;
+    const classifySlice = () => {
       if (shouldCancel()) return;
-      const classified = this.classifyPreparedWindow(prepared);
+      const started = Date.now();
+      const ready = featureWork.step();
+      featureMs += Date.now() - started;
+      if (!ready) { schedule(classifySlice); return; }
+      const classified = this.classifyPreparedWindow(prepared, featureWork.result);
+      classified.classifierMs += featureMs;
       schedule(() => {
         if (shouldCancel()) return;
         this.commitPreparedWindow(prepared, classified);
@@ -199,7 +207,8 @@ export class MotionEngine {
         if (this.cooperativeWork === work) this.cooperativeWork = null;
         done(this.currentState());
       });
-    });
+    };
+    schedule(classifySlice);
     return work;
   }
 
@@ -271,7 +280,7 @@ export function segmentRows(segments) {
   return rows.map((seg) => ({
     label: `${CLASS_EMOJIS[seg.classIdx]} ${seg.className}`,
     start: formatSec(seg.startSec),
-    duration: `${formatSec(seg.durationSec)}${seg.isOngoing ? ' ▶' : ''}`,
+    duration: `${formatSec(seg.durationSec)}${seg.isOngoing ? ' 中' : ''}`,
     confidence: `${Math.round(seg.confidence * 100)}%`,
     width: Math.max(12, Math.round(196 * Math.min(1, Number(seg.durationSec || 0) / maxDuration))),
     color: CLASS_COLORS[seg.classIdx],

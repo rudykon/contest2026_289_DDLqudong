@@ -66,8 +66,8 @@ function argMax(values) {
   return idx;
 }
 
-export function classifyWindow(samples, health) {
-  const f = computeImuFeatures(samples);
+export function classifyWindow(samples, health, features) {
+  const f = features || computeImuFeatures(samples);
   const hr = health && health.heartRate ? health.heartRate : null;
 
   const scores = new Array(CLASS_NAMES.length).fill(-0.2);

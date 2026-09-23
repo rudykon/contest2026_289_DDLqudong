@@ -47,7 +47,7 @@ function normalizeNativeResult(res) {
   });
 }
 
-export function classifyWindowWithBackend(samples, context) {
+export function classifyWindowWithBackend(samples, context, features) {
   const nativeBackend = loadNativeBackend();
   if (nativeBackend && nativeBackend.classifyWindow) {
     try {
@@ -64,5 +64,5 @@ export function classifyWindowWithBackend(samples, context) {
   }
   MODEL_BACKEND_STATUS.active = 'tiny_classifier';
   MODEL_BACKEND_STATUS.nativeAvailable = false;
-  return classifyWindow(samples, context);
+  return classifyWindow(samples, context, features);
 }

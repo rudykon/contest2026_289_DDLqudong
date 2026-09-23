@@ -1,0 +1,92 @@
+[
+  {
+    "image": "perf-stable-background.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-coach.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-home.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-ready.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-resume.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-scroll.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-stopped.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-sync.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "perf-stable-timeline.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  }
+]

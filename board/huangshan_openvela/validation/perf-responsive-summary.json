@@ -1,0 +1,47 @@
+{
+  "launch": {
+    "n": 1,
+    "median": 7876,
+    "max": 7876
+  },
+  "idle-next": {
+    "n": 8,
+    "median": 910.5,
+    "max": 1881
+  },
+  "start": {
+    "n": 1,
+    "median": 1657,
+    "max": 1657
+  },
+  "training-next": {
+    "n": 8,
+    "median": 1366.0,
+    "max": 1732
+  },
+  "home": {
+    "n": 1,
+    "median": 430,
+    "max": 430
+  },
+  "resume": {
+    "n": 1,
+    "median": 872,
+    "max": 872
+  },
+  "stop": {
+    "n": 1,
+    "median": 1926,
+    "max": 1926
+  },
+  "home-idle": {
+    "n": 1,
+    "median": 312,
+    "max": 312
+  },
+  "cached-idle-next": {
+    "n": 4,
+    "median": 880.5,
+    "max": 913
+  }
+}

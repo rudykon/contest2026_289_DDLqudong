@@ -1,0 +1,9 @@
+ro.product.brand=LCKFB
+ro.product.model=lckfb_huangshan_pi
+ro.product.marketname=Huangshan Pi SF32LB52
+ro.product.manufacturer=LCKFB
+ro.product.device.devicetype=watch
+ro.product.device.screenshape=rect
+ro.system.language=zh
+ro.system.region=CN
+ro.system.osversioncode=1000

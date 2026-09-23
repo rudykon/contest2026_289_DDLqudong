@@ -1,0 +1,505 @@
+{
+  "rpk_bytes": 52851,
+  "rpk_sha256": "851a2884e107d62313c4bb1e2950120521bc7ef7fcbba542ae3485b330d834aa",
+  "unpacked_bytes": 178272,
+  "compressed_entries_bytes": 48388,
+  "container_overhead_bytes": 4463,
+  "entries": [
+    {
+      "name": "pages/index/index.js",
+      "bytes": 169894,
+      "compressed_bytes": 42811
+    },
+    {
+      "name": "META-INF/CERT",
+      "bytes": 3583,
+      "compressed_bytes": 2963
+    },
+    {
+      "name": "app.js",
+      "bytes": 1674,
+      "compressed_bytes": 866
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 1191,
+      "compressed_bytes": 467
+    },
+    {
+      "name": "manifest-watch.json",
+      "bytes": 987,
+      "compressed_bytes": 366
+    },
+    {
+      "name": "common/logo.png",
+      "bytes": 821,
+      "compressed_bytes": 805
+    },
+    {
+      "name": "META-INF/build.txt",
+      "bytes": 122,
+      "compressed_bytes": 110
+    },
+    {
+      "name": "META-INF/",
+      "bytes": 0,
+      "compressed_bytes": 0
+    },
+    {
+      "name": "pages/",
+      "bytes": 0,
+      "compressed_bytes": 0
+    },
+    {
+      "name": "pages/index/",
+      "bytes": 0,
+      "compressed_bytes": 0
+    },
+    {
+      "name": "common/",
+      "bytes": 0,
+      "compressed_bytes": 0
+    }
+  ],
+  "source_ux_sections": {
+    "template": 18963,
+    "script": 69337,
+    "style": 70007
+  },
+  "source_common_groups": {
+    "logo.png": 821,
+    "ai": 4913,
+    "algorithm": 52727,
+    "device": 9984,
+    "sensor": 28140,
+    "storage": 3081,
+    "sync": 7886,
+    "ui": 22080
+  },
+  "bundle_ast": {
+    "modules": [
+      {
+        "id": 791,
+        "bytes": 10179,
+        "exports": [
+          "MotionFxController",
+          "heartRateIntervalMs",
+          "motionNeutralFrame",
+          "now",
+          "setTimer",
+          "clearTimer",
+          "syncFrameMs",
+          "breatheHalfMs",
+          "baselineStepMs",
+          "timer",
+          "generation",
+          "running",
+          "onFrame",
+          "queue",
+          "effectTokens",
+          "frame",
+          "channels",
+          "breatheExpanded"
+        ]
+      },
+      {
+        "id": 564,
+        "bytes": 8655,
+        "exports": [
+          "RealSensorProvider",
+          "clock",
+          "sensorLoader",
+          "setTimer",
+          "clearTimer",
+          "timer",
+          "onBatch",
+          "onStatus",
+          "sensor",
+          "latestAcc",
+          "accFrames",
+          "latestSteps",
+          "latestHealth",
+          "nextSampleTimeMs",
+          "firstFrameDeadlineMs",
+          "hasReceivedFirstFrame",
+          "active",
+          "tickMs"
+        ]
+      },
+      {
+        "id": 951,
+        "bytes": 7553,
+        "exports": [
+          "TemporalRecordLayer",
+          "timesSec",
+          "probs",
+          "averaged",
+          "smoothed",
+          "path",
+          "rawSegments",
+          "segmentRecords",
+          "segments",
+          "activeRawSegment",
+          "tailSegmentRecord",
+          "viterbiScores",
+          "backPointers",
+          "segmentCommittedCount",
+          "committedStatsByClass",
+          "stableSegmentState",
+          "length",
+          "visible"
+        ]
+      },
+      {
+        "id": 913,
+        "bytes": 5336,
+        "exports": [
+          "MotionEngine",
+          "formatSec",
+          "probabilityRows",
+          "segmentRows",
+          "cooperativeWork",
+          "samples",
+          "nextWindowStart",
+          "trl",
+          "lastResult",
+          "sessionStartMs",
+          "totalSamples",
+          "droppedWindowCount",
+          "pending",
+          "length"
+        ]
+      },
+      {
+        "id": 495,
+        "bytes": 4283,
+        "exports": [
+          "SCENARIOS",
+          "getScenario",
+          "locateSegment",
+          "sampleMotionFrame",
+          "scenarioDuration",
+          "stepRateForMode",
+          "id"
+        ]
+      },
+      {
+        "id": 61,
+        "bytes": 3788,
+        "exports": [
+          "analyzeWorkoutRisk",
+          "buildCoachTip",
+          "buildSummary",
+          "classifyHrZone"
+        ]
+      },
+      {
+        "id": 404,
+        "bytes": 3574,
+        "exports": [
+          "runDeviceDiagnostics"
+        ]
+      },
+      {
+        "id": 691,
+        "bytes": 3234,
+        "exports": [
+          "compactFeatureLog",
+          "computeImuFeatures",
+          "createImuFeatureWork",
+          "min",
+          "max",
+          "accumulated",
+          "result"
+        ]
+      },
+      {
+        "id": 245,
+        "bytes": 2779,
+        "exports": [
+          "buildLocalAiSummary",
+          "requestAiSummary"
+        ]
+      },
+      {
+        "id": 838,
+        "bytes": 2383,
+        "exports": [
+          "buildExportPreview",
+          "buildExportText",
+          "diagnosePhoneLink",
+          "sendSessionToPhone",
+          "subscribePhoneMessages",
+          "onmessage"
+        ]
+      },
+      {
+        "id": 721,
+        "bytes": 2355,
+        "exports": [
+          "TouchGesture",
+          "state",
+          "id",
+          "x",
+          "y",
+          "invalid",
+          "moved",
+          "axis"
+        ]
+      },
+      {
+        "id": 102,
+        "bytes": 2248,
+        "exports": [
+          "classifyWindow"
+        ]
+      },
+      {
+        "id": 115,
+        "bytes": 2144,
+        "exports": [
+          "PROCESSING_STATES",
+          "confirmedPreciseResult",
+          "inspectPreciseResult",
+          "preciseResultAcceptance",
+          "processingStateView"
+        ]
+      },
+      {
+        "id": 657,
+        "bytes": 1942,
+        "exports": [
+          "CooperativeMotionRunner",
+          "engine",
+          "schedule",
+          "maxPendingSamples",
+          "generation",
+          "busy",
+          "pumpScheduled",
+          "pendingBatch",
+          "pendingContext",
+          "pendingCallback",
+          "activeWork"
+        ]
+      },
+      {
+        "id": 950,
+        "bytes": 1801,
+        "exports": [
+          "clearSessions",
+          "listSessions",
+          "loadSessions",
+          "saveSession"
+        ]
+      },
+      {
+        "id": 451,
+        "bytes": 1746,
+        "exports": [
+          "HealthProvider",
+          "DATA_TYPES",
+          "ALL_HEALTH_TYPES",
+          "getRecentHealth",
+          "onSample",
+          "onError",
+          "active",
+          "activeTypes"
+        ]
+      },
+      {
+        "id": 410,
+        "bytes": 1662,
+        "exports": [
+          "MODEL_BACKEND_STATUS",
+          "classifyWindowWithBackend",
+          "active",
+          "nativeAvailable",
+          "setNativeModelBackend"
+        ]
+      },
+      {
+        "id": 86,
+        "bytes": 1658,
+        "exports": [
+          "PAGE_LIVE_KEYS",
+          "LivePatchBuffer",
+          "sameValue",
+          "pending",
+          "selectKeys",
+          "canPublish",
+          "live"
+        ]
+      },
+      {
+        "id": 598,
+        "bytes": 1531,
+        "exports": [
+          "MockSensorProvider",
+          "timer",
+          "active",
+          "sceneId",
+          "startedAtMs",
+          "syntheticElapsedSec",
+          "startOffsetSec",
+          "stepCount",
+          "lastStepAtSec",
+          "onBatch",
+          "tickMs"
+        ]
+      },
+      {
+        "id": 296,
+        "bytes": 1430,
+        "exports": [
+          "WINDOW_SIZE",
+          "WINDOW_SEC",
+          "STEP_SIZE",
+          "STEP_SEC",
+          "SOURCE_SAMPLE_RATE_HZ",
+          "SAMPLE_RATE_HZ",
+          "SAMPLE_PERIOD_MS",
+          "NORM_PARAMS_3S",
+          "MEDIAN_SIZE",
+          "DEMO_SHORT_GAP_SEC",
+          "DEMO_MIN_SEGMENT_SEC",
+          "CONF_MIN",
+          "CLASS_RUNNING",
+          "CLASS_PINGPONG",
+          "CLASS_NAMES",
+          "CLASS_JUMP_ROPE",
+          "CLASS_FLYING",
+          "CLASS_EMOJIS"
+        ]
+      },
+      {
+        "id": 507,
+        "bytes": 1225,
+        "exports": [
+          "pulseWorkoutAlert",
+          "shouldShakeRiskCard",
+          "key",
+          "vibrate"
+        ]
+      },
+      {
+        "id": 643,
+        "bytes": 758,
+        "exports": [
+          "HISTORY_CLEAR_ACTIONS",
+          "historyClearAction",
+          "syncActionPermission",
+          "wrappedPageIndex"
+        ]
+      },
+      {
+        "id": 226,
+        "bytes": 690,
+        "exports": [
+          "getDiagnosticStartPermission",
+          "getRealTrainingPermission",
+          "getSessionStartPermission"
+        ]
+      },
+      {
+        "id": 611,
+        "bytes": 428,
+        "exports": [
+          "loadOptionalFeature"
+        ]
+      },
+      {
+        "id": 943,
+        "bytes": 401,
+        "exports": [
+          "InteractionScheduler",
+          "now",
+          "timer",
+          "until"
+        ]
+      }
+    ],
+    "arrays": [
+      {
+        "name": "compiled_styles",
+        "start": 71711,
+        "end": 94149,
+        "bytes": 22438,
+        "rules": 163
+      }
+    ],
+    "functions": [
+      {
+        "target": "a",
+        "start": 94152,
+        "end": 132831,
+        "bytes": 41223
+      },
+      {
+        "target": "_",
+        "start": 132834,
+        "end": 164498,
+        "bytes": 31856
+      },
+      {
+        "target": "e.runDeviceDiagnostics",
+        "start": 29123,
+        "end": 31523,
+        "bytes": 2878
+      },
+      {
+        "target": "e.analyzeWorkoutRisk",
+        "start": 9132,
+        "end": 10754,
+        "bytes": 1946
+      },
+      {
+        "target": "e.classifyWindow",
+        "start": 19314,
+        "end": 21086,
+        "bytes": 1772
+      },
+      {
+        "target": "e.sampleMotionFrame",
+        "start": 36208,
+        "end": 37684,
+        "bytes": 1476
+      },
+      {
+        "target": "e.requestAiSummary",
+        "start": 1310,
+        "end": 2474,
+        "bytes": 1374
+      },
+      {
+        "target": "i.classifyWindowWithBackend",
+        "start": 12357,
+        "end": 13484,
+        "bytes": 1127
+      },
+      {
+        "target": "e.pulseWorkoutAlert",
+        "start": 33201,
+        "end": 33879,
+        "bytes": 766
+      },
+      {
+        "target": "e.buildCoachTip",
+        "start": 10771,
+        "end": 11233,
+        "bytes": 722
+      },
+      {
+        "target": "e.loadSessions",
+        "start": 50379,
+        "end": 50939,
+        "bytes": 560
+      },
+      {
+        "target": "e.subscribePhoneMessages",
+        "start": 53575,
+        "end": 54055,
+        "bytes": 480
+      }
+    ]
+  }
+}

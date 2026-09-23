@@ -1,6 +1,7 @@
 // Official service.health v1.0.0 wrapper.
 // Verified supported data types: HEART_RATE(0), SPO2(6), STRESS(9).
-import health from '@service.health';
+import { loadOptionalFeature } from '../device/optional_features.js';
+const health = loadOptionalFeature('health');
 
 export const DATA_TYPES = health && health.DATA_TYPES
   ? health.DATA_TYPES
@@ -62,6 +63,12 @@ export class HealthProvider {
     if (this.active) return;
     this.active = true;
     this.activeTypes = [];
+    if (!health || typeof health.subscribeSample !== 'function') {
+      ALL_HEALTH_TYPES.forEach((dataType) => {
+        if (this.onError) this.onError({ ok: false, dataType, code: 203, unsupported: true });
+      });
+      return;
+    }
     getRecentHealth(ALL_HEALTH_TYPES).then((list) => {
       list.forEach((sample) => this.onSample && this.onSample(sample));
     });

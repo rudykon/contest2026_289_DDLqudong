@@ -1,0 +1,140 @@
+[
+  {
+    "label": "launch",
+    "ms": 5615,
+    "before": 16,
+    "after": 1
+  },
+  {
+    "label": "idle-next",
+    "ms": 1028,
+    "before": 1,
+    "after": 2
+  },
+  {
+    "label": "idle-next",
+    "ms": 740,
+    "before": 2,
+    "after": 4
+  },
+  {
+    "label": "idle-next",
+    "ms": 1139,
+    "before": 4,
+    "after": 8
+  },
+  {
+    "label": "idle-next",
+    "ms": 484,
+    "before": 8,
+    "after": 1
+  },
+  {
+    "label": "idle-next",
+    "ms": 480,
+    "before": 1,
+    "after": 2
+  },
+  {
+    "label": "idle-next",
+    "ms": 465,
+    "before": 2,
+    "after": 4
+  },
+  {
+    "label": "idle-next",
+    "ms": 477,
+    "before": 4,
+    "after": 8
+  },
+  {
+    "label": "idle-next",
+    "ms": 483,
+    "before": 8,
+    "after": 1
+  },
+  {
+    "label": "start",
+    "ms": 781,
+    "before": 1,
+    "after": 33
+  },
+  {
+    "label": "training-next",
+    "ms": 1049,
+    "before": 33,
+    "after": 34
+  },
+  {
+    "label": "training-next",
+    "ms": 1003,
+    "before": 34,
+    "after": 36
+  },
+  {
+    "label": "training-next",
+    "ms": 505,
+    "before": 36,
+    "after": 40
+  },
+  {
+    "label": "training-next",
+    "ms": 725,
+    "before": 40,
+    "after": 33
+  },
+  {
+    "label": "training-next",
+    "ms": 617,
+    "before": 33,
+    "after": 34
+  },
+  {
+    "label": "training-next",
+    "ms": 709,
+    "before": 34,
+    "after": 36
+  },
+  {
+    "label": "training-next",
+    "ms": 491,
+    "before": 36,
+    "after": 40
+  },
+  {
+    "label": "training-next",
+    "ms": 649,
+    "before": 40,
+    "after": 33
+  },
+  {
+    "label": "home",
+    "ms": 447,
+    "before": 33,
+    "after": 16
+  },
+  {
+    "label": "resume",
+    "ms": 639,
+    "before": 16,
+    "after": 33
+  },
+  {
+    "label": "before-global-stop",
+    "ms": 837,
+    "before": 33,
+    "after": 34
+  },
+  {
+    "label": "stop",
+    "ms": 739,
+    "before": 34,
+    "after": 2
+  },
+  {
+    "label": "home-idle",
+    "ms": 262,
+    "before": 2,
+    "after": 16
+  }
+]

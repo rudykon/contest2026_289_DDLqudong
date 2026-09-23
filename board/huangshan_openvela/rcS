@@ -1,0 +1,6 @@
+mkdir /data/properties
+mkdir /data/quickapp
+mkdir /data/quickapp/com.velamotion.coach
+kvdbd &
+sleep 3
+vapp hap://app/com.velamotion.coach &

@@ -1,0 +1,142 @@
+[
+  {
+    "image": "font-subset-about.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-app.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-clock.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-coach.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-countdown.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-home.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-ready.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-settings.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-stopped.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-stopwatch.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-sync.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-timeline.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-tools.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  },
+  {
+    "image": "font-subset-training.png",
+    "corner_dark_pixels": {
+      "top_left": 0,
+      "top_right": 0,
+      "bottom_left": 0,
+      "bottom_right": 0
+    },
+    "passed": true
+  }
+]

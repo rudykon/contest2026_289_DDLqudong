@@ -1,0 +1,13 @@
+{
+  "name": "nuttx-bringup.bin",
+  "address": "0x12010000",
+  "bytes": 402316,
+  "sha256": "0a42a5da6dae956653d46ed34e3c6793228694630c437826e1be7035d69bd005",
+  "branch": "dev-ai-contest-2026",
+  "quickapp": false,
+  "readback_match": true,
+  "screen_user_confirmed": true,
+  "board": "lckfb_huangshan_pi",
+  "chip": "SF32LB52",
+  "port": "COM5"
+}

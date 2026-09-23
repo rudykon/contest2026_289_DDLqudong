@@ -1,0 +1,101 @@
+--- a/nuttx/CMakeLists.txt
++++ b/nuttx/CMakeLists.txt
+@@ -885,7 +885,7 @@
+ # Generate system map using the compiler toolchain. Conventionally, the tool
+ # which dump symbols are called nm, though, some compiler toolchain may have a
+ # different name.
+-if(NOT WIN32)
++if(NOT CMAKE_HOST_WIN32)
+   # Note that if we performed the nuttx_multiple_link target, the address
+   # assigned by the linker might change during each linking stage. We should use
+   # the final_nuttx as the target for generating the memory map
+--- a/nuttx/cmake/nuttx_export_header.cmake
++++ b/nuttx/cmake/nuttx_export_header.cmake
+@@ -128,7 +128,9 @@
+                                          ${EXPORT_PATH_PREFIX} ${INCDIR})
+       else()
+         # export single file
+-        file(CREATE_LINK ${INCDIR} ${INCLUDE_PATH_PREFIX}/${INCDIR}
++        get_filename_component(HEADER_NAME ${INCDIR} NAME)
++        file(MAKE_DIRECTORY ${INCLUDE_PATH_PREFIX})
++        file(CREATE_LINK ${INCDIR} ${INCLUDE_PATH_PREFIX}/${HEADER_NAME}
+              COPY_ON_ERROR SYMBOLIC)
+         install(FILES ${INCDIR} DESTINATION ${EXPORT_PATH_PREFIX})
+       endif()
+--- a/nuttx/cmake/nuttx_multiple_link.cmake
++++ b/nuttx/cmake/nuttx_multiple_link.cmake
+@@ -25,7 +25,7 @@
+   set(ALLSYMS_SOURCE ${CMAKE_BINARY_DIR}/allsyms_empty.c)
+   add_custom_command(
+     OUTPUT ${ALLSYMS_SOURCE}
+-    COMMAND ${NUTTX_DIR}/tools/mkallsyms.py nuttx.empty ${ALLSYMS_SOURCE}
++    COMMAND ${Python3_EXECUTABLE} ${NUTTX_DIR}/tools/mkallsyms.py nuttx.empty ${ALLSYMS_SOURCE}
+     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+     COMMENT "Generating allsyms_empty.c")
+   add_custom_target(generate_empty_allsyms DEPENDS ${ALLSYMS_SOURCE})
+@@ -87,7 +87,7 @@
+     list(APPEND MULTIPLE_LINK_SOURCES_${linktimes} ${LINK_ALLSYMS_SOURCE})
+     add_custom_command(
+       OUTPUT ${LINK_ALLSYMS_SOURCE} POST_BUILD
+-      COMMAND ${NUTTX_DIR}/tools/mkallsyms.py ${CMAKE_BINARY_DIR}/${dep_target}
++      COMMAND ${Python3_EXECUTABLE} ${NUTTX_DIR}/tools/mkallsyms.py ${CMAKE_BINARY_DIR}/${dep_target}
+               ${LINK_ALLSYMS_SOURCE}
+       DEPENDS ${dep_target}
+       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+--- a/nuttx/tools/mkallsyms.py
++++ b/nuttx/tools/mkallsyms.py
+@@ -28,7 +28,21 @@
+ import sys
+ 
+ try:
+-    import cxxfilt
++    if os.name == "nt":
++        import subprocess
++
++        class cxxfilt:
++            InvalidName = ValueError
++
++            @staticmethod
++            def demangle(name):
++                if not name.startswith("_Z"):
++                    return name
++                return subprocess.check_output(
++                    ["arm-none-eabi-c++filt", name], text=True
++                ).strip()
++    else:
++        import cxxfilt
+     from elftools import __version__
+     from elftools.elf.elffile import ELFFile
+     from elftools.elf.sections import SymbolTableSection
+--- a/apps/netutils/cjson/CMakeLists.txt
++++ b/apps/netutils/cjson/CMakeLists.txt
+@@ -60,9 +60,9 @@
+      OR NOT EXISTS ${CMAKE_BINARY_DIR}/apps/include/netutils/cJSON_Utils.h)
+     file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/apps/include/netutils)
+     file(CREATE_LINK ${CMAKE_CURRENT_LIST_DIR}/cJSON/cJSON.h
+-         ${CMAKE_BINARY_DIR}/apps/include/netutils/cJSON.h SYMBOLIC)
++         ${CMAKE_BINARY_DIR}/apps/include/netutils/cJSON.h COPY_ON_ERROR SYMBOLIC)
+     file(CREATE_LINK ${CMAKE_CURRENT_LIST_DIR}/cJSON/cJSON_Utils.h
+-         ${CMAKE_BINARY_DIR}/apps/include/netutils/cJSON_Utils.h SYMBOLIC)
++         ${CMAKE_BINARY_DIR}/apps/include/netutils/cJSON_Utils.h COPY_ON_ERROR SYMBOLIC)
+   endif()
+ 
+   target_sources(apps PRIVATE cJSON/cJSON.c cJSON/cJSON_Utils.c)
+--- a/vendor/sifli/boards/sf32lb52/lckfb_huangshan_pi/src/CMakeLists.txt
++++ b/vendor/sifli/boards/sf32lb52/lckfb_huangshan_pi/src/CMakeLists.txt
+@@ -21,6 +21,7 @@
+ set(SRCS sifli_ap.c sifli_gpio.c sf32lb52_buttons.c bsp_init.c bsp_lcd_tp.c bsp_pinmux.c bsp_power.c )
+ 
+ # Collect all HAP app and font files for romfs
++if(CONFIG_ETC_ROMFS)
+ file(GLOB_RECURSE _HAP_ABS ${CMAKE_CURRENT_LIST_DIR}/etc/data/app/* ${CMAKE_CURRENT_LIST_DIR}/etc/data/font/*)
+ set(HAP_FILES)
+ foreach(_f ${_HAP_ABS})
+@@ -44,6 +45,7 @@
+   ${CMAKE_CURRENT_LIST_DIR}/etc)
+ 
+ target_link_libraries(board PRIVATE romfs_etc)
++endif()
+ 
+ target_sources(board PRIVATE ${SRCS})
+ 

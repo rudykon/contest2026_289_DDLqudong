@@ -1,7 +1,5 @@
 # VelaMotion Coach / 腕动教练
 
-> **1.1.0 六轴接入更新（验收中）**：新增原生 Feature 补丁和六轴 JS 采样。原生数据已进入快应用；当前预编译模拟器持续训练仍出现底层采样缺口，固件编译及黄山派实测尚未完成。参见[接入与验证说明](docs/six_axis_integration.md)。下方原有介绍 PDF/Word、视频、四页截图和旧验收记录对应 1.0.0，不作为 1.1.0 原生六轴已通过验收的证据。
-
 面向 openvela 智能手表/手环的 AI 运动教练快应用。应用在腕上自动识别跑步、跳绳、静坐/恢复等运动状态，生成训练片段时间线、疲劳/异常提醒、图表复盘和本地历史；没有真机时可使用 openvela Watch Emulator 与官方 Mock 链路完成演示。
 
 ## 参赛信息与评审入口
@@ -59,7 +57,7 @@ npm run release
 release 包位置：
 
 ```text
-dist/com.velamotion.coach.release.1.1.0.rpk
+dist/com.velamotion.coach.release.1.0.0.rpk
 ```
 
 ## 模拟器启动与安装
@@ -75,9 +73,9 @@ aiot-ide "./openvela_velamotion_coach"
 ```bash
 cd quickapp/velamotion_coach
 ./node_modules/@miwt/adb/bin/linux/adb devices
-./node_modules/@miwt/adb/bin/linux/adb -s emulator-5554 push dist/com.velamotion.coach.release.1.1.0.rpk /data/tmp/com.velamotion.coach.release.1.1.0.rpk
+./node_modules/@miwt/adb/bin/linux/adb -s emulator-5554 push dist/com.velamotion.coach.release.1.0.0.rpk /data/tmp/com.velamotion.coach.release.1.0.0.rpk
 ./node_modules/@miwt/adb/bin/linux/adb -s emulator-5554 shell pm uninstall com.velamotion.coach
-./node_modules/@miwt/adb/bin/linux/adb -s emulator-5554 shell pm install /data/tmp/com.velamotion.coach.release.1.1.0.rpk
+./node_modules/@miwt/adb/bin/linux/adb -s emulator-5554 shell pm install /data/tmp/com.velamotion.coach.release.1.0.0.rpk
 ```
 
 当前 Vela5 工具链可用启动命令：

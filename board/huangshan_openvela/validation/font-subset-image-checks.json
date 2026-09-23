@@ -1,0 +1,17 @@
+{
+  "firmware_bytes": 5871668,
+  "firmware_sha256": "8c10639d5f501d31f114a1f38396bd08515cdec1eaca440a0b8360ccfacb329f",
+  "apps": [
+    "com.velamotion.coach"
+  ],
+  "startup_command": "vapp \"hap://app/com.velamotion.coach\" &",
+  "font_hashes_match": true,
+  "demo_symbols_absent": [
+    "lv_demo_widgets",
+    "img_demo_widgets",
+    "img_clothes_map",
+    "img_lvgl_logo_map",
+    "lvgldemo_main"
+  ],
+  "default_font_preserved": true
+}

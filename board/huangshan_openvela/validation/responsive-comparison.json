@@ -1,0 +1,73 @@
+{
+  "firmware_sha256": "9edcea850770cfe6079457262d75c80a0085f7bf1d3fcce8f6c554af5183e4f1",
+  "summary": {
+    "cached-idle-next": {
+      "n": 8,
+      "median_ms": 478.5,
+      "min_ms": 465,
+      "max_ms": 483
+    },
+    "training-next": {
+      "n": 16,
+      "median_ms": 717.0,
+      "min_ms": 479,
+      "max_ms": 1068
+    },
+    "start": {
+      "n": 2,
+      "median_ms": 779.5,
+      "min_ms": 778,
+      "max_ms": 781
+    },
+    "home": {
+      "n": 2,
+      "median_ms": 456.5,
+      "min_ms": 447,
+      "max_ms": 466
+    },
+    "resume": {
+      "n": 2,
+      "median_ms": 559.5,
+      "min_ms": 480,
+      "max_ms": 639
+    },
+    "launch": {
+      "n": 2,
+      "median_ms": 5620.0,
+      "min_ms": 5615,
+      "max_ms": 5625
+    },
+    "home-idle": {
+      "n": 2,
+      "median_ms": 260.0,
+      "min_ms": 258,
+      "max_ms": 262
+    },
+    "stop-home": {
+      "n": 1,
+      "median_ms": 1402,
+      "min_ms": 1402,
+      "max_ms": 1402
+    },
+    "stop-coach": {
+      "n": 1,
+      "median_ms": 739,
+      "min_ms": 739,
+      "max_ms": 739
+    },
+    "native-all": {
+      "n": 18,
+      "median_ms": 241.0,
+      "min_ms": 211,
+      "max_ms": 364
+    },
+    "native-cached": {
+      "n": 12,
+      "median_ms": 238.5,
+      "min_ms": 211,
+      "max_ms": 244
+    }
+  },
+  "latency_target_met": false,
+  "measurement": "Device-side synthetic LVGL press to changed-page refresh completion. Includes nominal 100ms press; excludes physical sensor and panel response. Stop paths reported separately."
+}

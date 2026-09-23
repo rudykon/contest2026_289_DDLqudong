@@ -1,6 +1,6 @@
 {
   "name": "velamotion-coach",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "openvela watch quick app for on-device IMU activity segmentation and AI coaching demo.",
   "engines": {
     "node": ">=20"
@@ -12,16 +12,15 @@
     "watch": "aiot start --watch",
     "test:motion": "node --no-warnings scripts/smoke_motion_engine.mjs",
     "test:core": "node --no-warnings scripts/test_core_modules.mjs",
+    "test:gesture": "node --no-warnings scripts/test_touch_gesture.mjs",
+    "test:ui-performance": "node --no-warnings scripts/test_live_patch.mjs",
     "mock:official": "node --no-warnings scripts/inject_official_sensor_mock.js",
     "mock:official:dry": "MOCK_DRY_RUN=1 node --no-warnings scripts/inject_official_sensor_mock.js",
     "demo:capture": "node --no-warnings scripts/final_demo_capture.js",
     "demo:capture:fast": "DEMO_WAIT_SCALE=0.35 node --no-warnings scripts/final_demo_capture.js",
     "model:inventory": "node --no-warnings scripts/model_migration_inventory.js",
     "submit:check": "node --no-warnings scripts/check_submission_ready.js",
-    "submit:prepare": "node --no-warnings scripts/prepare_submission_package.js",
-    "test:six-axis": "node --no-warnings scripts/test_six_axis.mjs",
-    "bridge:emulator": "python3 scripts/emulator_uorb_bridge.py",
-    "test:bridge": "python3 scripts/test_emulator_uorb_bridge.py"
+    "submit:prepare": "node --no-warnings scripts/prepare_submission_package.js"
   },
   "devDependencies": {
     "@aiot-toolkit/velasim": "^0.1.26",

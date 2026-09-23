@@ -8,7 +8,7 @@ const { PNG } = require('pngjs')
 
 const root = path.resolve(__dirname, '..')
 const outPath = path.join(root, 'artifacts/submission/submission_check_report.json')
-const releaseRel = 'dist/com.velamotion.coach.release.1.1.0.rpk'
+const releaseRel = 'dist/com.velamotion.coach.release.1.0.0.rpk'
 const zipRel = 'artifacts/submission/velamotion_coach_submission.zip'
 const mockRel = 'artifacts/mock_verification/official_mock_report.json'
 const manifestRel = 'artifacts/submission/velamotion_submission_manifest.json'
@@ -29,16 +29,6 @@ const required = [
   'docs/作品介绍.docx',
   'skills/openvela-watch-acceptance/SKILL.md',
   'README.md',
-  'native/sensor-six-axis.patch',
-  'native/upstream.json',
-  'native/apply_sensor_patch.py',
-  'native/README.md',
-  'native/.gitattributes',
-  'scripts/emulator_uorb_bridge.py',
-  'scripts/test_emulator_uorb_bridge.py',
-  'docs/six_axis_integration.md',
-  'artifacts/six_axis/validation.json',
-  'artifacts/six_axis/source_selector.png',
   '.gitignore',
   'src/manifest.json',
   'src/pages/index/index.ux',
@@ -253,17 +243,12 @@ const zipOk = zipEntries.length > 0 &&
 const sourceText = exists('src/pages/index/index.ux') ? fs.readFileSync(abs('src/pages/index/index.ux'), 'utf8') : ''
 const productModeOk = /const AUTO_START_DEMO = false;/.test(sourceText) && /const AUTO_PAGE_DEMO = false;/.test(sourceText)
 
-const sixAxisEvidence = readJson('artifacts/six_axis/validation.json');
 const report = {
   generatedAt: new Date().toISOString(),
   ok: missing.length === 0 && packageScriptTargetsOk && screenshotOk && mockOk && releaseStructureOk && releaseFresh && zipOk && productModeOk,
   missing,
   aiCodingLogs: { included: false, reason: 'withheld_by_author', officialRequirementMet: false },
   competitionRequirementsComplete: false,
-  packageIntegrityOnly: true,
-  legacyVisualEvidenceVersion: '1.0.0',
-  nativeSixAxisAcceptanceComplete: Boolean(sixAxisEvidence && sixAxisEvidence.continuousWatchTraining && sixAxisEvidence.continuousWatchTraining.passed && sixAxisEvidence.firmwareBuild === 'passed' && sixAxisEvidence.physicalBoard === 'passed'),
-  sixAxisEvidence,
   packageScripts: {
     ok: packageScriptTargetsOk,
     targets: packageScriptTargets,
@@ -305,7 +290,7 @@ const report = {
     rootManifestReleaseHashMatches: rootManifestReleaseMatches,
     embeddedManifestReleaseHashMatches: zipManifestReleaseMatches,
   },
-  note: 'Package integrity success is not native six-axis runtime acceptance. The screenshots/video are retained 1.0.0 overview evidence. The current acceptance set is four core pages; preserved legacy 11-page artifacts are ignored. Dry-run Mock evidence, stale RPKs, mislabeled screenshots, stale ZIP manifests and private/heavy files fail this check.',
+  note: 'The current acceptance set is four core pages; preserved legacy 11-page artifacts are ignored. Dry-run Mock evidence, stale RPKs, mislabeled screenshots, stale ZIP manifests and private/heavy files fail this check.',
 }
 fs.mkdirSync(path.dirname(outPath), { recursive: true })
 fs.writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`)
