@@ -1,88 +1,115 @@
-# VelaMotion Coach / 腕动教练
+# 腕动教练 · VelaMotion Coach
 
-**2026 首届 openvela AI 硬件开发者大赛 · 手表应用创新方向**
+**让混合训练有清楚的记录。**
 
-队伍：**DDLqudong（289）** · GitHub：rudykon · 版本：1.0.0
+2026 首届 openvela AI 硬件开发者大赛 · 手表应用创新方向
 
-腕动教练是一款 openvela 手表快应用：在腕上识别运动状态，自动生成训练片段，以短提醒和图表帮助用户复盘混合训练。以“小芽”运动伙伴引导开始和停止，核心训练闭环可在无手机、无云端 AI 服务的模拟器环境运行。
+队伍 **DDLqudong（289）** · 孔明昊：方案与代码 · 刘子荣：调试
 
-## 黄山派实机版
+腕动教练以“小芽”运动伙伴组织开始、查看、停止与复盘，在立创·黄山派 SF32LB52 上集成 openvela/NuttX、原生手表桌面和 QuickApp。面向跑步、跳绳等交替进行的混合训练，用活动初筛与时间线展示各阶段的状态和持续时间。
 
-当前项目也已适配立创黄山派 SF32LB52：包含 openvela/NuttX 固件、QuickApp 运行时、自定义手表桌面、手势和大字界面，以及 EPIC 绘制后端。实机源码、D 盘 WSL 构建步骤、烧录脚本和验收记录见 [黄山派部署指南](board/huangshan_openvela/README.md)。仓库内的 [最新固件](board/huangshan_openvela/firmware/velamotion-openvela.bin) 使用公开开发测试证书打包应用，供这块开发板验证；正式发布仍需自己的签名。最新性能测试显示停止操作反馈约 0.55 秒，普通快应用翻页约 0.45 秒，尚未达到市售手表的流畅度。
+**[下载黄山派固件](https://github.com/rudykon/contest2026_289_DDLqudong/releases/tag/huangshan-20260923)** · **[部署与构建指南](board/huangshan_openvela/README.md)** · **[应用源码](quickapp/velamotion_coach/src)**
 
-## 评审入口
+## 实物展示
 
-- [作品介绍 PDF](quickapp/velamotion_coach/docs/作品介绍.pdf) / [Word](quickapp/velamotion_coach/docs/作品介绍.docx)
-- [演示 MP4](quickapp/velamotion_coach/artifacts/final_demo/auto_carousel/velamotion_core_demo.mp4)：四张本轮模拟器实测截图串联，每页 10 秒，非连续录屏。
-- [生产 Release RPK](quickapp/velamotion_coach/dist/com.velamotion.coach.release.1.0.0.rpk)
-- [源码与详细运行指南](quickapp/velamotion_coach/README.md)
-- [完整交付 ZIP](quickapp/velamotion_coach/artifacts/submission/velamotion_coach_submission.zip)
-- [本轮验收](quickapp/velamotion_coach/docs/submission_validation_2026-09-20.md) / [提交包检查](quickapp/velamotion_coach/artifacts/submission/submission_check_report.json) / [官方要求对应](quickapp/velamotion_coach/docs/contest_requirements.md)
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/huangshan-desktop.jpg" width="250" alt="黄山派实物显示自定义手表桌面"><br>手表桌面</td>
+    <td align="center"><img src="docs/images/huangshan-coach.jpg" width="250" alt="黄山派实物显示应用内演示模式的活动候选评分"><br>活动初筛</td>
+    <td align="center"><img src="docs/images/huangshan-timeline.jpg" width="250" alt="黄山派实物显示混合活动时间线"><br>训练时间线</td>
+  </tr>
+</table>
 
-| 首页 | 腕上教练 | 时间线 | 同步复盘 |
-|---|---|---|---|
-| ![首页](quickapp/velamotion_coach/artifacts/final_demo/auto_carousel/core_01_home.png) | ![教练](quickapp/velamotion_coach/artifacts/final_demo/auto_carousel/core_02_coach.png) | ![时间线](quickapp/velamotion_coach/artifacts/final_demo/auto_carousel/core_03_timeline.png) | ![同步复盘](quickapp/velamotion_coach/artifacts/final_demo/auto_carousel/core_04_sync_review.png) |
+以上为 2026-09-24 现有实拍，训练画面使用应用内演示数据。照片展示物理屏幕上的页面，不单独证明固件版本、真实六轴采集或手指触控验收。公开图片已移除定位等照片元数据，显示内容保持原样。
 
-## 技术与交互
+## 可以做什么
 
-`应用内 Mock 六轴数据 → 16 Hz / 3 秒滑窗 → IMU 特征 → tiny_classifier → TRL 后处理 → 风险提示、时间线与本地摘要`
+| 功能 | 实现内容 |
+| --- | --- |
+| 原生桌面 | 时钟、工具、设置、小芽入口，以及长按解锁的防误触锁屏。 |
+| 实用工具 | 秒表、倒计时、系统信息；离开工具页后继续计时，到时显示屏幕提醒。 |
+| 训练交互 | 大字与圆角屏留白；左右切换四页、上下滚动，拖动时取消按钮动作。 |
+| 活动初筛 | 为无活动、羽毛球、跳绳、飞鸟、跑步、乒乓球六类计算候选评分。 |
+| 分段回顾 | 平滑与时序解码整理活动片段；停止后查看摘要、时间线与复盘建议。 |
+| 桌面与应用切换 | 返回桌面保留应用实例，再从“返回小芽”恢复页面和训练状态。 |
 
-- 六类标签：无活动、羽毛球、跳绳、飞鸟、跑步、乒乓球；演示覆盖混合训练、跑步、跳绳和疲劳场景。
-- TRL 居中平滑与 Viterbi 解码，固定尾部回溯；协作式推理、有界缓存与停止取消保护操作响应。
-- 接入 openvela 图形框架、`@system.storage`、`@system.vibrator`、`@service.health`；可选手机摘要同步与 `@system.velaclaw` 总结有明确降级。
-- 历史只保存摘要/片段/事件，不存原始连续波形。训练中每页均可停止，训练与诊断互斥。
+操作流程：**桌面打开小芽 → 开始演示训练 → 左右滑动查看教练与时间线 → 停止并等待整理 → 查看复盘**。
 
-## 运行与复现
+### 板端界面
 
-建议 Node.js 22；打开 AIoT-IDE 的 Vela5 Watch Emulator。可直接安装上方已经签名的 RPK。
+<table>
+  <tr>
+    <td align="center"><img src="board/huangshan_openvela/validation/expanded-app.png" width="220" alt="当前固件的小芽待机首页"><br>当前固件 · 待机首页</td>
+    <td align="center"><img src="board/huangshan_openvela/validation/perf-stable-coach.png" width="220" alt="前序稳定版的跑步候选评分演示"><br>前序稳定版 · 候选评分</td>
+    <td align="center"><img src="board/huangshan_openvela/validation/perf-stable-stopped.png" width="220" alt="前序稳定版的六片段训练时间线"><br>前序稳定版 · 分段结果</td>
+  </tr>
+</table>
+
+这组 PNG 是串口取回的板端 LVGL 渲染截图。分类与非空时间线来自前序稳定版的 Mock 会话，三张图并非同一连续操作；候选百分比不是人体识别准确率。
+
+## AI 能力与工程实现
+
+当前采用可解释的 JS 特征规则分类器。按设计的 16 Hz、3 秒窗口组织 48 帧六通道输入，提取统计与周期特征，再通过平滑和 Viterbi 时序解码形成活动片段。当前板端演示使用 Mock 数据，研究阶段的深度模型尚未部署到此固件。
+
+实板工程主要完成了以下工作：
+
+- **运行栈接入**：openvela/NuttX、LVGL 9 与 QuickApp 集成，处理本地服务、JS 堆、应用资源及可写目录。
+- **交互调度**：按需创建页面并保留缓存，减少隐藏页更新；停止整理分成六个事件循环阶段，保护忙状态和异步保存回调。
+- **图形与资源**：适用场景下使用有界 EPIC 填充、复制和掩码混合，失败时软件回退；精简两套中文字库并保留现有字重。
+
+新增 GPU 绘制覆盖不等于所有操作都会更快。实现范围及已知限制见[板端指南](board/huangshan_openvela/README.md)。
+
+## 固件下载与烧录
+
+当前提供 **黄山派开发验证版 `huangshan-20260923`**，固件源码基线为 [`03f3543`](https://github.com/rudykon/contest2026_289_DDLqudong/commit/03f3543922d8ce4b6cb32fd1270fc8851fa668ba)。
+
+- [Release 页面与下载](https://github.com/rudykon/contest2026_289_DDLqudong/releases/tag/huangshan-20260923)
+- [完整固件 `velamotion-openvela.bin`](https://github.com/rudykon/contest2026_289_DDLqudong/releases/download/huangshan-20260923/velamotion-openvela.bin)
+- [SHA256 校验文件](https://github.com/rudykon/contest2026_289_DDLqudong/releases/download/huangshan-20260923/SHA256SUMS.txt)
+
+固件大小 **5,871,668 B**，烧录地址 **`0x12010000`**，适用 SF32LB52 / 390×450 显示配置。它包含系统、桌面、QuickApp 运行时与应用资源；应用 manifest 版本为 1.0.0，使用公开开发测试证书签名。
+
+下载后核对 SHA256，将镜像放到 `board/huangshan_openvela/firmware/velamotion-openvela.bin`。准备 `sftool.exe`，关闭占用串口的工具，然后在 `board/huangshan_openvela` 中运行：
+
+```powershell
+.\flash-quickapp.ps1 -PortName COM5 -SfTool 'C:\tools\sftool.exe'
+```
+
+将串口和工具路径改为实际值。脚本核对大小与哈希，写入镜像、校验、复位并同步时间。烧录会替换当前镜像，有需保留的系统时先备份。完整环境、重编译和回退说明见[部署指南](board/huangshan_openvela/README.md)；原构建脚本含 Windows/WSL 路径，换机需要配置。
+
+## 验证结果与当前边界
+
+2026-09-24 在固定源码上重跑主机回归：核心模块 **54 项**、手势 **7 项**、合成运动 **53 个断言**，以及实时字段、协作停止和原生桌面逻辑测试均通过。软件回归验证状态和逻辑，不等于真实硬件或人体效果验收。
+
+同一固件、新增掩码路径开启的一轮合成操作记录中，缓存切页中位数 **454 ms（n=4）**，停止反馈 **547 ms（n=1）**；停止函数入口至保存 API 回调为 **857 ms（n=1）**。界面反馈从合成按下计时，包含约 100 ms 按压；保存起点不同，均不包含真实触摸采样和物理面板响应。对照没有证明新增 GPU 路径普遍提速。
+
+| 能力 | 当前状态 |
+| --- | --- |
+| 真实六轴 → QuickApp JS | 原生器件曾可读，当前页面尚未接通完整真实六轴；能力不全时真实训练拒绝启动。 |
+| 历史持久化 | `/data` 为 RAM 文件系统；本次开机内可读写，复位或断电即丢失。 |
+| 真实健康数据与互联 | 心率等真实传感、振动及手机互联未完成板端支持；演示数据有明确标识。 |
+| 桌面工具 | 倒计时仅屏幕提醒；锁屏用于防误触，非密码锁或休眠。亮度、时间与计时状态复位后需重设。 |
+| 产品效果 | 真人识别准确率、整机功耗、长期稳定性与本固件手指触控尚需验证。 |
+
+## 开发入口
+
+Node.js 22 为已使用的开发环境；快应用项目支持以下命令：
 
 ```bash
 cd quickapp/velamotion_coach
 npm ci
 npm run test:core
+npm run test:gesture
 npm run test:motion
+npm run test:ui-performance
 ```
 
-使用项目带的 ADB 安装到当前 Vela5 模拟器：
+| 路径 | 用途 |
+| --- | --- |
+| [`quickapp/velamotion_coach/src`](quickapp/velamotion_coach/src) | 训练业务、页面、活动初筛与时序处理。 |
+| [`board/huangshan_openvela`](board/huangshan_openvela) | 原生桌面、运行栈适配、构建和烧录。 |
+| [`quickapp/velamotion_coach/README.md`](quickapp/velamotion_coach/README.md) | 应用开发与模拟器运行说明，部分材料属于前序阶段。 |
+| [`skills/openvela-watch-acceptance`](skills/openvela-watch-acceptance) | 版本、输入来源与交互验收的可复用流程。 |
+| [`docs/official_repository_guide.md`](docs/official_repository_guide.md) | 官方工程与清单使用说明。 |
 
-```bash
-ADB=./node_modules/@miwt/adb/bin/linux/adb
-"$ADB" devices
-"$ADB" -s emulator-5554 push dist/com.velamotion.coach.release.1.0.0.rpk /data/tmp/com.velamotion.coach.release.1.0.0.rpk
-"$ADB" -s emulator-5554 shell pm install /data/tmp/com.velamotion.coach.release.1.0.0.rpk
-"$ADB" -s emulator-5554 shell am start com.velamotion.coach
-```
-
-进入首页后点击开始，等待预热和动态识别，停止后查看时间线、历史。手机未连接或健康接口不可用时按页面说明使用模拟训练。对仅支持 ADB 推送的 arm64 镜像，按[官方手动开发文档](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/quickapp/quickapp_manual.md)解包推送到 `/data/app/com.velamotion.coach/`，再在串口执行 `vapp hap://app/com.velamotion.coach`。
-
-自行重建 Release 前，在 AIoT-IDE 的发布流程生成自己的签名；作者私钥不分发。
-
-```bash
-npm run release
-npm run demo:capture
-npm run submit:prepare
-npm run submit:check
-```
-
-完整 openvela 工程按[保留的官方仓说明](docs/official_repository_guide.md)执行 `repo init` 和 `repo sync`，基线为 `dev-ai-contest-2026`。队伍清单已添加本应用到 `packages/apps/contest2026_289_velamotion_coach` 的 linkfile。
-
-## 验证与边界
-
-2026-09-20：核心回归 **53/53**、运动场景测试、生产构建、设备 bundle 哈希核对、动态跑步确认、四页严格截图检查及提交包一致性全部通过。官方 gRPC 注入/回读 ACC、GYRO 和心率通过，步数由应用内 Mock 生成。
-
-当前使用轻量规则/特征分类器；未将研究工程 CNN-BiLSTM 原模型部署到手表。合成场景测试不代表真人识别准确率。官方 gRPC 注入和应用内 Mock 分类分别验证，不声称应用已消费全部官方六轴数据。本地预编译 SDK 镜像未追溯到大赛分支源码 commit。真机缺少 GYRO 时完整训练被阻断；真实功耗、振动触感、手机配对与真人性能尚未验证。
-
-## AI Coding 与可复用经验
-
-AI 协作用于采样边界修复、TRL 增量处理、生命周期和交互回归、模拟器部署与验收。[验收 Skill](skills/openvela-watch-acceptance/SKILL.md)沉淀设备 bundle 核对、动态画面双验证、传感器边界与提交包检查流程。
-
-**按作者要求，本次不公开历史开发日志及其摘要**，日志仅本地保留。官方 AI Coding 日志材料尚未提交；详见 [AI 协作与日志状态](quickapp/velamotion_coach/docs/ai_coding_disclosure.md)。构建和演示通过不代表该项官方要求已满足。
-
-## 目录与许可
-
-- `quickapp/velamotion_coach/`：参赛应用及完整材料。
-- `logs/README.md`：未提交日志的状态说明；`skills/`：复用验收流程。
-- `app/hello_app/`、`quickapp/hello_quickapp/`、`board/contest_board/`：保留官方示例骨架。
-- `contest2026_289_DDLqudong.xml`、`openvela.xml`：官方工程清单。
-
-作品源码遵循 [Apache-2.0](LICENSE)，第三方依赖保留各自许可证。签名私钥、原始数据和构建依赖不入仓。
+源码遵循 [Apache-2.0](LICENSE)，第三方组件保留各自许可证。作者签名私钥不分发；历史 AI 开发对话、调用轨迹及其摘要不公开。
