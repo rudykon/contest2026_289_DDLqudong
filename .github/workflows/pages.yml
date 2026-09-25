@@ -1,0 +1,59 @@
+name: Showcase Pages
+
+on:
+  push:
+    branches: [dev-ai-contest-2026]
+    paths:
+      - 'website/**'
+      - 'quickapp/velamotion_coach/src/common/algorithm/**'
+      - 'quickapp/velamotion_coach/src/common/sensor/mock_scenarios.js'
+      - 'docs/images/**'
+      - 'LICENSE'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: showcase-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: website/dist
+
+  deploy:
+    if: github.repository == 'rudykon/contest2026_289_DDLqudong'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment

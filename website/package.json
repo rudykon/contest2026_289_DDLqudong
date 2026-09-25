@@ -1,0 +1,17 @@
+{
+  "name": "velamotion-showcase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --no-warnings --test test/wasm.test.mjs",
+    "test:browser": "playwright test",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20",
+    "@playwright/test": "1.63.0"
+  }
+}

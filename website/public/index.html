@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eaf0e8">
+  <meta name="description" content="腕动教练 · VelaMotion Coach。在浏览器中用 WebAssembly 体验六轴活动初筛、实时波形和混合训练复盘。openvela × 黄山派实板项目。">
+  <title>腕动教练 — 让每一次运动，有迹可循</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#demo">跳转到互动演示</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#" aria-label="腕动教练首页"><svg class="brand-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 33V19M20 24C6 23 6 10 6 10s14-1 14 14Zm0-7C21 5 34 5 34 5s2 13-14 16"/></svg><span>腕动教练<small>VelaMotion Coach</small></span></a>
+    <nav aria-label="主导航"><a href="#demo">在线体验</a><a href="#design">设计与实现</a><a href="#hardware">实板展示</a></nav>
+    <a class="repo-link" href="https://github.com/rudykon/contest2026_289_DDLqudong" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy"><p class="eyebrow"><span class="dot"></span> openvela × 黄山派 · DDLqudong</p>
+        <h1 id="hero-title">让每一次运动，<br><em>有迹可循。</em></h1>
+        <p class="hero-description">跑步、跳绳、挥拍，让小芽陪你找到运动的节奏。<br class="desktop-break">从腕上活动初筛，到一段清楚的训练回顾。</p>
+        <div class="hero-actions"><a class="button primary" id="hero-start" href="#demo">亲手试一试 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/rudykon/contest2026_289_DDLqudong/releases/tag/huangshan-20260923" target="_blank" rel="noopener">下载实板固件 <span aria-hidden="true">↓</span></a></div>
+        <p class="hero-note"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 9-3 3 3 3m8-6 3 3-3 3m-3-10-2 13"/></svg>无需安装 · 浏览器本地计算 · 不上传演示数据</p>
+        <div class="hero-specs"><div><b>6<span> 类</span></b><small>活动候选</small></div><div><b>16<span> Hz</span></b><small>采样网格</small></div><div><b>3<span> 秒</span></b><small>滑动窗口</small></div></div>
+      </div>
+      <div class="hero-art" aria-label="浏览器界面设计预览，不是实板录屏">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="orbit-label">MOVE. UNDERSTAND. REPEAT.</span>
+        <div class="watch-strap top"></div><div class="watch-strap bottom"></div>
+        <div class="watch-case"><div class="watch-crown"></div><div class="watch-screen">
+          <div class="watch-top"><span>小芽 · 在线演示</span><span id="watch-clock">00:00</span></div>
+          <div class="sprout" aria-hidden="true"><svg viewBox="0 0 120 105"><path d="M59 63C20 58 20 23 20 23s38-4 42 40M61 46C66 15 102 16 102 16S105 49 64 54" fill="#3a8c64"/><path d="M62 80V45" stroke="#256b4d" stroke-width="6" stroke-linecap="round"/><ellipse cx="60" cy="83" rx="30" ry="19" fill="#bdd4aa"/><circle cx="50" cy="80" r="2.6" fill="#294e39"/><circle cx="69" cy="80" r="2.6" fill="#294e39"/><path d="M55 88q5 4 10 0" fill="none" stroke="#294e39" stroke-width="2.3" stroke-linecap="round"/></svg></div>
+          <span class="watch-caption" id="watch-caption">准备好，动起来</span><strong id="watch-class">跟上你的节奏</strong>
+          <div class="watch-data"><span>演示时长<b id="watch-duration">00:00</b></span><span>候选评分<b id="watch-confidence">—</b></span></div>
+          <button class="watch-button" id="watch-start" type="button" disabled>加载引擎…</button><div class="watch-tabs"><span class="selected">首页</span><span>教练</span><span>时间线</span><span>协同</span></div>
+        </div></div>
+        <div class="floating-note"><span class="spark-icon" aria-hidden="true">✳</span><div><b>每种运动，都有自己的节奏</b><small>特征提取 → 活动初筛 → 片段回顾</small></div></div>
+        <span class="art-disclaimer">浏览器体验界面 · 非设备模拟器</span>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo" aria-labelledby="demo-title"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">01 / PLAY WITH MOTION</p><h2 id="demo-title">让算法，跟着你选的节奏跑。</h2><p>选一个场景，看六轴信号如何变成活动候选与训练片段。</p></div><span class="engine-badge" id="engine-status" role="status"><span class="dot"></span>正在加载 WASM</span></div>
+      <div id="engine-error" class="error-panel" role="alert" hidden><p id="engine-error-message"></p><button id="retry-engine" class="button secondary" type="button">重新加载引擎</button></div>
+      <div class="lab-panel">
+        <div class="lab-toolbar"><div class="scenario-control"><label for="scenario">演示场景</label><select id="scenario"><option value="mixed_workout">混合训练</option><option value="running">跑步节奏</option><option value="jump_rope">跳绳</option><option value="badminton">羽毛球</option><option value="pingpong">乒乓球</option><option value="flying">飞鸟抬臂</option><option value="static">静坐恢复</option></select></div><div class="speed-control"><label for="speed">播放速度</label><select id="speed"><option value="1">1× 实时</option><option value="4">4× 快览</option></select></div><span class="demo-label"><span class="dot"></span>模拟六轴输入</span><div class="controls"><button id="start" class="button primary" disabled>开始演示 <span aria-hidden="true">▶</span></button><button id="reset" class="icon-button" title="重置演示" aria-label="重置演示" disabled>↺</button></div></div>
+        <div class="lab-grid"><div class="signal-panel"><div class="panel-heading"><h3>运动信号 <small>LIVE SIGNAL</small></h3><span id="sample-count">0 / 48 帧</span></div><div class="signal-legend"><span><i class="legend-x"></i>X 轴</span><span><i class="legend-y"></i>Y 轴</span><span><i class="legend-z"></i>Z 轴</span><span class="signal-unit">加速度 m/s²</span></div><canvas id="signal-canvas" width="1000" height="280" role="img" aria-label="最近三秒的三轴加速度波形"></canvas><div class="signal-bottom"><span id="input-stage">等待开始 · 先积累 3 秒窗口</span><span>16 Hz · ACC + GYRO</span></div><div class="signal-legend gyro-legend"><span>三轴角速度</span><span class="signal-unit">rad/s</span></div><canvas id="gyro-canvas" width="1000" height="120" role="img" aria-label="最近三秒的三轴角速度波形"></canvas></div>
+        <div class="result-panel"><div class="panel-heading"><h3>活动初筛 <small>ON-DEVICE LOGIC</small></h3><span class="local-pill">本地计算</span></div><div class="primary-result"><div><span id="result-state">引擎加载中</span><strong id="result-name">准备就绪</strong></div><span id="result-score">—</span></div><div id="probabilities" class="probabilities" aria-label="六类候选评分"></div><p class="result-note">特征规则模型 · 候选评分不等于识别准确率</p></div></div>
+        <div class="metrics-strip"><div><span>演示时长</span><strong id="elapsed">00:00</strong></div><div><span>已计算窗口</span><strong id="window-count">0</strong></div><div><span>WASM 本次耗时</span><strong id="inference-time">—</strong></div><div><span>输入窗口</span><strong>48 × 6 <small>f64</small></strong></div><div class="metric-engine"><span>计算位置</span><strong>你的浏览器 <span class="small-dot"></span></strong></div></div>
+        <div class="timeline-panel"><div class="panel-heading"><h3>训练时间线 <small>SESSION RECAP</small></h3><span id="segment-count">尚无片段</span></div><div class="timeline-track" id="timeline" aria-label="识别出的活动片段"><p>开始训练后，活动片段会出现在这里。推荐以 4× 速度体验混合训练。</p></div><div class="timeline-footer"><span id="session-note" aria-live="polite">使用项目原有的平滑与时序解码，片段会随新窗口修正。</span><button class="text-link" id="export-session" disabled>导出本次结果 ↓</button></div></div>
+      </div>
+      <div class="compute-note"><div><span class="compute-symbol" aria-hidden="true">⌘</span><div><b>真正运行的 WebAssembly</b><p>特征提取与六类评分在 WASM 中完成，Worker 保持页面响应。<span id="wasm-size"></span></p></div></div><div class="benchmark"><button class="text-link" id="benchmark" disabled>测一下本机算力 ↗</button><span id="benchmark-result" role="status">固定窗口 × 3,000 · 仅计 WASM 内核</span></div></div>
+      <p class="demo-boundary">这是一份可交互的算法与产品演示，采用项目的合成运动场景。它不连接开发板、不读取你的传感器，也不代表黄山派固件已接通真实六轴。切换场景将重新开始一段会话，切到后台时自动暂停。</p>
+    </div></section>
+
+    <section class="design-section wrap" id="design" aria-labelledby="design-title"><div class="section-heading"><div><p class="eyebrow">02 / SMALL SCREEN, CLEAR THINKING</p><h2 id="design-title">小屏幕，也可以把训练讲清楚。</h2></div><p class="section-aside">从输入到回顾，每一步都有可检查的实现。</p></div>
+      <div class="feature-grid"><article class="feature-card"><span class="feature-number">01</span><svg viewBox="0 0 80 60" aria-hidden="true"><path d="M2 31h13l5-19 10 38 10-31 8 20 6-8h24"/></svg><h3>识别运动的节奏</h3><p>48 帧六轴窗口，提取统计与周期特征。用可解释的规则，为六类活动计算候选评分。</p><span>16 Hz / 3 秒窗口 / 1 秒步长</span></article><article class="feature-card"><span class="feature-number">02</span><svg viewBox="0 0 80 60" aria-hidden="true"><rect x="19" y="4" width="42" height="52" rx="12"/><path d="M8 30H1m7-7-7 7 7 7m64-7h7m-7-7 7 7-7 7M30 19h20M30 28h13M30 41h20"/></svg><h3>交互少一点，专注多一点</h3><p>大字、手势与圆角安全区。开始、查看、停止与复盘，形成简单的腕上操作路径。</p><span>四页循环 / 滑动取消误触</span></article><article class="feature-card"><span class="feature-number">03</span><svg viewBox="0 0 80 60" aria-hidden="true"><path d="M6 16h23v10H6zM29 16h30v10H29zM10 36h13v10H10zM23 36h45v10H23z"/></svg><h3>把碎片动作，连成回顾</h3><p>平滑、时序解码与片段整理。既能看到当前候选，也能回看一段训练的活动组成。</p><span>时序分段 / 本地摘要</span></article></div>
+      <div class="architecture"><span class="architecture-title">浏览器演示链路</span><div><span>合成六轴信号</span><b>→</b><span class="wasm-step">WASM 特征 + 评分</span><b>→</b><span>JS 平滑与时序解码</span><b>→</b><span>交互与可视化</span></div><p>浏览器版移植项目特征规则计算；黄山派当前固件运行 JS 实现。浏览器跑分不能外推为开发板性能。</p></div>
+    </section>
+
+    <section class="hardware-section" id="hardware" aria-labelledby="hardware-title"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">03 / FROM CODE TO WRIST</p><h2 id="hardware-title">它也运行在，真实的小屏幕上。</h2></div><a class="text-link" href="https://github.com/rudykon/contest2026_289_DDLqudong/tree/dev-ai-contest-2026/board/huangshan_openvela" target="_blank" rel="noopener">查看实板实现 ↗</a></div>
+      <div class="hardware-grid"><figure><img src="./images/huangshan-desktop.jpg" alt="黄山派实物上的原生时钟桌面" loading="lazy" width="3024" height="4032"><figcaption><span>01</span><div><b>一套独立的手表桌面</b><small>时钟、工具、设置与小芽入口</small></div></figcaption></figure><figure><img src="./images/huangshan-coach.jpg" alt="黄山派实物显示活动评分演示" loading="lazy" width="3024" height="4032"><figcaption><span>02</span><div><b>当前活动，一眼可见</b><small>应用内 Mock 演示 · 候选分数</small></div></figcaption></figure><figure><img src="./images/huangshan-timeline.jpg" alt="黄山派实物上的多活动时间线" loading="lazy" width="3024" height="4032"><figcaption><span>03</span><div><b>让训练留下清楚的段落</b><small>大字时间线与复盘入口</small></div></figcaption></figure></div>
+      <div class="hardware-note"><span>SF32LB52 · 390 × 450 · openvela / NuttX · LVGL 9 · QuickApp</span><p>2026-09-24 实拍，公开副本已移除定位元数据。静态照片不单独验证固件身份或手指触控过程。</p></div>
+      <details class="boundaries"><summary>当前工程进展与能力边界 <span aria-hidden="true">＋</span></summary><div><p><b>已实现：</b>原生桌面与工具、QuickApp 集成、大字手势、协作停止、限定范围的 EPIC 绘制与回退。</p><p><b>待完成：</b>当前固件真实六轴到 JS、断电持久化；真人识别、物理触控、功耗与长时间运行验证。训练历史存于 RAM，复位或断电丢失。</p><p><b>验证：</b>现有主机回归包含核心 54 项、手势 7 项与运动场景 53 个断言；网站 WASM 另做与原 JS 实现的逐窗口数值对照。测试通过不等于真人识别准确率。</p></div></details>
+    </div></section>
+
+    <section class="cta wrap"><div><p class="eyebrow">BUILT IN THE OPEN</p><h2>把下一次运动，<br>变成更清楚的下一步。</h2><p>DDLqudong · 孔明昊 / 方案与代码 · 刘子荣 / 调试</p></div><div class="cta-actions"><a class="button primary" href="https://github.com/rudykon/contest2026_289_DDLqudong" target="_blank" rel="noopener">探索项目源码 ↗</a><a class="button secondary" href="https://github.com/rudykon/contest2026_289_DDLqudong/releases/tag/huangshan-20260923" target="_blank" rel="noopener">下载开发验证固件 ↓</a></div></section>
+  </main>
+  <footer class="wrap"><span>腕动教练 · VelaMotion Coach</span><span>openvela AI 硬件开发者大赛 · DDLqudong 289</span><span>Apache-2.0 · 本地计算，无数据上传</span></footer>
+  <noscript><div class="noscript-note">互动演示需要 JavaScript 与 WebAssembly。你仍可查看作品介绍、实拍与源码链接。</div></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

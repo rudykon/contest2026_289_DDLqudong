@@ -8,7 +8,13 @@
 
 腕动教练以“小芽”运动伙伴组织开始、查看、停止与复盘，在立创·黄山派 SF32LB52 上集成 openvela/NuttX、原生手表桌面和 QuickApp。面向跑步、跳绳等交替进行的混合训练，用活动初筛与时间线展示各阶段的状态和持续时间。
 
-**[下载黄山派固件](https://github.com/rudykon/contest2026_289_DDLqudong/releases/tag/huangshan-20260923)** · **[部署与构建指南](board/huangshan_openvela/README.md)** · **[应用源码](quickapp/velamotion_coach/src)**
+**[在线体验 · WebAssembly 演示](https://rudykon.github.io/contest2026_289_DDLqudong/)** · **[下载黄山派固件](https://github.com/rudykon/contest2026_289_DDLqudong/releases/tag/huangshan-20260923)** · **[部署与构建指南](board/huangshan_openvela/README.md)** · **[应用源码](quickapp/velamotion_coach/src)**
+
+## 浏览器在线演示
+
+**[打开作品展示页](https://rudykon.github.io/contest2026_289_DDLqudong/)**，选择混合训练或单项活动，即可查看六轴波形、六类候选评分、训练片段和当前浏览器的计算耗时。支持暂停、4× 快览和本地导出结果。
+
+特征提取与活动评分真正运行于 **WebAssembly**，后台 Worker 保持界面响应，时序整理复用项目 JS 实现。使用项目合成运动数据，不读取真实传感器；浏览器跑分不代表黄山派性能。网站源码、移植说明与验证方式见 [website/README.md](website/README.md)。
 
 ## 实物展示
 
